@@ -1,30 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Workout from './Workout';
+import WeeklyView from './WeeklyView';
 
-const WorkoutList = ({ workouts }) => {
+const WorkoutList = () => {
+  const [workouts, setWorkouts] = useState([]);
+
+  const addWorkout = (workout) => {
+    setWorkouts([...workouts, workout]);
+  };
+
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <h2>Workouts</h2>
-      {workouts.length === 0 ? (<p>No workouts found.</p>) :
-      (
-      <ul>
-        {workouts.map((day, index) => (
-          <div key={index} className="mb-6">
-          <h2 className="text-xl font-bold mb-2">{day.date}</h2>
-           {day.exercises.map((exercise, idx) => (
-             <div key={idx} className="mb-4">
-               <h3 className="font-semibold">{exercise.name}</h3>
-               <ul className="list-disc ml-4">
-                 {exercise.sets.map((set, i) => (
-                   <li key={i}>
-                     {set.reps} ismétlés, {set.weight} kg
-                   </li>
-                 ))}
-               </ul>
-             </div>
-           ))}
-          </div>
-        ))}
-      </ul>)}
+      <Workout onAddWorkout={addWorkout} />
+      <h2 className="font-bold text-2xl">This week's workouts</h2>
+      <WeeklyView workouts={workouts} />
     </div>
   )
 }

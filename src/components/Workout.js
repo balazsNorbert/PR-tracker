@@ -8,6 +8,7 @@ const Workout = ({ onAddWorkout }) => {
     weight: '',
   });
   const [sets, setSets] = useState([]);
+  const [unit, setUnit] = useState('kg');
 
   const handleAddSet = () => {
     if(!currentSet.reps || !currentSet.weight) {
@@ -15,7 +16,7 @@ const Workout = ({ onAddWorkout }) => {
       return;
     }
 
-    setSets([...sets, currentSet]);
+    setSets([...sets, { ...currentSet, unit }]);
     setCurrentSet({
       reps: '',
       weight: '',
@@ -32,7 +33,7 @@ const Workout = ({ onAddWorkout }) => {
       date,
       exercise:{
         name: exercise,
-        sets
+        sets,
       },
       sets,
     });
@@ -43,8 +44,8 @@ const Workout = ({ onAddWorkout }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border bg-gray-100">
-      <div className="mb-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-xl bg-gray-200 w-1/3 p-4">
+      <div>
         <label htmlFor="date" className="block font-medium mb-1">Date</label>
         <input
           type="date"
@@ -53,7 +54,7 @@ const Workout = ({ onAddWorkout }) => {
           className="w-full border rounded px-3 py-2"
         />
       </div>
-      <div className="mb-4">
+      <div>
         <label className="block font-medium mb-1">Exercise</label>
         <input
           type="text"
@@ -63,7 +64,7 @@ const Workout = ({ onAddWorkout }) => {
           className="w-full border rounded px-3 py-2"
         />
       </div>
-      <div className="mb-4">
+      <div>
         <h3 className="font-medium mb-2">Add set</h3>
         <div className="flex gap-4 mb-2">
           <input
@@ -79,26 +80,30 @@ const Workout = ({ onAddWorkout }) => {
             name="weight"
             value={currentSet.weight}
             onChange={(e) => setCurrentSet({ ...currentSet, weight: e.target.value })}
-            placeholder="Weight (kg)"
+            placeholder="Weight"
             className="w-1/2 border rounded-lg px-3 py-2"
           />
+          <select className="pl-2 rounded-lg" value={unit} onChange={(e) => setUnit(e.target.value)}>
+            <option value="kg">kg</option>
+            <option value="lbs">lbs</option>
+          </select>
+        </div>
+        <button
+          type="button"
+          onClick={handleAddSet}
+          className="bg-blue-500 text-white px-3 py-2 rounded w-fit"
+        >
+          Add Set
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={handleAddSet}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Add Set
-      </button>
-      </div>
-      <ul className="mb-4">
-        {sets.map((set, index) => (
-          <li key={index} className="text-gray-700">
-            {set.reps} reps, {set.weight} kg
+      <ul>
+        {sets.map((set, setIndex) => (
+          <li key={setIndex} className="text-gray-700">
+            {set.reps} reps with {set.weight} {set.unit}
           </li>
         ))}
       </ul>
-      <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
+      <button type="submit" className="bg-green-500 text-white w-fit px-3 py-2 rounded">
         Save exercise
       </button>
     </form>
