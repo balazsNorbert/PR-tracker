@@ -46,6 +46,7 @@ const Workout = ({ onAddWorkout }) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-xl bg-gray-200 w-1/3 p-4">
       <div>
+        <h3 className="font-semibold text-xl mb-2">Add a new exercise</h3>
         <label htmlFor="date" className="block font-medium mb-1">Date</label>
         <input
           type="date"
@@ -60,7 +61,7 @@ const Workout = ({ onAddWorkout }) => {
           type="text"
           value={exercise}
           onChange={(e) => setExercise(e.target.value)}
-          placeholder="Add an exercise name"
+          placeholder="e.g. Bench press"
           className="w-full border rounded px-3 py-2"
         />
       </div>
@@ -83,7 +84,7 @@ const Workout = ({ onAddWorkout }) => {
             placeholder="Weight"
             className="w-1/2 border rounded-lg px-3 py-2"
           />
-          <select className="pl-2 rounded-lg" value={unit} onChange={(e) => setUnit(e.target.value)}>
+          <select className="pl-2 rounded-lg focus:round-b-none" value={unit} onChange={(e) => setUnit(e.target.value)}>
             <option value="kg">kg</option>
             <option value="lbs">lbs</option>
           </select>

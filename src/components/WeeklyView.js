@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-const getCurrentWeek = () => {
-  const today = new Date();
-  const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+const getCurrentWeek = (startDate) => {
+  const startOfWeek = new Date(startDate);
+  startOfWeek.setDate(startOfWeek.getDate() - (startOfWeek.getDay() === 0 ? 6 : startOfWeek.getDay() - 1));
   const week = Array.from({ length: 7 }, (_, i) => {
     const day = new Date(startOfWeek);
     day.setDate(startOfWeek.getDate() + i);
@@ -12,19 +12,17 @@ const getCurrentWeek = () => {
 };
 
 const WeeklyView = ({ workouts }) => {
-  const [week, setWeek] = useState(getCurrentWeek());
-  const [currentDay, setCurrentDay] = useState(new Date().toISOString().slice(0, 10));
-
-  useEffect(() => {
-    setWeek(getCurrentWeek());
-  }, []);
+  const today = new Date().toISOString().slice(0, 10);
+  const [currentDay, setCurrentDay] = useState(today);
+  const [week, setWeek] = useState(getCurrentWeek(currentDay));
 
   const handleNavigate = (direction) => {
-    const today = new Date();
+    const today = new Date(currentDay);
     if(direction === 'prev') today.setDate(today.getDate() - 7);
     if(direction === 'next') today.setDate(today.getDate() + 7);
-    setCurrentDay(today.toISOString().slice(0, 10));
-    setWeek(getCurrentWeek());
+    const newDate = today.toISOString().slice(0, 10);
+    setCurrentDay(newDate);
+    setWeek(getCurrentWeek(newDate));
   };
 
   return (
@@ -41,18 +39,19 @@ const WeeklyView = ({ workouts }) => {
       </div>
       <div className="grid grid-cols-7 w-full gap-5">
         {week.map((date, index) => {
-          const isToday = date === currentDay;
+          const isToday = date === today;
+          const dayNumber = new Date(date).getDate();
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
           return (
             <div key={index} className={`p-3 rounded-lg ${isToday ? 'bg-blue-500 text-white' : ''}`}>
-              <h3 className="text-lg font-semibold text-center">{dayName}</h3>
+              <h3 className="text-lg font-semibold text-center">{dayName} {dayNumber}</h3>
               <ul>
                 {workouts.filter((workout) => workout.date === date).map((workout, workoutIndex) => (
-                  <li key="workoutIndex">
+                  <li key={`${date}-${workoutIndex}`}>
                     {workout.exercise.name}
                     <ul className="text-sm">
                       {workout.exercise.sets.map((set, setIndex) => (
-                        <li key={setIndex}>
+                        <li key={`${date}-${workoutIndex}-${setIndex}`}>
                           {set.reps} reps with {set.weight} {set.unit}
                         </li>
                       ))}
