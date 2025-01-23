@@ -26,25 +26,26 @@ const WeeklyView = ({ workouts }) => {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center w-full h-min-[300px]">
+    <div className="flex flex-col gap-5">
+      <div className="flex justify-between items-center w-full text-sm md:text-lg lg:text-xl">
         <button onClick={() => handleNavigate('prev')}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+        className="bg-gray-700 text-white px-4 py-2 rounded-lg">
           Previous Week
         </button>
         <button onClick={() => handleNavigate('next')}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+        className="bg-gray-700 text-white px-4 py-2 rounded-lg">
           Next Week
         </button>
       </div>
-      <div className="grid grid-cols-7 w-full gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full gap-3">
         {week.map((date, index) => {
           const isToday = date === today;
           const dayNumber = new Date(date).getDate();
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
           return (
-            <div key={index} className={`p-3 rounded-lg ${isToday ? 'bg-blue-500 text-white' : ''}`}>
-              <h3 className="text-lg font-semibold text-center">{dayName} {dayNumber}</h3>
+            <div key={index} className={`aspect-square p-2 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-400 text-white' : 'bg-gray-200'}`}>
+              <h3 className="text-sm lg:text-lg font-semibold text-center">{dayName}</h3>
+              <p className="text-center">{dayNumber}</p>
               <ul>
                 {workouts.filter((workout) => workout.date === date).map((workout, workoutIndex) => (
                   <li key={`${date}-${workoutIndex}`}>

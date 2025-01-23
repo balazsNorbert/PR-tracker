@@ -44,7 +44,7 @@ const Workout = ({ onAddWorkout }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-xl bg-gray-200 w-1/3 p-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-xl bg-gray-200 w-fit p-3 md:p-5">
       <div>
         <h3 className="font-semibold text-xl mb-2">Add a new exercise</h3>
         <label htmlFor="date" className="block font-medium mb-1">Date</label>
@@ -52,7 +52,7 @@ const Workout = ({ onAddWorkout }) => {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="w-full border rounded px-3 py-2"
+          className="w-full border rounded-lg px-3 py-2"
         />
       </div>
       <div>
@@ -62,32 +62,34 @@ const Workout = ({ onAddWorkout }) => {
           value={exercise}
           onChange={(e) => setExercise(e.target.value)}
           placeholder="e.g. Bench press"
-          className="w-full border rounded px-3 py-2"
+          className="w-full border rounded-lg px-3 py-2"
         />
       </div>
       <div>
         <h3 className="font-medium mb-2">Add set</h3>
-        <div className="flex gap-4 mb-2">
+        <div className="flex flex-col w-full md:flex-row gap-4 mb-2">
           <input
             type="number"
             name="reps"
             value={currentSet.reps}
             onChange={(e) => setCurrentSet({ ...currentSet, reps: e.target.value })}
             placeholder="Reps"
-            className="w-1/2 border rounded-lg px-3 py-2"
+            className="w-full md:w-fit border rounded-lg px-3 py-2"
           />
-          <input
-            type="number"
-            name="weight"
-            value={currentSet.weight}
-            onChange={(e) => setCurrentSet({ ...currentSet, weight: e.target.value })}
-            placeholder="Weight"
-            className="w-1/2 border rounded-lg px-3 py-2"
-          />
-          <select className="pl-2 rounded-lg focus:round-b-none" value={unit} onChange={(e) => setUnit(e.target.value)}>
-            <option value="kg">kg</option>
-            <option value="lbs">lbs</option>
-          </select>
+          <div className="flex gap-2 w-full md:w-1/2">
+            <input
+              type="number"
+              name="weight"
+              value={currentSet.weight}
+              onChange={(e) => setCurrentSet({ ...currentSet, weight: e.target.value })}
+              placeholder="Weight"
+              className="border rounded-lg px-3 py-2"
+            />
+            <select className="pl-2 rounded-lg" value={unit} onChange={(e) => setUnit(e.target.value)}>
+              <option value="kg">kg</option>
+              <option value="lbs">lbs</option>
+            </select>
+          </div>
         </div>
         <button
           type="button"

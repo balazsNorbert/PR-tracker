@@ -11,8 +11,10 @@ const WorkoutList = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <Workout onAddWorkout={addWorkout} />
-      <h2 className="font-bold text-2xl text-center">This week's workouts</h2>
+      <div className="mx-auto">
+        <Workout onAddWorkout={addWorkout} />
+      </div>
+      <h2 className="font-bold text-2xl lg:text-3xl text-center mt-5">This week's workouts</h2>
       <WeeklyView workouts={workouts} />
     </div>
   )
