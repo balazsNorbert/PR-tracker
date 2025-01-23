@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Home from './components/Home';
+import LogBook from './components/LogBook';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -14,8 +17,5 @@ function App() {
     </Router>
   );
 }
-const Home = () => <div>Welcome to your Training Logbook!</div>;
-const LogBook = () => <div>Your Training Log</div>;
-const Profile = () => <div>Your Profile</div>;
 
 export default App;
