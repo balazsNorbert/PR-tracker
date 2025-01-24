@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const getCurrentWeek = (startDate) => {
   const startOfWeek = new Date(startDate);
@@ -11,10 +11,15 @@ const getCurrentWeek = (startDate) => {
   return week;
 };
 
-const WeeklyView = ({ workouts }) => {
+const WeeklyView = ({ workouts, onDeleteSet }) => {
   const today = new Date().toISOString().slice(0, 10);
   const [currentDay, setCurrentDay] = useState(today);
   const [week, setWeek] = useState(getCurrentWeek(currentDay));
+  const [workoutsList, setWorkoutsList] = useState(workouts);
+
+  useEffect(() => {
+    setWorkoutsList(workouts);
+  }, [workouts]);
 
   const handleNavigate = (direction) => {
     const today = new Date(currentDay);
@@ -23,6 +28,10 @@ const WeeklyView = ({ workouts }) => {
     const newDate = today.toISOString().slice(0, 10);
     setCurrentDay(newDate);
     setWeek(getCurrentWeek(newDate));
+  };
+
+  const handleDeleteSet = (date, workoutIndex, setIndex) => {
+    onDeleteSet(date, workoutIndex, setIndex);
   };
 
   return (
@@ -47,14 +56,19 @@ const WeeklyView = ({ workouts }) => {
               <h3 className="text-sm lg:text-lg font-semibold text-center">{dayName}</h3>
               <p className="text-center">{dayNumber}</p>
               <ul>
-                {workouts.filter((workout) => workout.date === date).map((workout, workoutIndex) => (
-                  <li key={`${date}-${workoutIndex}`}>
+                {workoutsList.filter((workout) => workout.date === date).map((workout, workoutIndex) => (
+                  <li className="text-lg" key={`${date}-${workoutIndex}`}>
                     {workout.exercise.name}
                     <ul className="text-sm">
                       {workout.exercise.sets.map((set, setIndex) => (
-                        <li key={`${date}-${workoutIndex}-${setIndex}`}>
-                          {set.reps} reps with {set.weight} {set.unit}
-                        </li>
+                        <div key={`${date}-${workoutIndex}-${setIndex}`} className="flex items-center justify-between text-sm">
+                          <li>
+                            {set.weight} {set.unit} - {set.reps} reps
+                          </li>
+                          <button type="button" onClick={() => handleDeleteSet(date, workoutIndex, setIndex)} className=" text-teal-800">
+                            <span className="material-icons">delete</span>
+                          </button>
+                        </div>
                       ))}
                     </ul>
                   </li>

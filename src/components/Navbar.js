@@ -13,11 +13,11 @@ const Navbar = () => {
       <h1 className="text-2xl md:text-3xl font-bold">PR Tracker</h1>
       <button className="block md:hidden" onClick={toggleMenu} aria-label="Toggle Menu">
         {isOpen ? (
-        <span class="material-icons">
+        <span className="material-icons">
           close
         </span>
         ) : (
-        <span class="material-icons">
+        <span className="material-icons">
           menu
         </span>
         )}
