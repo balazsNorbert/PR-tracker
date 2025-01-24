@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Workout = ({ onAddWorkout }) => {
+const Workout = ({ onAddWorkout, existingExercises }) => {
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [exercise, setExercise] = useState('');
   const [currentSet, setCurrentSet] = useState({
@@ -9,7 +9,16 @@ const Workout = ({ onAddWorkout }) => {
   });
   const [sets, setSets] = useState([]);
   const [unit, setUnit] = useState('kg');
+  const [suggestions, setSuggestions] = useState([]);
 
+  const handleExerciseChange = (e) => {
+    const value = e.target.value;
+    setExercise(value);
+    const matchedExercises = existingExercises.filter((ex) =>
+      ex.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setSuggestions(matchedExercises);
+  }
   const handleAddSet = () => {
     if(!currentSet.reps || !currentSet.weight) {
       alert("Please enter reps and weight!");
@@ -23,24 +32,45 @@ const Workout = ({ onAddWorkout }) => {
     });
   };
 
+  const handleDeleteSet = (index) => {
+    const newSets = [...sets];
+    newSets.splice(index, 1);
+    setSets(newSets);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if(!date || !exercise || sets.length === 0) {
       alert("Please enter date, exercise name, and at least one set!");
       return;
     }
-    onAddWorkout({
-      date,
-      exercise:{
-        name: exercise,
-        sets,
-      },
-      sets,
-    });
+    const existingWorkout = existingExercises.find((ex) => ex.name === exercise);
+    if (existingWorkout) {
+      const updatedWorkout = {
+        ...existingWorkout,
+        sets: [...existingWorkout.sets, ...sets],
+      }
+      onAddWorkout({
+        date,
+        exercise: updatedWorkout,
+      });
+    } else {
+      onAddWorkout({
+        date,
+        exercise:{
+          name: exercise,
+          sets,
+        }
+      });
+    }
 
     setDate(new Date().toISOString().slice(0, 10));
     setExercise('');
     setSets([]);
+    setCurrentSet({
+      reps: '',
+      weight: '',
+    });
   };
 
   return (
@@ -60,23 +90,25 @@ const Workout = ({ onAddWorkout }) => {
         <input
           type="text"
           value={exercise}
-          onChange={(e) => setExercise(e.target.value)}
+          onChange={handleExerciseChange}
           placeholder="e.g. Bench press"
           className="w-full border rounded-lg px-3 py-2"
         />
+        {suggestions.length > 0 && (
+          <ul className="bg-white border rounded-lg p-2 mt-2">
+            {suggestions.map((suggestion) => (
+              <li key={suggestion.name} className="cursor-pointer" onClick={() => {setExercise(suggestion.name);setSuggestions([]);}}>
+                {suggestion.name}
+                <hr></hr>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div>
         <h3 className="font-medium mb-2">Add set</h3>
         <div className="flex flex-col w-full md:flex-row gap-4 mb-2">
-          <input
-            type="number"
-            name="reps"
-            value={currentSet.reps}
-            onChange={(e) => setCurrentSet({ ...currentSet, reps: e.target.value })}
-            placeholder="Reps"
-            className="w-full md:w-fit border rounded-lg px-3 py-2"
-          />
-          <div className="flex gap-2 w-full md:w-1/2">
+          <div className="flex gap-2 w-full md:w-fit">
             <input
               type="number"
               name="weight"
@@ -90,6 +122,14 @@ const Workout = ({ onAddWorkout }) => {
               <option value="lbs">lbs</option>
             </select>
           </div>
+          <input
+            type="number"
+            name="reps"
+            value={currentSet.reps}
+            onChange={(e) => setCurrentSet({ ...currentSet, reps: e.target.value })}
+            placeholder="Reps"
+            className="w-full md:w-fit border rounded-lg px-3 py-2"
+          />
         </div>
         <button
           type="button"
@@ -101,9 +141,14 @@ const Workout = ({ onAddWorkout }) => {
       </div>
       <ul>
         {sets.map((set, setIndex) => (
-          <li key={setIndex} className="text-gray-700">
-            {set.reps} reps with {set.weight} {set.unit}
-          </li>
+          <div key={setIndex} className="flex items-center justify-between text-xl">
+            <li>
+              {set.weight} {set.unit} - {set.reps} reps
+            </li>
+            <button type="button" onClick={handleDeleteSet} className=" text-teal-800">
+              <span className="material-icons">delete</span>
+            </button>
+          </div>
         ))}
       </ul>
       <button type="submit" className="bg-green-500 text-white w-fit px-3 py-2 rounded">
