@@ -1,52 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Workout from './Workout';
 import WeeklyView from './WeeklyView';
+import axios from 'axios';
 
 const WorkoutList = () => {
   const [workouts, setWorkouts] = useState([]);
 
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/workouts")
+      .then(response => {
+        setWorkouts(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching workouts:", error);
+      });
+  }, []);
+
   const addWorkout = (newWorkout) => {
-    setWorkouts((prevWorkouts) => {
-      console.log("Previous workouts:", prevWorkouts);
-      console.log("New workout being added:", newWorkout);
-      const workoutIndex = prevWorkouts.findIndex(
-        (w) => w.date === newWorkout.date && w.exercise.name === newWorkout.exercise.name
-      );
-      if (workoutIndex > -1) {
-        const updatedWorkouts = prevWorkouts.map((workout, index) => {
-          if (index === workoutIndex) {
-            return {
-              ...workout,
-              exercise: {
-                ...workout.exercise,
-                sets: [...newWorkout.exercise.sets],
-              },
-            };
-          }
-          return workout;
-        });
-        return updatedWorkouts;
-      }
-      return [...prevWorkouts, newWorkout];
-    });
+    console.log("New workout being sent:", newWorkout);
+    axios.post('http://localhost:5000/api/workouts', newWorkout)
+      .then(response => {
+        console.log("Response from backend:", response.data);
+        setWorkouts((prevWorkouts) => [...prevWorkouts, response.data]);
+      })
+      .catch(error => {
+        console.error("Error adding workout:", error);
+      });
   };
 
+
   const deleteSet = (date, workoutIndex, setIndex) => {
-    setWorkouts((prevWorkouts) => {
-      return prevWorkouts.map((workout, index) => {
-        if (index === workoutIndex && workout.date === date) {
-          const updatedSets = workout.exercise.sets.filter((_, index) => index !== setIndex);
-          if (updatedSets.length === 0) {
-            return null;
+    console.log("Delete request being sent:", date, workoutIndex, setIndex);
+    const encodedDate = encodeURIComponent(date);
+    axios.delete(`http://localhost:5000/api/workouts/${encodedDate}/${workoutIndex}/${setIndex}`)
+      .then((response) => {
+        console.log("Delete response from backend:", response.data);
+        setWorkouts(prevWorkouts => {
+          const updatedWorkouts = [...prevWorkouts];
+          const workout = updatedWorkouts.find(w => w.date === date);
+          if (workout) {
+            const exercise = workout.exercise[workoutIndex];
+            exercise.sets.splice(setIndex, 1);
+            if (exercise.sets.length === 0) {
+              workout.exercise.splice(workoutIndex, 1);
+            }
           }
-          return {
-            ...workout,
-            exercise: { ...workout.exercise, sets: updatedSets },
-          };
-        }
-        return workout;
-      }).filter(Boolean);
-    });
+          return updatedWorkouts;
+        });
+      })
+      .catch((error) => {
+        console.error("Error deleting set:", error);
+      });
   };
 
   return (

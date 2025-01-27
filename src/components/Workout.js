@@ -15,7 +15,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
     const value = e.target.value;
     setExercise(value);
     const matchedExercises = existingExercises.filter((ex) =>
-      ex.name.toLowerCase().includes(value.toLowerCase())
+      ex.name && ex.name.toLowerCase().includes(value.toLowerCase())
     );
     setSuggestions(matchedExercises);
   }

@@ -56,21 +56,25 @@ const WeeklyView = ({ workouts, onDeleteSet }) => {
               <h3 className="text-sm lg:text-lg font-semibold text-center">{dayName}</h3>
               <p className="text-center">{dayNumber}</p>
               <ul>
-                {workoutsList.filter((workout) => workout.date === date).map((workout, workoutIndex) => (
+                {workoutsList.filter((workout) => new Date(workout.date).toISOString().slice(0, 10) === date).map((workout, workoutIndex) => (
                   <li className="text-lg" key={`${date}-${workoutIndex}`}>
-                    {workout.exercise.name}
-                    <ul className="text-sm">
-                      {workout.exercise.sets.map((set, setIndex) => (
-                        <div key={`${date}-${workoutIndex}-${setIndex}`} className="flex items-center justify-between text-sm">
-                          <li>
-                            {set.weight} {set.unit} - {set.reps} reps
-                          </li>
-                          <button type="button" onClick={() => handleDeleteSet(date, workoutIndex, setIndex)} className=" text-teal-800">
-                            <span className="material-icons">delete</span>
-                          </button>
+                      {workout.exercise.map((exercise, exerciseIndex) => (
+                        <div key={exerciseIndex} className="flex items-center justify-between text-sm">
+                          <p>{exercise.name}</p>
+                          <ul>
+                            {exercise.sets.map((set, setIndex) => (
+                              <div key={setIndex}>
+                                <li>
+                                  {set.weight} {set.unit} - {set.reps} reps
+                                </li>
+                                <button type="button" onClick={() => handleDeleteSet(date, workoutIndex, setIndex)} className=" text-teal-800">
+                                  <span className="material-icons">delete</span>
+                                </button>
+                              </div>
+                            ))}
+                          </ul>
                         </div>
                       ))}
-                    </ul>
                   </li>
                 ))}
               </ul>
