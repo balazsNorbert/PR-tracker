@@ -31,7 +31,11 @@ const Workout = mongoose.model("Workout", workoutSchema);
 
 app.post('/api/workouts', (req, res) => {
   console.log("Received workout data:", req.body);
-  const newWorkout = new Workout(req.body);
+  const newWorkout = new Workout({
+    date: req.body.date,
+    exercise: req.body.exercise
+  });
+
   newWorkout.save()
     .then(workout => {
       console.log("Saved workout:", workout);
@@ -52,32 +56,37 @@ app.get('/api/workouts', async (req, res) => {
   }
 });
 
-app.delete('/api/workouts/:date/:workoutIndex/:setIndex', (req, res) => {
-  const { date, workoutIndex, setIndex } = req.params;
-  console.log("Received parameters for deletion:", req.params);
-  const dateObj = new Date(date).toISOString().slice(0, 10);
-  console.log("Type of date:", dateObj);
-  Workout.findOne( dateObj )
-    .then(workouts => {
-      if (workouts.length > 0) {
-        const workout = workouts[0];
-        workout.exercise[workoutIndex].sets.splice(setIndex, 1);
-        console.log("Workout after deletion:", workout);
-        workout.save()
-          .then(() => {
-            res.status(200).json({ message: "Set deleted successfully" });
-          })
-          .catch((err) => {
-            res.status(500).json({ message: "Error saving workout", error: err });
-          });
-      } else {
-        res.status(404).json({ message: "Workout not found" });
+app.delete('/api/workouts/:workoutId', (req, res) => {
+  const { workoutId } = req.params;
+  const { exerciseIndex, setIndex } = req.body;  // Az exercise és set indexeket a request body-ban várjuk
+
+  // Megkeressük a workout-ot az ID alapján
+  Workout.findById(workoutId)
+    .then(workout => {
+      if (!workout) {
+        return res.status(404).json({ message: "Workout not found" });
       }
+
+      // Megkeressük az exercise-t
+      const exercise = workout.exercise[exerciseIndex];
+      if (!exercise) {
+        return res.status(404).json({ message: "Exercise not found" });
+      }
+      exercise.sets.splice(setIndex, 1);
+      if (exercise.sets.length === 0) {
+        workout.exercise.splice(exerciseIndex, 1);
+      }
+      return workout.save();
     })
-    .catch((err) => {
-      res.status(500).json({ message: "Error deleting set", error: err });
+    .then(updatedWorkout => {
+      res.json(updatedWorkout);
+    })
+    .catch(error => {
+      res.status(500).json({ message: error.message });
     });
 });
+
+
 
 const PORT = 5000;
 app.listen(PORT, () => {
