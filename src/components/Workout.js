@@ -14,10 +14,22 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   const handleExerciseChange = (e) => {
     const value = e.target.value;
     setExercise(value);
+    if(!value.trim()){
+      setSuggestions([]);
+      return;
+    }
     const matchedExercises = existingExercises.filter((ex) =>
       ex.name && ex.name.toLowerCase().includes(value.toLowerCase())
     );
-    setSuggestions(matchedExercises);
+    const uniqueExercises = [];
+    const seen = new Set();
+    matchedExercises.forEach(exercise => {
+      if (!seen.has(exercise.name)) {
+        seen.add(exercise.name);
+        uniqueExercises.push(exercise);
+      }
+    });
+    setSuggestions(uniqueExercises);
   }
   const handleAddSet = () => {
     if(!currentSet.reps || !currentSet.weight) {
@@ -44,7 +56,16 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
       alert("Please enter date, exercise name, and at least one set!");
       return;
     }
-    const existingWorkout = existingExercises.find((ex) => ex.name === exercise);
+    const validDate = new Date(date);
+    if (isNaN(validDate)) {
+      alert("Invalid date!");
+      return;
+    }
+    const existingWorkout = existingExercises.find((ex) => {
+      const exDate = new Date(ex.date);
+      return ex.name === exercise && !isNaN(exDate) && exDate.toISOString().slice(0, 10) === validDate.toISOString().slice(0, 10);
+    });
+
     if (existingWorkout) {
       const updatedWorkout = {
         ...existingWorkout,

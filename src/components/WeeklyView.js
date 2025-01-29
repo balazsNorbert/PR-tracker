@@ -48,11 +48,11 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                 {workouts.filter((workout) => new Date(workout.date).toISOString().slice(0, 10) === date).map((workout, workoutIndex) => (
                   <li className="text-lg" key={`${date}-${workoutIndex}`}>
                     {workout.exercise.map((exercise, exerciseIndex) => (
-                      <div key={exerciseIndex} className="flex items-center justify-between text-sm">
+                      <div key={exerciseIndex} className="flex flex-col justify-between text-sm">
                         <p>{exercise.name}</p>
                         <ul>
                           {exercise.sets.map((set, setIndex) => (
-                            <div key={setIndex}>
+                            <div key={setIndex} className="flex gap-5 items-center">
                               <li>
                                 {set.weight} {set.unit} - {set.reps} reps
                               </li>

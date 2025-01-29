@@ -58,16 +58,12 @@ app.get('/api/workouts', async (req, res) => {
 
 app.delete('/api/workouts/:workoutId', (req, res) => {
   const { workoutId } = req.params;
-  const { exerciseIndex, setIndex } = req.body;  // Az exercise és set indexeket a request body-ban várjuk
-
-  // Megkeressük a workout-ot az ID alapján
+  const { exerciseIndex, setIndex } = req.body;
   Workout.findById(workoutId)
     .then(workout => {
       if (!workout) {
         return res.status(404).json({ message: "Workout not found" });
       }
-
-      // Megkeressük az exercise-t
       const exercise = workout.exercise[exerciseIndex];
       if (!exercise) {
         return res.status(404).json({ message: "Exercise not found" });
@@ -86,7 +82,19 @@ app.delete('/api/workouts/:workoutId', (req, res) => {
     });
 });
 
-
+app.put('/api/workouts/:id', async (req, res) => {
+  try {
+      const { id } = req.params;
+      const updatedWorkout = req.body;
+      const workout = await Workout.findByIdAndUpdate(id, updatedWorkout, { new: true });
+      if (!workout) {
+          return res.status(404).json({ message: "Workout not found" });
+      }
+      res.json(workout);
+  } catch (error) {
+      res.status(500).json({ message: "Error updating workout", error });
+  }
+});
 
 const PORT = 5000;
 app.listen(PORT, () => {
