@@ -5,10 +5,13 @@ import Home from './components/Home';
 import LogBook from './components/LogBook';
 import Profile from './components/Profile';
 import ChartByExercise from './components/ChartByExercise';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

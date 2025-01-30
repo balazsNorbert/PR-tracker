@@ -2,19 +2,58 @@ import React, { useState, useEffect } from 'react';
 import Workout from './Workout';
 import WeeklyView from './WeeklyView';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const WorkoutList = () => {
   const [workouts, setWorkouts] = useState([]);
+  const [maxWeight, setMaxWeight] = useState(0);
+  const [maxReps, setMaxReps] = useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/workouts")
       .then(response => {
         setWorkouts(response.data);
+        let currentMaxWeight = 0;
+        let currentMaxReps = 0;
+        response.data.forEach(workout => {
+          workout.exercise.forEach(ex => {
+            ex.sets.forEach(set => {
+              if (set.weight > currentMaxWeight) {
+                currentMaxWeight = set.weight;
+              }
+              if (set.reps > currentMaxReps) {
+                currentMaxReps = set.reps;
+              }
+            });
+          });
+        });
+        setMaxWeight(currentMaxWeight);
+        setMaxReps(currentMaxReps);
       })
       .catch(error => {
         console.error("Error fetching workouts:", error);
       });
   }, []);
+
+  const checkForNewPR = (newWorkout) => {
+    let newMaxWeight = maxWeight;
+    let newMaxReps = maxReps;
+    newWorkout.exercise.forEach(ex => {
+      ex.sets.forEach(set => {
+        if (set.weight > newMaxWeight) {
+          newMaxWeight = set.weight;
+          toast.success(`New Weight PR! (${newMaxWeight} kg)`, { autoClose: 3000 });
+        }
+        if (set.reps > newMaxReps) {
+          newMaxReps = set.reps;
+          toast.success(`New Reps PR! (${newMaxReps} reps)`, { autoClose: 3000 });
+        }
+      });
+    });
+    setMaxWeight(newMaxWeight);
+    setMaxReps(newMaxReps);
+  };
 
   const addWorkout = (newWorkout) => {
     if (!Array.isArray(newWorkout.exercise)) {
@@ -51,6 +90,7 @@ const WorkoutList = () => {
           setWorkouts(prevWorkouts =>
             prevWorkouts.map(w => w._id === existingWorkout._id ? response.data : w)
           );
+          checkForNewPR(response.data);
         })
         .catch(error => {
           console.error("Error updating workout:", error);
@@ -60,6 +100,7 @@ const WorkoutList = () => {
         .then(response => {
           console.log("Response from backend:", response.data);
           setWorkouts((prevWorkouts) => [...prevWorkouts, response.data]);
+          checkForNewPR(response.data);
         })
         .catch(error => {
           console.error("Error adding workout:", error);
