@@ -56,6 +56,23 @@ app.get('/api/workouts', async (req, res) => {
   }
 });
 
+app.get("/api/exercise", async (req, res) => {
+  try{
+    const { name } = req.query;
+    const exercises = await Workout.aggregate([
+      { $match: { "exercise.name": name } },
+      { $unwind: "$exercise" },
+      { $match: { "exercise.name": name } },
+      { $sort: { date: 1 } },
+      { $project: { "exercise.sets": 1, date: 1, _id: 0 } }
+    ]);
+    res.json(exercises);
+  } catch (error) {
+    console.error("Error fetching exercise data:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 app.delete('/api/workouts/:workoutId', (req, res) => {
   const { workoutId } = req.params;
   const { exerciseIndex, setIndex } = req.body;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const getCurrentWeek = (startDate) => {
   const startOfWeek = new Date(startDate);
@@ -49,7 +50,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                   <li className="text-lg" key={`${date}-${workoutIndex}`}>
                     {workout.exercise.map((exercise, exerciseIndex) => (
                       <div key={exerciseIndex} className="flex flex-col justify-between text-sm">
-                        <p>{exercise.name}</p>
+                        <p><Link to={`/exercise/${exercise.name}`}>{exercise.name}</Link></p>
                         <ul>
                           {exercise.sets.map((set, setIndex) => (
                             <div key={setIndex} className="flex gap-5 items-center">

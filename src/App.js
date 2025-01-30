@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import LogBook from './components/LogBook';
 import Profile from './components/Profile';
+import ChartByExercise from './components/ChartByExercise';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/logbook" element={<LogBook />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/exercise/:name" element={<ChartByExercise />} />
       </Routes>
     </Router>
   );
