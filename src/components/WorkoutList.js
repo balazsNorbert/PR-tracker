@@ -7,29 +7,35 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const WorkoutList = () => {
   const [workouts, setWorkouts] = useState([]);
-  const [maxWeight, setMaxWeight] = useState(0);
-  const [maxReps, setMaxReps] = useState(0);
+  const [maxWeightByExercise, setMaxWeightByExercise] = useState({});
+  const [maxRepsByExercise, setMaxRepsByExercise] = useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/workouts")
       .then(response => {
         setWorkouts(response.data);
-        let currentMaxWeight = 0;
-        let currentMaxReps = 0;
+        let previousMaxWeightByExercise = {};
+        let previousMaxRepsByExercise = {};
         response.data.forEach(workout => {
           workout.exercise.forEach(ex => {
+            if(!previousMaxWeightByExercise[ex.name]) {
+              previousMaxWeightByExercise[ex.name] = 0;
+            }
+            if(!previousMaxRepsByExercise[ex.name]) {
+              previousMaxRepsByExercise[ex.name] = {};
+            }
             ex.sets.forEach(set => {
-              if (set.weight > currentMaxWeight) {
-                currentMaxWeight = set.weight;
+              if(set.weight > previousMaxWeightByExercise[ex.name]) {
+                previousMaxWeightByExercise[ex.name] = set.weight;
               }
-              if (set.reps > currentMaxReps) {
-                currentMaxReps = set.reps;
+              if(!previousMaxRepsByExercise[ex.name][set.weight] || set.reps > previousMaxRepsByExercise[ex.name][set.weight]) {
+                previousMaxRepsByExercise[ex.name][set.weight] = set.reps;
               }
             });
           });
         });
-        setMaxWeight(currentMaxWeight);
-        setMaxReps(currentMaxReps);
+        setMaxWeightByExercise(previousMaxWeightByExercise);
+        setMaxRepsByExercise(previousMaxRepsByExercise);
       })
       .catch(error => {
         console.error("Error fetching workouts:", error);
@@ -37,22 +43,29 @@ const WorkoutList = () => {
   }, []);
 
   const checkForNewPR = (newWorkout) => {
-    let newMaxWeight = maxWeight;
-    let newMaxReps = maxReps;
+    const newMaxWeightByExercise = {...maxWeightByExercise};
+    const newMaxRepsByExercise = {...maxRepsByExercise};
+
     newWorkout.exercise.forEach(ex => {
+      if(!newMaxWeightByExercise[ex.name]) {
+        newMaxWeightByExercise[ex.name] = 0;
+      }
+      if(!newMaxRepsByExercise[ex.name]) {
+        newMaxRepsByExercise[ex.name] = 0;
+      }
       ex.sets.forEach(set => {
-        if (set.weight > newMaxWeight) {
-          newMaxWeight = set.weight;
-          toast.success(`New Weight PR! (${newMaxWeight} kg)`, { autoClose: 3000 });
+        if(set.weight > newMaxWeightByExercise[ex.name]) {
+          newMaxWeightByExercise[ex.name] = set.weight;
+          toast.success(`New PR for ${ex.name}: ${set.weight} ${set.unit}!`, { autoClose: 4000 });
         }
-        if (set.reps > newMaxReps) {
-          newMaxReps = set.reps;
-          toast.success(`New Reps PR! (${newMaxReps} reps)`, { autoClose: 3000 });
+        if(!newMaxRepsByExercise[ex.name][set.weight] || set.reps > newMaxRepsByExercise[ex.name][set.weight]) {
+          newMaxRepsByExercise[ex.name][set.weight] = set.reps;
+          toast.success(`New Reps PR for ${ex.name} at ${set.weight} ${set.unit} - ${set.reps} reps!`, { autoClose: 4000 });
         }
-      });
     });
-    setMaxWeight(newMaxWeight);
-    setMaxReps(newMaxReps);
+    });
+    setMaxWeightByExercise(newMaxWeightByExercise);
+    setMaxRepsByExercise(newMaxRepsByExercise);
   };
 
   const addWorkout = (newWorkout) => {
