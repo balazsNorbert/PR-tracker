@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 bg-gray-700 flex justify-between items-center text-white py-4 px-5 md:px-10">
-      <h1 className="text-2xl md:text-3xl font-bold">PR Tracker</h1>
+      <h1 className="text-2xl md:text-3xl font-bold"><Link to="/">PR Tracker</Link></h1>
       <button className="block md:hidden" onClick={toggleMenu} aria-label="Toggle Menu">
         {isOpen ? (
         <span className="material-icons">

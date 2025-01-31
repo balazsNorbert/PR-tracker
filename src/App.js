@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import LogBook from './components/LogBook';
 import Profile from './components/Profile';
+import Footer from './components/Footer';
 import ChartByExercise from './components/ChartByExercise';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +20,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/exercise/:name" element={<ChartByExercise />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

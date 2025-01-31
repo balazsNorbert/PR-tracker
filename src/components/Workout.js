@@ -155,7 +155,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         <button
           type="button"
           onClick={handleAddSet}
-          className="bg-blue-500 text-white px-3 py-2 rounded w-fit"
+          className="bg-slate-600 hover:bg-green-800 transition duration-300  text-white px-3 py-2 mt-2 rounded w-fit"
         >
           Add Set
         </button>
@@ -172,7 +172,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           </div>
         ))}
       </ul>
-      <button type="submit" className="bg-green-500 text-white w-fit px-3 py-2 rounded">
+      <button type="submit" className="bg-teal-600 hover:bg-teal-400 transition duration-300 text-white w-fit px-3 py-2 rounded">
         Save exercise
       </button>
     </form>
