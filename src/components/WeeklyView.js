@@ -42,24 +42,24 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
           const dayNumber = new Date(date).getDate();
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
           return (
-            <div key={index} className={`aspect-square pt-1 px-3 pb-10 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-400 text-white' : 'bg-gray-200'}`}>
+            <div key={index} className={`aspect-square pt-1 px-3 pb-11 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-400 text-white' : 'bg-gray-200'}`}>
               <h3 className="text-xs lg:text-base font-semibold text-center">{dayName}</h3>
               <p className="text-center text-sm lg:text-lg mb-1">{dayNumber}</p>
-              <div className="h-full">
+              <div className="h-full overflow-y-auto overflow-x-auto w-full">
                 {workouts.filter((workout) => new Date(workout.date).toISOString().slice(0, 10) === date).map((workout, workoutIndex) => (
-                  <ul className="flex gap-3 overflow-x-auto h-full w-full" key={`${date}-${workoutIndex}`}>
+                  <ul className="flex gap-3" key={`${date}-${workoutIndex}`}>
                     {workout.exercise.map((exercise, exerciseIndex) => (
-                      <li key={exerciseIndex} className="flex gap-1 text-xs md:text-sm 2xl:text-lg h-full">
-                        <div className="flex flex-col min-w-max overflow-y-auto min-h-max">
+                      <li key={exerciseIndex} className="flex gap-1 text-xs md:text-sm 2xl:text-lg">
+                        <div className="flex flex-col min-w-max">
                           <p className="font-semibold text-sm md:text-base 2xl:text-xl">
                             {`${exerciseIndex + 1}. `}
                             <Link to={`/exercise/${exercise.name}`}>{exercise.name}</Link>
                           </p>
                           <ul>
                             {exercise.sets.map((set, setIndex) => (
-                              <li key={setIndex} className="flex gap-2 items-center">
+                              <li key={setIndex} className="flex gap-1 items-center">
                                 <span className="font-semibold">{`${setIndex + 1}.`}</span>
-                                {set.weight} {set.unit} - {set.reps} reps
+                                <p className="block min-w-28 md:min-w-32 2xl:min-w-40">{set.weight} {set.unit} - {set.reps} reps</p>
                                 <button type="button" onClick={() => handleDeleteSet(date, workoutIndex, exerciseIndex, setIndex)} className=" text-teal-800">
                                   <span className="material-icons text-[18px] md:text-[24px]">delete</span>
                                 </button>
