@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const user = localStorage.getItem('user');
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -34,6 +35,20 @@ const Navbar = () => {
         <li className="hover:text-teal-500">
           <Link to="/profile">Profile</Link>
         </li>
+        {!user ? (
+          <div className="flex gap-1 items-center ml-auto">
+            <li className="hover:text-teal-500"><Link to="/login">Login</Link></li>
+            /
+            <li className="hover:text-teal-500"><Link to="/register">Register</Link></li>
+          </div>
+        )
+        :(
+          <li className="hover:text-teal-500"><button onClick={()=>{
+            localStorage.removeItem('user');
+            window.location.reload();
+            }}>Logout</button>
+          </li>
+        )}
       </ul>
     </nav>
   );

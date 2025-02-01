@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 app.use(express.json());
@@ -29,6 +31,84 @@ const workoutSchema = new mongoose.Schema({
 
 const Workout = mongoose.model("Workout", workoutSchema);
 
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+userSchema.pre("save", async function (next) {
+  if(!this.isModified("password")) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+const User = mongoose.model("User", userSchema);
+
+app.post("/api/register", async (req, res) => {
+  const { username, password } = req.body;
+  const userExists = await User.findOne({ username });
+  if(userExists){
+    return res.status(400).json({ message: "User already exists!" });
+  }
+
+  const user = new User({
+    username,
+    password,
+  });
+
+  try{
+    const createdUser = await user.save();
+    res.status(201).json({ message: "User registered successfully", user: createdUser });
+  } catch (error) {
+    res.status(500).json({ message: "Error registering user", error });
+  }
+});
+
+app.post("/api/login", async(req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid username or password!" });
+    }
+
+    const isMatch = await user.matchPassword(password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid username or password!" });
+    }
+
+    const token = jwt.sign({ userId: user._id, username: user.username }, "your_jwt_secret", {
+      expiresIn: "2h",
+    });
+
+    res.json({ message: "Login successful", token });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
+const protect = (req, res, next) => {
+  const token = req.header("Athorization")?.split("")[1];
+
+  if(!token){
+    return res.status(401).json({ message: "No token, authorization denied!" });
+  }
+
+  try{
+    const decoded = jwt.verify(token, "your_jwt_secret");
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Token is not valid!" });
+  }
+}
+
 app.post('/api/workouts', (req, res) => {
   console.log("Received workout data:", req.body);
   const newWorkout = new Workout({
@@ -47,7 +127,7 @@ app.post('/api/workouts', (req, res) => {
     });
 });
 
-app.get('/api/workouts', async (req, res) => {
+app.get('/api/workouts', protect, async (req, res) => {
   try {
     const workouts = await Workout.find();
     res.json(workouts);
@@ -56,7 +136,7 @@ app.get('/api/workouts', async (req, res) => {
   }
 });
 
-app.get("/api/exercise", async (req, res) => {
+app.get("/api/exercise", protect, async (req, res) => {
   try{
     const { name } = req.query;
     const exercises = await Workout.aggregate([
@@ -99,7 +179,7 @@ app.delete('/api/workouts/:workoutId', (req, res) => {
     });
 });
 
-app.put('/api/workouts/:id', async (req, res) => {
+app.put('/api/workouts/:id', protect, async (req, res) => {
   try {
       const { id } = req.params;
       const updatedWorkout = req.body;
