@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Workout from './Workout';
 import WeeklyView from './WeeklyView';
-import axios from 'axios';
+import axios from '../axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,9 +9,11 @@ const WorkoutList = () => {
   const [workouts, setWorkouts] = useState([]);
   const [maxWeightByExercise, setMaxWeightByExercise] = useState({});
   const [maxRepsByExercise, setMaxRepsByExercise] = useState(0);
-
   useEffect(() => {
-    axios.get("http://localhost:5000/api/workouts")
+    const token = localStorage.getItem("token");
+    axios.get("http://localhost:5000/api/workouts",{
+      headers: {Authorization: `Bearer ${token}`},
+    })
       .then(response => {
         setWorkouts(response.data);
         let previousMaxWeightByExercise = {};
@@ -97,7 +99,12 @@ const WorkoutList = () => {
         ...existingWorkout,
         exercise: [...updatedExercises, ...exercisesToAdd],
       };
-      axios.put(`http://localhost:5000/api/workouts/${existingWorkout._id}`, updatedWorkout)
+      const token = localStorage.getItem("token");
+      axios.put(`http://localhost:5000/api/workouts/${existingWorkout._id}`, updatedWorkout, {
+        headers: {
+          Authorization:`Bearer ${token}`
+        }
+      })
         .then(response => {
           console.log("Updated workout in backend:", response.data);
           setWorkouts(prevWorkouts =>
@@ -109,7 +116,12 @@ const WorkoutList = () => {
           console.error("Error updating workout:", error);
         });
     } else {
-      axios.post('http://localhost:5000/api/workouts', newWorkout)
+      const token = localStorage.getItem("token");
+      axios.post('http://localhost:5000/api/workouts', newWorkout, {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
         .then(response => {
           console.log("Response from backend:", response.data);
           setWorkouts((prevWorkouts) => [...prevWorkouts, response.data]);
@@ -138,9 +150,13 @@ const WorkoutList = () => {
       console.error("Set not found for this exercise");
       return;
     }
-
+    const token = localStorage.getItem("token");
     axios.delete(`http://localhost:5000/api/workouts/${workout._id}`, {
       data: { exerciseIndex, setIndex },
+    },{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
     })
       .then(response => {
         console.log("Updated workout after delete:", response.data);

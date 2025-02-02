@@ -25,6 +25,7 @@ const exerciseSchema = new mongoose.Schema({
 });
 
 const workoutSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref:"User", required: true },
   date: { type: Date, required: true },
   exercise: [exerciseSchema]
 });
@@ -94,7 +95,7 @@ app.post("/api/login", async(req, res) => {
 });
 
 const protect = (req, res, next) => {
-  const token = req.header("Athorization")?.split("")[1];
+  const token = req.header("Authorization")?.split(" ")[1];
 
   if(!token){
     return res.status(401).json({ message: "No token, authorization denied!" });
@@ -109,9 +110,11 @@ const protect = (req, res, next) => {
   }
 }
 
-app.post('/api/workouts', (req, res) => {
-  console.log("Received workout data:", req.body);
+app.post('/api/workouts', protect, (req, res) => {
+  const userId = req.user.userId;
+
   const newWorkout = new Workout({
+    userId: userId,
     date: req.body.date,
     exercise: req.body.exercise
   });
@@ -129,7 +132,8 @@ app.post('/api/workouts', (req, res) => {
 
 app.get('/api/workouts', protect, async (req, res) => {
   try {
-    const workouts = await Workout.find();
+    const userId = req.user.userId;
+    const workouts = await Workout.find({ userId: userId });
     res.json(workouts);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -139,10 +143,15 @@ app.get('/api/workouts', protect, async (req, res) => {
 app.get("/api/exercise", protect, async (req, res) => {
   try{
     const { name } = req.query;
+    const userId = req.user.userId;
+    console.log("User ID:", userId);
+    const objectIdUserId = mongoose.Types.ObjectId(userId);
+    console.log("UserId ObjectId:", objectIdUserId);
+    console.log("Name:", name);
     const exercises = await Workout.aggregate([
-      { $match: { "exercise.name": name } },
+      { $match: { "userId": userId, "exercise.name": name } },
       { $unwind: "$exercise" },
-      { $match: { "exercise.name": name } },
+      { $match: {"exercise.name": name } },
       { $sort: { date: 1 } },
       { $project: { "exercise.sets": 1, date: 1, _id: 0 } }
     ]);
@@ -153,10 +162,11 @@ app.get("/api/exercise", protect, async (req, res) => {
   }
 });
 
-app.delete('/api/workouts/:workoutId', (req, res) => {
+app.delete('/api/workouts/:workoutId', protect, (req, res) => {
+  const userId = req.user.userId;
   const { workoutId } = req.params;
   const { exerciseIndex, setIndex } = req.body;
-  Workout.findById(workoutId)
+  Workout.findById({ _id: workoutId, userId: userId})
     .then(workout => {
       if (!workout) {
         return res.status(404).json({ message: "Workout not found" });
@@ -181,9 +191,10 @@ app.delete('/api/workouts/:workoutId', (req, res) => {
 
 app.put('/api/workouts/:id', protect, async (req, res) => {
   try {
+      const userId = req.user.userId;
       const { id } = req.params;
       const updatedWorkout = req.body;
-      const workout = await Workout.findByIdAndUpdate(id, updatedWorkout, { new: true });
+      const workout = await Workout.findByIdAndUpdate({_id: id, userId: userId}, updatedWorkout, { new: true });
       if (!workout) {
           return res.status(404).json({ message: "Workout not found" });
       }

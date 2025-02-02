@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -16,8 +16,8 @@ const Login = () => {
         password
       });
 
-      if(response.data.message === "Login successful") {
-        localStorage.setItem('user', JSON.stringify({ username }));
+      if(response.data.token) {
+        localStorage.setItem("token", response.data.token);
         navigate('/logbook');
       } else {
         alert(response.data.message);

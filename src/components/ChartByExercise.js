@@ -14,7 +14,13 @@ const ChartByExercise = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/exercise?name=${name}`);
+        const token = localStorage.getItem("token");
+        const response = await fetch(`http://localhost:5000/api/exercise?name=${name}`,{
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
         const data = await response.json();
         console.log("Data", data);
         const chartData = data.flatMap(entry => {
@@ -68,7 +74,6 @@ const ChartByExercise = () => {
           <XAxis dataKey="date" tickFormatter={(tick) => new Date(tick).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} angle={-25} textAnchor="end"/>
           <YAxis dataKey="weight"/>
           <ReferenceLine y={maxWeight} stroke="Red" label={<Label value="Weight PR" className="font-bold text-sm md:text-lg xl:text-xl fill-red-700"/>}/>
-          <ReferenceLine y={maxReps} stroke="Red" label={<Label value="Reps PR" className="font-bold text-sm md:text-lg xl:text-xl fill-red-700"/>}/>
           <Tooltip content={<CustomTooltip />}/>
           <Legend
             verticalAlign="top"

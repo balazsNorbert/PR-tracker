@@ -1,9 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const user = localStorage.getItem('user');
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+   if(token) {
+    try {
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken);
+      setUser(decodedToken);
+    } catch (error) {
+      console.error("Invalid token", error);
+      setUser(null);
+    }
+   } else {
+    setUser(null);
+   }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    window.location.reload();
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -43,10 +67,7 @@ const Navbar = () => {
           </div>
         )
         :(
-          <li className="hover:text-teal-500"><button onClick={()=>{
-            localStorage.removeItem('user');
-            window.location.reload();
-            }}>Logout</button>
+          <li className="hover:text-teal-500"><button onClick={handleLogout}>Logout</button>
           </li>
         )}
       </ul>
