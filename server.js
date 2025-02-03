@@ -145,11 +145,9 @@ app.get("/api/exercise", protect, async (req, res) => {
     const { name } = req.query;
     const userId = req.user.userId;
     console.log("User ID:", userId);
-    const objectIdUserId = mongoose.Types.ObjectId(userId);
-    console.log("UserId ObjectId:", objectIdUserId);
     console.log("Name:", name);
     const exercises = await Workout.aggregate([
-      { $match: { "userId": userId, "exercise.name": name } },
+      { $match: { "userId": new mongoose.Types.ObjectId(userId) , "exercise.name": name } },
       { $unwind: "$exercise" },
       { $match: {"exercise.name": name } },
       { $sort: { date: 1 } },

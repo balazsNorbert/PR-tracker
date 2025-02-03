@@ -21,14 +21,24 @@ const ChartByExercise = () => {
             Authorization: `Bearer ${token}`,
           }
         });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
-        console.log("Data", data);
+        console.log("Fetched Data:", data);
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid data format: Expected an array");
+        }
         const chartData = data.flatMap(entry => {
+          if (!entry.exercise || !Array.isArray(entry.exercise.sets)) {
+            console.error("Invalid entry format:", entry);
+            return [];
+          }
           return entry.exercise.sets.map(set => ({
             date: new Date(entry.date).toISOString().slice(0, 10),
             weight: set.weight,
             reps: set.reps,
-            unit: set.unit
+            unit: set.unit,
           }));
         });
         console.log("ChartData", chartData);
