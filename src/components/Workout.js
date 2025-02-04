@@ -95,8 +95,14 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-3xl bg-white shadow-xl p-4 md:p-6">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-3xl bg-white shadow-xl p-4 md:p-6 mt-5 lg:mt-10">
       <h2 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 mb-6">Add a New Exercise</h2>
+      {!localStorage.getItem("token") && (
+          <h3 className="text-lg lg:text-xl text-red-600 font-semibold text-center">
+            ⚠️ You need to log in to save your workouts!
+          </h3>
+        )
+      }
       <div className="flex flex-col">
         <label htmlFor="date" className="text-lg lg:text-xl font-medium text-gray-600">Date</label>
         <input
@@ -153,15 +159,18 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
       <button
         type="button"
         onClick={handleAddSet}
-        className="mt-3 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md hover:bg-teal-600 transition duration-300"
+        className="flex items-center justify-center gap-2 mt-3 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md hover:bg-teal-600 transition duration-300"
       >
+        <span class="material-icons">
+          add
+        </span>
         Add Set
       </button>
       <ul className="mt-3">
         {sets.map((set, setIndex) => (
           <div key={setIndex} className="flex items-center justify-between text-lg p-2 border-b border-gray-300">
             <li>{set.weight} {set.unit} - {set.reps} reps</li>
-            <button type="button" onClick={handleDeleteSet} className="text-red-500 hover:text-red-700 transition">
+            <button type="button" onClick={handleDeleteSet} className="text-red-600 hover:text-red-700 transition duration-300">
               <span className="material-icons">delete</span>
             </button>
           </div>

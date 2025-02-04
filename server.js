@@ -37,6 +37,15 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
+const goalSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  text: { type: String, required: true },
+  achieved: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
+});
+
+const Goal = mongoose.model('Goal', goalSchema);
+
 userSchema.pre("save", async function (next) {
   if(!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(10);
@@ -130,6 +139,17 @@ app.post('/api/workouts', protect, (req, res) => {
     });
 });
 
+app.post('/api/goals', async (req, res) => {
+  const { userId, text } = req.body;
+  try {
+    const newGoal = new Goal({ userId, text });
+    await newGoal.save();
+    res.status(201).json(newGoal);
+  } catch (err) {
+    res.status(400).json({ message: 'Error adding goal', error: err });
+  }
+});
+
 app.get('/api/workouts', protect, async (req, res) => {
   try {
     const userId = req.user.userId;
@@ -160,6 +180,16 @@ app.get("/api/exercise", protect, async (req, res) => {
   }
 });
 
+app.get("/api/goals/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const goals = await Goal.find({ userId });
+    res.status(200).json(goals);
+  } catch (err) {
+    res.status(400).json({ message:'Error fetching goals', error:err });
+  }
+})
+
 app.delete('/api/workouts/:workoutId', protect, (req, res) => {
   const userId = req.user.userId;
   const { workoutId } = req.params;
@@ -187,6 +217,21 @@ app.delete('/api/workouts/:workoutId', protect, (req, res) => {
     });
 });
 
+app.delete('/api/goals/:id', async (req, res) => {
+  try {
+    const goalId = req.params.id;
+    const deletedGoal = await Goal.findByIdAndDelete(goalId);
+
+    if (!deletedGoal) {
+      return res.status(404).json({ message: "Goal not found" });
+    }
+
+    res.json({ message: "Goal deleted successfully", deletedGoal });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting goal", error });
+  }
+});
+
 app.put('/api/workouts/:id', protect, async (req, res) => {
   try {
       const userId = req.user.userId;
@@ -199,6 +244,20 @@ app.put('/api/workouts/:id', protect, async (req, res) => {
       res.json(workout);
   } catch (error) {
       res.status(500).json({ message: "Error updating workout", error });
+  }
+});
+
+app.patch('/api/goals/:goalId', async (req, res) => {
+  const { goalId } = req.params;
+  try {
+    const updatedGoal = await Goal.findByIdAndUpdate(
+      goalId,
+      { achieved: true },
+      { new: true }
+    );
+    res.status(200).json(updatedGoal);
+  } catch (err) {
+    res.status(400).json({ message: 'Error updating goal', error: err });
   }
 });
 

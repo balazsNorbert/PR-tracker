@@ -60,7 +60,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                               <li key={setIndex} className="flex gap-1 items-center">
                                 <span className="font-semibold">{`${setIndex + 1}.`}</span>
                                 <p className="block min-w-28 md:min-w-32 2xl:min-w-40">{set.weight} {set.unit} - {set.reps} reps</p>
-                                <button type="button" onClick={() => handleDeleteSet(date, workoutIndex, exerciseIndex, setIndex)} className=" text-red-700">
+                                <button type="button" onClick={() => handleDeleteSet(date, workoutIndex, exerciseIndex, setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
                                   <span className="material-icons text-[18px] md:text-[24px]">delete</span>
                                 </button>
                               </li>

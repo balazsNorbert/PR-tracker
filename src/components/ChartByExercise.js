@@ -74,8 +74,8 @@ const ChartByExercise = () => {
   };
 
   return (
-    <div className="flex flex-col gap-10 items-center mx-3 md:mx-10 my-10 text-xs">
-      <h1 className="text-2xl xl:text-3xl font-bold">Exercise: {name}</h1>
+    <div className="flex justify-center flex-col gap-10 lg:gap-20 items-center mx-3 md:mx-10 my-10 text-xs min-h-screen">
+      <h1 className="text-4xl xl:text-5xl font-bold text-white">Exercise: {name}</h1>
       <ResponsiveContainer width="100%" className="bg-gray-200 py-3 pr-5 md:pr-10 md:py-5 rounded-xl min-h-[300px] md:min-h-[500px] xl:min-h-[700px]">
         <LineChart width={600} height={300} data={exerciseData}>
           <CartesianGrid  strokeDasharray="3 3" stroke="gray"/>
@@ -83,7 +83,7 @@ const ChartByExercise = () => {
           <Line domain={[0, maxReps]} type="monotone" dataKey="reps" stroke="#15803d" animationDuration={1000}/>
           <XAxis dataKey="date" tickFormatter={(tick) => new Date(tick).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} angle={-25} textAnchor="end"/>
           <YAxis dataKey="weight"/>
-          <ReferenceLine y={maxWeight} stroke="Red" label={<Label value="Weight PR" className="font-bold text-sm md:text-lg xl:text-xl fill-red-700"/>}/>
+          <ReferenceLine y={maxWeight} stroke="Red" label={<Label value="Max weight" className="font-bold text-sm md:text-lg xl:text-xl fill-red-700"/>}/>
           <Tooltip content={<CustomTooltip />}/>
           <Legend
             verticalAlign="top"

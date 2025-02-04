@@ -19,6 +19,7 @@ const Login = () => {
       if(response.data.token) {
         localStorage.setItem("token", response.data.token);
         navigate('/logbook');
+        window.location.reload();
       } else {
         alert(response.data.message);
       }
