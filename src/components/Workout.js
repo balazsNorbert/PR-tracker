@@ -95,8 +95,8 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-3xl bg-white shadow-xl p-4 md:p-6 mt-5 lg:mt-10">
-      <h2 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 mb-6">Add a New Exercise</h2>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-xl p-4 md:p-6 mt-5 lg:mt-10">
+      <h2 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-6">Add a New Exercise</h2>
       {!localStorage.getItem("token") && (
           <h3 className="text-lg lg:text-xl text-red-600 font-semibold text-center">
             ⚠️ You need to log in to save your workouts!
@@ -104,34 +104,34 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         )
       }
       <div className="flex flex-col">
-        <label htmlFor="date" className="text-lg lg:text-xl font-medium text-gray-600">Date</label>
+        <label htmlFor="date" className="text-lg lg:text-xl font-medium text-gray-600 dark:text-white">Date</label>
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="mt-2 p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300"
+          className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
       </div>
       <div className="flex flex-col">
-        <label className="text-lg lg:text-xl font-medium text-gray-600">Exercise</label>
+        <label className="text-lg lg:text-xl font-medium text-gray-600 dark:text-white">Exercise</label>
         <input
           type="text"
           value={exercise}
           onChange={handleExerciseChange}
           placeholder="e.g. Bench press"
-          className="mt-2 p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300"
+          className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
         {suggestions.length > 0 && (
-          <ul className="bg-white border rounded-lg p-2 mt-2 shadow-md">
+          <ul className="bg-white dark:bg-gray-600 border rounded-lg p-2 mt-2 shadow-md text-black dark:text-white">
             {suggestions.map((suggestion) => (
-              <li key={suggestion.name} className="cursor-pointer p-2 hover:bg-gray-100 transition" onClick={() => {setExercise(suggestion.name);setSuggestions([]);}}>
+              <li key={suggestion.name} className="cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-500 transition" onClick={() => {setExercise(suggestion.name);setSuggestions([]);}}>
                 {suggestion.name}
               </li>
             ))}
           </ul>
         )}
       </div>
-      <h3 className="text-lg lg:text-xl font-medium text-gray-600">Add Set</h3>
+      <h3 className="text-lg lg:text-xl font-medium text-gray-600  dark:text-white">Add Set</h3>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex gap-2 w-full">
           <input
@@ -140,9 +140,11 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
             value={currentSet.weight}
             onChange={(e) => setCurrentSet({ ...currentSet, weight: e.target.value })}
             placeholder="Weight"
-            className="w-full md:w-auto p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300"
+            className="text-black dark:text-white dark:bg-gray-700 w-full md:w-auto p-3 border-2 border-gray-300 dark:border-gray-600
+            rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
           />
-          <select className="px-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none" value={unit} onChange={(e) => setUnit(e.target.value)}>
+          <select className="text-black dark:text-white dark:bg-gray-700 px-3 py-2 border-2 border-gray-300 dark:border-gray-600
+          rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300" value={unit} onChange={(e) => setUnit(e.target.value)}>
             <option value="kg">kg</option>
             <option value="lbs">lbs</option>
           </select>
@@ -153,15 +155,16 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           value={currentSet.reps}
           onChange={(e) => setCurrentSet({ ...currentSet, reps: e.target.value })}
           placeholder="Reps"
-          className="md:w-24 p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300"
+          className="dark:bg-gray-700 md:w-24 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-black dark:text-white focus:outline-none focus:ring-2
+          focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
       </div>
       <button
         type="button"
         onClick={handleAddSet}
-        className="flex items-center justify-center gap-2 mt-3 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md hover:bg-teal-600 transition duration-300"
+        className="flex items-center justify-center gap-2 mt-3 py-3 bg-teal-500 font-semibold rounded-lg shadow-md hover:bg-teal-600 dark:hover:bg-teal-400 transition duration-300"
       >
-        <span class="material-icons">
+        <span className="material-icons">
           add
         </span>
         Add Set
@@ -176,7 +179,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           </div>
         ))}
       </ul>
-      <button type="submit" className="py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md hover:bg-teal-600 transition duration-300">
+      <button type="submit" className="py-3 bg-teal-500 font-semibold rounded-lg shadow-md hover:bg-teal-600 dark:hover:bg-teal-400 transition duration-300">
         Save Exercise
       </button>
     </form>

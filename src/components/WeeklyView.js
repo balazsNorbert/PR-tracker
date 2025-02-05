@@ -29,10 +29,10 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
   return (
     <div className="flex flex-col h-full gap-5 mb-20">
       <div className="flex justify-between items-center w-full text-sm md:text-lg lg:text-xl">
-        <button onClick={() => handleNavigate('prev')} className="bg-gray-700 hover:bg-teal-400 transition duration-300 text-white px-4 py-2 rounded-lg">
+        <button onClick={() => handleNavigate('prev')} className="bg-gray-700 dark:bg-teal-600 hover:bg-teal-400 dark:hover:bg-teal-500 transition duration-300 px-4 py-2 rounded-lg">
           Previous Week
         </button>
-        <button onClick={() => handleNavigate('next')} className="bg-gray-700 hover:bg-teal-400 transition duration-300 text-white px-4 py-2 rounded-lg">
+        <button onClick={() => handleNavigate('next')} className="bg-gray-700 dark:bg-teal-600 hover:bg-teal-400 dark:hover:bg-teal-500 transition duration-300 px-4 py-2 rounded-lg">
           Next Week
         </button>
       </div>
@@ -42,7 +42,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
           const dayNumber = new Date(date).getDate();
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
           return (
-            <div key={index} className={`aspect-square pt-1 px-3 pb-11 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-500 text-white' : 'bg-white'}`}>
+            <div key={index} className={`aspect-square pt-1 px-3 pb-11 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-500' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
               <h3 className="text-xs lg:text-base font-semibold text-center">{dayName}</h3>
               <p className="text-center text-sm lg:text-lg mb-1">{dayNumber}</p>
               <div className="h-full overflow-y-auto overflow-x-auto w-full">
@@ -59,7 +59,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                             {exercise.sets.map((set, setIndex) => (
                               <li key={setIndex} className="flex gap-1 items-center">
                                 <span className="font-semibold">{`${setIndex + 1}.`}</span>
-                                <p className="block min-w-28 md:min-w-32 2xl:min-w-40">{set.weight} {set.unit} - {set.reps} reps</p>
+                                <p className="block min-w-28 md:min-w-32 2xl:min-w-40 ">{set.weight} {set.unit} - {set.reps} reps</p>
                                 <button type="button" onClick={() => handleDeleteSet(date, workoutIndex, exerciseIndex, setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
                                   <span className="material-icons text-[18px] md:text-[24px]">delete</span>
                                 </button>

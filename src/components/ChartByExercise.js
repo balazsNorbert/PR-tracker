@@ -4,12 +4,14 @@ import { useParams } from 'react-router-dom';
 import { LineChart, Line, ResponsiveContainer, CartesianGrid,XAxis, YAxis, ReferenceLine, Tooltip,
   Legend, Label
 } from 'recharts';
+import { useDarkMode } from '../contexts/DarkModeContext';
 
 const ChartByExercise = () => {
   const {name} = useParams();
   const [exerciseData, setExerciseData] = useState([]);
   const [maxWeight, setMaxWeight] = useState(0);
   const [maxReps, setMaxReps] = useState(0);
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,17 +75,20 @@ const ChartByExercise = () => {
     return null;
   };
 
+  const gridStrokeColor = darkMode ? "lightGray" : "gray";
+
   return (
     <div className="flex justify-center flex-col gap-10 lg:gap-20 items-center mx-3 md:mx-10 my-10 text-xs min-h-screen">
-      <h1 className="text-4xl xl:text-5xl font-bold text-white">Exercise: {name}</h1>
-      <ResponsiveContainer width="100%" className="bg-gray-200 py-3 pr-5 md:pr-10 md:py-5 rounded-xl min-h-[300px] md:min-h-[500px] xl:min-h-[700px]">
+      <h1 className="text-4xl xl:text-5xl font-bold">Exercise: {name}</h1>
+      <ResponsiveContainer width="100%" className="bg-gray-200 dark:bg-gray-700 py-3 pr-5 md:pr-10 md:py-5 rounded-xl min-h-[300px] md:min-h-[500px] xl:min-h-[700px]">
         <LineChart width={600} height={300} data={exerciseData}>
-          <CartesianGrid  strokeDasharray="3 3" stroke="gray"/>
+          <CartesianGrid  strokeDasharray="3 3" stroke={gridStrokeColor}/>
           <Line type="monotone" dataKey="weight" stroke="#1d4ed8" animationDuration={1000}/>
           <Line domain={[0, maxReps]} type="monotone" dataKey="reps" stroke="#15803d" animationDuration={1000}/>
-          <XAxis dataKey="date" tickFormatter={(tick) => new Date(tick).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} angle={-25} textAnchor="end"/>
-          <YAxis dataKey="weight"/>
-          <ReferenceLine y={maxWeight} stroke="Red" label={<Label value="Max weight" className="font-bold text-sm md:text-lg xl:text-xl fill-red-700"/>}/>
+          <XAxis dataKey="date" tickFormatter={(tick) => new Date(tick).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+          angle={-25} textAnchor="end" tick={{ fill: darkMode ? 'white' : 'black' }}/>
+          <YAxis dataKey="weight" tick={{ fill: darkMode ? 'white' : 'black' }}/>
+          <ReferenceLine y={maxWeight} stroke="Red" label={<Label value="Max weight" className="font-bold text-sm md:text-lg xl:text-xl fill-red-700 dark:fill-red-600"/>}/>
           <Tooltip content={<CustomTooltip />}/>
           <Legend
             verticalAlign="top"

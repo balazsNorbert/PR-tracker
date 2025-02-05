@@ -10,22 +10,27 @@ import Register from './components/Register';
 import ChartByExercise from './components/ChartByExercise';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { DarkModeProvider } from './contexts/DarkModeContext';
 
 function App() {
   return (
-    <Router>
-      <ToastContainer />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/logbook" element={<LogBook />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/exercise/:name" element={<ChartByExercise />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <DarkModeProvider>
+      <div className="bg-gradient-to-r from-teal-600 dark:from-teal-800 to-teal-900 dark:to-teal-950 text-white relative">
+        <Router>
+            <ToastContainer />
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/logbook" element={<LogBook />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/exercise/:name" element={<ChartByExercise />} />
+            </Routes>
+            <Footer />
+        </Router>
+      </div>
+    </DarkModeProvider>
   );
 }
 

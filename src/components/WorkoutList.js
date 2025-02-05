@@ -174,7 +174,7 @@ const WorkoutList = () => {
       <div className="mx-auto">
         <Workout onAddWorkout={addWorkout} existingExercises={workouts.flatMap((w) => w.exercise)}/>
       </div>
-      <h2 className="font-bold text-2xl lg:text-3xl text-center mt-10 text-white">This week's workouts</h2>
+      <h2 className="font-bold text-2xl lg:text-3xl text-center mt-10">This week's workouts</h2>
       <WeeklyView workouts={workouts} handleDeleteSet={handleDeleteSet}/>
     </div>
   )
