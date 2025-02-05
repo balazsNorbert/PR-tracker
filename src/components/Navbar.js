@@ -1,16 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+   if(token) {
+    try {
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken);
+      setUser(decodedToken);
+    } catch (error) {
+      console.error("Invalid token", error);
+      setUser(null);
+    }
+   } else {
+    setUser(null);
+   }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    window.location.reload();
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className="sticky top-0 bg-gray-700 flex justify-between items-center text-white py-4 px-5 md:px-10">
-      <h1 className="text-2xl md:text-3xl font-bold">PR Tracker</h1>
+    <nav className="sticky top-0 bg-gray-700 flex justify-between items-center py-4 px-5 md:px-10">
+      <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-teal-400 to-teal-200 bg-clip-text text-transparen"><Link to="/"><span className="text-teal-500">Progress</span>Tracker</Link></h1>
       <button className="block md:hidden" onClick={toggleMenu} aria-label="Toggle Menu">
         {isOpen ? (
         <span className="material-icons">
@@ -34,6 +59,17 @@ const Navbar = () => {
         <li className="hover:text-teal-500">
           <Link to="/profile">Profile</Link>
         </li>
+        {!user ? (
+          <div className="flex gap-1 items-center ml-auto">
+            <li className="hover:text-teal-500"><Link to="/login">Login</Link></li>
+            /
+            <li className="hover:text-teal-500"><Link to="/register">Register</Link></li>
+          </div>
+        )
+        :(
+          <li className="hover:text-teal-500"><button onClick={handleLogout}>Logout</button>
+          </li>
+        )}
       </ul>
     </nav>
   );

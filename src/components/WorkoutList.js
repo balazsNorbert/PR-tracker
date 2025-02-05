@@ -1,20 +1,74 @@
 import React, { useState, useEffect } from 'react';
 import Workout from './Workout';
 import WeeklyView from './WeeklyView';
-import axios from 'axios';
+import axios from '../axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const WorkoutList = () => {
   const [workouts, setWorkouts] = useState([]);
-
+  const [maxWeightByExercise, setMaxWeightByExercise] = useState({});
+  const [maxRepsByExercise, setMaxRepsByExercise] = useState(0);
   useEffect(() => {
-    axios.get("http://localhost:5000/api/workouts")
+    const token = localStorage.getItem("token");
+    axios.get("http://localhost:5000/api/workouts",{
+      headers: {Authorization: `Bearer ${token}`},
+    })
       .then(response => {
         setWorkouts(response.data);
+        let previousMaxWeightByExercise = {};
+        let previousMaxRepsByExercise = {};
+        response.data.forEach(workout => {
+          workout.exercise.forEach(ex => {
+            if(!previousMaxWeightByExercise[ex.name]) {
+              previousMaxWeightByExercise[ex.name] = 0;
+            }
+            if(!previousMaxRepsByExercise[ex.name]) {
+              previousMaxRepsByExercise[ex.name] = {};
+            }
+            ex.sets.forEach(set => {
+              if(set.weight > previousMaxWeightByExercise[ex.name]) {
+                previousMaxWeightByExercise[ex.name] = set.weight;
+              }
+              if(!previousMaxRepsByExercise[ex.name][set.weight] || set.reps > previousMaxRepsByExercise[ex.name][set.weight]) {
+                previousMaxRepsByExercise[ex.name][set.weight] = set.reps;
+              }
+            });
+          });
+        });
+        setMaxWeightByExercise(previousMaxWeightByExercise);
+        setMaxRepsByExercise(previousMaxRepsByExercise);
       })
       .catch(error => {
         console.error("Error fetching workouts:", error);
       });
   }, []);
+
+  const checkForNewPR = (newWorkout) => {
+    const newMaxWeightByExercise = {...maxWeightByExercise};
+    const newMaxRepsByExercise = {...maxRepsByExercise};
+
+    newWorkout.exercise.forEach(ex => {
+      if(!newMaxWeightByExercise[ex.name]) {
+        newMaxWeightByExercise[ex.name] = 0;
+      }
+      if(!newMaxRepsByExercise[ex.name]) {
+        newMaxRepsByExercise[ex.name] = 0;
+      }
+      ex.sets.forEach(set => {
+        if(set.weight > newMaxWeightByExercise[ex.name]) {
+          newMaxWeightByExercise[ex.name] = set.weight;
+          toast.success(`New PR for ${ex.name}: ${set.weight} ${set.unit}!`, { autoClose: 4000 });
+        }
+        if(!newMaxRepsByExercise[ex.name][set.weight] || set.reps > newMaxRepsByExercise[ex.name][set.weight]) {
+          newMaxRepsByExercise[ex.name][set.weight] = set.reps;
+          toast.success(`New Reps PR for ${ex.name} at ${set.weight} ${set.unit} - ${set.reps} reps!`, { autoClose: 4000 });
+        }
+    });
+    });
+    setMaxWeightByExercise(newMaxWeightByExercise);
+    setMaxRepsByExercise(newMaxRepsByExercise);
+  };
 
   const addWorkout = (newWorkout) => {
     if (!Array.isArray(newWorkout.exercise)) {
@@ -45,21 +99,33 @@ const WorkoutList = () => {
         ...existingWorkout,
         exercise: [...updatedExercises, ...exercisesToAdd],
       };
-      axios.put(`http://localhost:5000/api/workouts/${existingWorkout._id}`, updatedWorkout)
+      const token = localStorage.getItem("token");
+      axios.put(`http://localhost:5000/api/workouts/${existingWorkout._id}`, updatedWorkout, {
+        headers: {
+          Authorization:`Bearer ${token}`
+        }
+      })
         .then(response => {
           console.log("Updated workout in backend:", response.data);
           setWorkouts(prevWorkouts =>
             prevWorkouts.map(w => w._id === existingWorkout._id ? response.data : w)
           );
+          checkForNewPR(response.data);
         })
         .catch(error => {
           console.error("Error updating workout:", error);
         });
     } else {
-      axios.post('http://localhost:5000/api/workouts', newWorkout)
+      const token = localStorage.getItem("token");
+      axios.post('http://localhost:5000/api/workouts', newWorkout, {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
         .then(response => {
           console.log("Response from backend:", response.data);
           setWorkouts((prevWorkouts) => [...prevWorkouts, response.data]);
+          checkForNewPR(response.data);
         })
         .catch(error => {
           console.error("Error adding workout:", error);
@@ -84,9 +150,13 @@ const WorkoutList = () => {
       console.error("Set not found for this exercise");
       return;
     }
-
+    const token = localStorage.getItem("token");
     axios.delete(`http://localhost:5000/api/workouts/${workout._id}`, {
       data: { exerciseIndex, setIndex },
+    },{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
     })
       .then(response => {
         console.log("Updated workout after delete:", response.data);
@@ -100,11 +170,11 @@ const WorkoutList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col h-full gap-5">
       <div className="mx-auto">
         <Workout onAddWorkout={addWorkout} existingExercises={workouts.flatMap((w) => w.exercise)}/>
       </div>
-      <h2 className="font-bold text-2xl lg:text-3xl text-center mt-5">This week's workouts</h2>
+      <h2 className="font-bold text-2xl lg:text-3xl text-center mt-10">This week's workouts</h2>
       <WeeklyView workouts={workouts} handleDeleteSet={handleDeleteSet}/>
     </div>
   )

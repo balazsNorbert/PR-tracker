@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 app.use(express.json());
@@ -23,15 +25,105 @@ const exerciseSchema = new mongoose.Schema({
 });
 
 const workoutSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref:"User", required: true },
   date: { type: Date, required: true },
   exercise: [exerciseSchema]
 });
 
 const Workout = mongoose.model("Workout", workoutSchema);
 
-app.post('/api/workouts', (req, res) => {
-  console.log("Received workout data:", req.body);
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+const goalSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  text: { type: String, required: true },
+  achieved: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
+});
+
+const Goal = mongoose.model('Goal', goalSchema);
+
+userSchema.pre("save", async function (next) {
+  if(!this.isModified("password")) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+const User = mongoose.model("User", userSchema);
+
+app.post("/api/register", async (req, res) => {
+  const { username, password } = req.body;
+  const userExists = await User.findOne({ username });
+  if(userExists){
+    return res.status(400).json({ message: "User already exists!" });
+  }
+
+  const user = new User({
+    username,
+    password,
+  });
+
+  try{
+    const createdUser = await user.save();
+    res.status(201).json({ message: "User registered successfully", user: createdUser });
+  } catch (error) {
+    res.status(500).json({ message: "Error registering user", error });
+  }
+});
+
+app.post("/api/login", async(req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid username or password!" });
+    }
+
+    const isMatch = await user.matchPassword(password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid username or password!" });
+    }
+
+    const token = jwt.sign({ userId: user._id, username: user.username }, "your_jwt_secret", {
+      expiresIn: "2h",
+    });
+
+    res.json({ message: "Login successful", token });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
+const protect = (req, res, next) => {
+  const token = req.header("Authorization")?.split(" ")[1];
+
+  if(!token){
+    return res.status(401).json({ message: "No token, authorization denied!" });
+  }
+
+  try{
+    const decoded = jwt.verify(token, "your_jwt_secret");
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Token is not valid!" });
+  }
+}
+
+app.post('/api/workouts', protect, (req, res) => {
+  const userId = req.user.userId;
+
   const newWorkout = new Workout({
+    userId: userId,
     date: req.body.date,
     exercise: req.body.exercise
   });
@@ -47,19 +139,62 @@ app.post('/api/workouts', (req, res) => {
     });
 });
 
-app.get('/api/workouts', async (req, res) => {
+app.post('/api/goals', async (req, res) => {
+  const { userId, text } = req.body;
   try {
-    const workouts = await Workout.find();
+    const newGoal = new Goal({ userId, text });
+    await newGoal.save();
+    res.status(201).json(newGoal);
+  } catch (err) {
+    res.status(400).json({ message: 'Error adding goal', error: err });
+  }
+});
+
+app.get('/api/workouts', protect, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const workouts = await Workout.find({ userId: userId });
     res.json(workouts);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-app.delete('/api/workouts/:workoutId', (req, res) => {
+app.get("/api/exercise", protect, async (req, res) => {
+  try{
+    const { name } = req.query;
+    const userId = req.user.userId;
+    console.log("User ID:", userId);
+    console.log("Name:", name);
+    const exercises = await Workout.aggregate([
+      { $match: { "userId": new mongoose.Types.ObjectId(userId) , "exercise.name": name } },
+      { $unwind: "$exercise" },
+      { $match: {"exercise.name": name } },
+      { $sort: { date: 1 } },
+      { $project: { "exercise.sets": 1, date: 1, _id: 0 } }
+    ]);
+    res.json(exercises);
+  } catch (error) {
+    console.error("Error fetching exercise data:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.get("/api/goals/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const goals = await Goal.find({ userId });
+    res.status(200).json(goals);
+  } catch (err) {
+    res.status(400).json({ message:'Error fetching goals', error:err });
+  }
+})
+
+app.delete('/api/workouts/:workoutId', protect, (req, res) => {
+  const userId = req.user.userId;
   const { workoutId } = req.params;
   const { exerciseIndex, setIndex } = req.body;
-  Workout.findById(workoutId)
+  Workout.findById({ _id: workoutId, userId: userId})
     .then(workout => {
       if (!workout) {
         return res.status(404).json({ message: "Workout not found" });
@@ -82,17 +217,47 @@ app.delete('/api/workouts/:workoutId', (req, res) => {
     });
 });
 
-app.put('/api/workouts/:id', async (req, res) => {
+app.delete('/api/goals/:id', async (req, res) => {
   try {
+    const goalId = req.params.id;
+    const deletedGoal = await Goal.findByIdAndDelete(goalId);
+
+    if (!deletedGoal) {
+      return res.status(404).json({ message: "Goal not found" });
+    }
+
+    res.json({ message: "Goal deleted successfully", deletedGoal });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting goal", error });
+  }
+});
+
+app.put('/api/workouts/:id', protect, async (req, res) => {
+  try {
+      const userId = req.user.userId;
       const { id } = req.params;
       const updatedWorkout = req.body;
-      const workout = await Workout.findByIdAndUpdate(id, updatedWorkout, { new: true });
+      const workout = await Workout.findByIdAndUpdate({_id: id, userId: userId}, updatedWorkout, { new: true });
       if (!workout) {
           return res.status(404).json({ message: "Workout not found" });
       }
       res.json(workout);
   } catch (error) {
       res.status(500).json({ message: "Error updating workout", error });
+  }
+});
+
+app.patch('/api/goals/:goalId', async (req, res) => {
+  const { goalId } = req.params;
+  try {
+    const updatedGoal = await Goal.findByIdAndUpdate(
+      goalId,
+      { achieved: true },
+      { new: true }
+    );
+    res.status(200).json(updatedGoal);
+  } catch (err) {
+    res.status(400).json({ message: 'Error updating goal', error: err });
   }
 });
 

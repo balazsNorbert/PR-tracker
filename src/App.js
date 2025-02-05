@@ -4,17 +4,33 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import LogBook from './components/LogBook';
 import Profile from './components/Profile';
+import Footer from './components/Footer';
+import Login from './components/Login';
+import Register from './components/Register';
+import ChartByExercise from './components/ChartByExercise';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { DarkModeProvider } from './contexts/DarkModeContext';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/logbook" element={<LogBook />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </Router>
+    <DarkModeProvider>
+      <div className="bg-gradient-to-r from-teal-600 dark:from-teal-800 to-teal-900 dark:to-teal-950 text-white relative">
+        <Router>
+            <ToastContainer />
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/logbook" element={<LogBook />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/exercise/:name" element={<ChartByExercise />} />
+            </Routes>
+            <Footer />
+        </Router>
+      </div>
+    </DarkModeProvider>
   );
 }
 
