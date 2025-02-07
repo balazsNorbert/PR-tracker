@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import axios from '../axios';
@@ -12,30 +12,30 @@ const Profile = () => {
   const [goalText, setGoalText] = useState('');
   const { darkMode, toggleDarkMode } = useDarkMode();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if(token) {
-    try {
-      const decodedToken = jwtDecode(token);
-      setUser(decodedToken);
-      fetchGoals(decodedToken.userId);
-    } catch (error) {
-      console.error("Invalid token", error);
-      setUser(null);
-    }
-   } else {
-    setUser(null);
-   }
-  }, []);
-
-  const fetchGoals = async (userId) => {
+  const fetchGoals = useCallback(async (userId) => {
     try {
       const response = await axios.get(`${apiURL}/goals/${userId}`);
       setGoals(response.data);
     } catch (error) {
       console.log("Error adding goal:", error);
     }
-  }
+  }, [apiURL]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        setUser(decodedToken);
+        fetchGoals(decodedToken.userId);
+      } catch (error) {
+        console.error("Invalid token", error);
+        setUser(null);
+      }
+    } else {
+      setUser(null);
+    }
+  }, [fetchGoals]);
 
   const handleAddGoal = async () => {
     if (goalText.trim()) {
