@@ -97,7 +97,7 @@ app.post("/api/login", async(req, res) => {
       return res.status(400).json({ message: "Invalid username or password!" });
     }
 
-    const token = jwt.sign({ userId: user._id, username: user.username }, "process.env.JWT_SECRET", {
+    const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET, {
       expiresIn: "2h",
     });
 
@@ -115,7 +115,7 @@ const protect = (req, res, next) => {
   }
 
   try{
-    const decoded = jwt.verify(token, "your_jwt_secret");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
