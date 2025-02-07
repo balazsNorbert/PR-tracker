@@ -13,7 +13,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MongoDB_MONGO_URL)
 .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
