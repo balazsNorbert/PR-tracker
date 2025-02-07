@@ -46,6 +46,7 @@ const WorkoutList = () => {
   }, [apiURL]);
 
   const checkForNewPR = (newWorkout) => {
+    console.log("Just for deployment!");
     const newMaxWeightByExercise = {...maxWeightByExercise};
     const newMaxRepsByExercise = {...maxRepsByExercise};
 
