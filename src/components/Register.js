@@ -4,6 +4,7 @@ import axios from '../axios';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
+  const apiURL = process.env.REACT_APP_API_URL;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,7 +19,7 @@ const Register = () => {
     }
 
     try{
-      const response = await axios.post('http://localhost:5000/api/register', {
+      const response = await axios.post(`${apiURL}/register`, {
         username,
         password,
       });

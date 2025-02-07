@@ -4,6 +4,7 @@ import axios from '../axios';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+  const apiURL = process.env.REACT_APP_API_URL;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-      const response = await axios.post('http://localhost:5000/api/login', {
+      const response = await axios.post(`${apiURL}/login`, {
         username,
         password
       });
