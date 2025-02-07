@@ -9,7 +9,8 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://pr-tracker-production.up.railway.app"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
 
 mongoose.connect(process.env.MONGO_URI)
@@ -96,7 +97,7 @@ app.post("/api/login", async(req, res) => {
       return res.status(400).json({ message: "Invalid username or password!" });
     }
 
-    const token = jwt.sign({ userId: user._id, username: user.username }, "your_jwt_secret", {
+    const token = jwt.sign({ userId: user._id, username: user.username }, "process.env.JWT_SECRET", {
       expiresIn: "2h",
     });
 

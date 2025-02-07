@@ -7,6 +7,7 @@ import { LineChart, Line, ResponsiveContainer, CartesianGrid,XAxis, YAxis, Refer
 import { useDarkMode } from '../contexts/DarkModeContext';
 
 const ChartByExercise = () => {
+  const apiURL = process.env.REACT_APP_API_URL;
   const {name} = useParams();
   const [exerciseData, setExerciseData] = useState([]);
   const [maxWeight, setMaxWeight] = useState(0);
@@ -17,7 +18,7 @@ const ChartByExercise = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`http://localhost:5000/api/exercise?name=${name}`,{
+        const response = await fetch(`${apiURL}/exercise?name=${name}`,{
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

@@ -6,6 +6,7 @@ import { useDarkMode } from '../contexts/DarkModeContext';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
+  const apiURL = process.env.REACT_APP_API_URL;
   const [user, setUser] = useState(null);
   const [goals, setGoals] = useState([]);
   const [goalText, setGoalText] = useState('');
@@ -29,7 +30,7 @@ const Profile = () => {
 
   const fetchGoals = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/goals/${userId}`);
+      const response = await axios.get(`${apiURL}/goals/${userId}`);
       setGoals(response.data);
     } catch (error) {
       console.log("Error adding goal:", error);
@@ -39,7 +40,7 @@ const Profile = () => {
   const handleAddGoal = async () => {
     if (goalText.trim()) {
       try {
-        const response = await axios.post('http://localhost:5000/api/goals', {
+        const response = await axios.post(`${apiURL}/goals`, {
           userId: user.userId,
           text: goalText,
         });
@@ -55,7 +56,7 @@ const Profile = () => {
 
   const changeGoalStatus = async (goalId) => {
     try{
-      const response = await axios.patch(`http://localhost:5000/api/goals/${goalId}`);
+      const response = await axios.patch(`${apiURL}/goals/${goalId}`);
       const updatedGoals = goals.map(goal =>
         goal._id === goalId ? {...goal, achieved: true} : goal
       );
@@ -68,7 +69,7 @@ const Profile = () => {
 
   const deleteGoal = async (goalId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/goals/${goalId}`);
+      await axios.delete(`${apiURL}/goals/${goalId}`);
       setGoals(goals.filter(goal => goal._id !== goalId));
     } catch (error) {
       console.error("Error deleting goal:", error);

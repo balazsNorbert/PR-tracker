@@ -6,12 +6,13 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const WorkoutList = () => {
+  const apiURL = process.env.REACT_APP_API_URL;
   const [workouts, setWorkouts] = useState([]);
   const [maxWeightByExercise, setMaxWeightByExercise] = useState({});
   const [maxRepsByExercise, setMaxRepsByExercise] = useState(0);
   useEffect(() => {
     const token = localStorage.getItem("token");
-    axios.get("http://localhost:5000/api/workouts",{
+    axios.get(`${apiURL}/workouts`,{
       headers: {Authorization: `Bearer ${token}`},
     })
       .then(response => {
@@ -100,7 +101,7 @@ const WorkoutList = () => {
         exercise: [...updatedExercises, ...exercisesToAdd],
       };
       const token = localStorage.getItem("token");
-      axios.put(`http://localhost:5000/api/workouts/${existingWorkout._id}`, updatedWorkout, {
+      axios.put(`${apiURL}/workouts/${existingWorkout._id}`, updatedWorkout, {
         headers: {
           Authorization:`Bearer ${token}`
         }
@@ -117,7 +118,7 @@ const WorkoutList = () => {
         });
     } else {
       const token = localStorage.getItem("token");
-      axios.post('http://localhost:5000/api/workouts', newWorkout, {
+      axios.post(`${apiURL}/workouts`, newWorkout, {
         headers:{
           Authorization:`Bearer ${token}`
         }
@@ -151,7 +152,7 @@ const WorkoutList = () => {
       return;
     }
     const token = localStorage.getItem("token");
-    axios.delete(`http://localhost:5000/api/workouts/${workout._id}`, {
+    axios.delete(`${apiURL}/workouts/${workout._id}`, {
       data: { exerciseIndex, setIndex },
     },{
       headers:{
