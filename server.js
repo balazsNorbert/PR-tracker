@@ -4,6 +4,7 @@ const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const path = require("path");
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
@@ -11,7 +12,8 @@ app.use(cors({
   origin: "http://localhost:3000",
 }));
 
-mongoose.connect('mongodb://localhost:27017/prtracker').then(() => console.log("MongoDB connected"))
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
 const setSchema = new mongoose.Schema({
