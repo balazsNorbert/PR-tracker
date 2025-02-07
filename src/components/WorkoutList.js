@@ -43,7 +43,7 @@ const WorkoutList = () => {
       .catch(error => {
         console.error("Error fetching workouts:", error);
       });
-  }, []);
+  }, [apiURL]);
 
   const checkForNewPR = (newWorkout) => {
     const newMaxWeightByExercise = {...maxWeightByExercise};

@@ -60,7 +60,7 @@ const ChartByExercise = () => {
     };
 
     fetchData();
-  }, [name]);
+  }, [name, apiURL]);
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
