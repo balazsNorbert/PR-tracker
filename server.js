@@ -9,7 +9,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:3000", "https://pr-tracker-production.up.railway.app"],
+  origin: ["http://localhost:3000", "https://workoutracker.com"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
 
