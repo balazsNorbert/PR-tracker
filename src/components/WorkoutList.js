@@ -22,7 +22,7 @@ const WorkoutList = () => {
         response.data.forEach(workout => {
           workout.exercise.forEach(ex => {
             if(!previousMaxWeightByExercise[ex.name]) {
-              previousMaxWeightByExercise[ex.name] = 0;
+              previousMaxWeightByExercise[ex.name] = {};
             }
             if(!previousMaxRepsByExercise[ex.name]) {
               previousMaxRepsByExercise[ex.name] = {};
@@ -46,7 +46,6 @@ const WorkoutList = () => {
   }, [apiURL]);
 
   const checkForNewPR = (newWorkout) => {
-    console.log("Just for deployment!");
     const newMaxWeightByExercise = {...maxWeightByExercise};
     const newMaxRepsByExercise = {...maxRepsByExercise};
 
@@ -60,11 +59,11 @@ const WorkoutList = () => {
       ex.sets.forEach(set => {
         if(set.weight > newMaxWeightByExercise[ex.name]) {
           newMaxWeightByExercise[ex.name] = set.weight;
-          toast.success(`New PR for ${ex.name}: ${set.weight} ${set.unit}!`, { autoClose: 4000 });
+          toast.success(`New PR for ${ex.name}: ${set.weight} ${set.unit}!`, { autoClose: 5000 });
         }
         if(!newMaxRepsByExercise[ex.name][set.weight] || set.reps > newMaxRepsByExercise[ex.name][set.weight]) {
           newMaxRepsByExercise[ex.name][set.weight] = set.reps;
-          toast.success(`New Reps PR for ${ex.name} at ${set.weight} ${set.unit} - ${set.reps} reps!`, { autoClose: 4000 });
+          toast.success(`New Reps PR for ${ex.name} at ${set.weight} ${set.unit} - ${set.reps} reps!`, { autoClose: 5000 });
         }
     });
     });

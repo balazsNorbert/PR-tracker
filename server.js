@@ -184,7 +184,7 @@ app.get("/api/exercise", protect, async (req, res) => {
   }
 });
 
-app.get("/api/goals/:userId", async (req, res) => {
+app.get("/api/goals/:userId", protect, async (req, res) => {
   const { userId } = req.params;
   try {
     const goals = await Goal.find({ userId });
@@ -221,7 +221,7 @@ app.delete('/api/workouts/:workoutId', protect, (req, res) => {
     });
 });
 
-app.delete('/api/goals/:id', async (req, res) => {
+app.delete('/api/goals/:id', protect, async (req, res) => {
   try {
     const goalId = req.params.id;
     const deletedGoal = await Goal.findByIdAndDelete(goalId);
@@ -251,7 +251,7 @@ app.put('/api/workouts/:id', protect, async (req, res) => {
   }
 });
 
-app.patch('/api/goals/:goalId', async (req, res) => {
+app.patch('/api/goals/:goalId', protect, async (req, res) => {
   const { goalId } = req.params;
   try {
     const updatedGoal = await Goal.findByIdAndUpdate(
