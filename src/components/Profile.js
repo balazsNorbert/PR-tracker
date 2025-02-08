@@ -77,24 +77,24 @@ const Profile = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-full flex justify-center items-center">
       {user ? (
-        <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white rounded-3xl shadow-xl p-6 md:p-8">
+        <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white rounded-3xl shadow-xl p-6 mx-5 md:mx-10 md:p-8 mt-10">
           <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
             Welcome back, <span className="text-teal-600 dark:text-white">{user.username}!</span>
           </h2>
-          <div className="flex gap-4">
+          <div className="flex justify-between gap-3 w-full">
             <button
               onClick={toggleDarkMode}
-              className="flex items-center gap-2 text-sm dark:bg-white dark:text-black bg-gray-600 px-4 py-2 rounded-lg transition duration-300"
+              className="flex items-center gap-2 text-sm md:text-lg dark:bg-white dark:text-black bg-gray-600 px-4 py-2 rounded-lg transition duration-300"
             >
-              {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              {darkMode ? 'Light Mode' : 'Dark Mode'}
               <span className="material-icons text-white dark:text-yellow-400">
                 light_mode
               </span>
             </button>
             <button
-              className="text-sm dark:bg-white dark:text-black bg-gray-600 px-4 py-2 rounded-lg transition duration-300"
+              className="text-sm md:text-lg dark:bg-white dark:text-black bg-gray-600 px-4 py-2 rounded-lg transition duration-300"
             >
              <Link to="/logbook" className="flex items-center gap-2">
                 Your logbook
@@ -116,7 +116,7 @@ const Profile = () => {
             />
             <button
               onClick={handleAddGoal}
-              className="flex items-center gap-2 text-lg bg-green-500 dark:bg-green-700 hover:bg-green-600 dark:hover:bg-green-800 px-4 py-3
+              className="flex items-center gap-2 text-sm ml-auto md:text-lg bg-green-500 dark:bg-green-700 hover:bg-green-600 dark:hover:bg-green-800 px-2 py-2
               rounded-lg transition duration-300 shadow-md">
               <span className="material-icons">
                 add
