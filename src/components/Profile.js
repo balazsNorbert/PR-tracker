@@ -78,14 +78,14 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-        <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white rounded-3xl shadow-xl p-6 mx-5 md:mx-10 md:p-8 mt-10">
+        <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white rounded-3xl shadow-xl p-6 mx-5 md:mx-10 md:p-8 mt-10 mb-20">
           {user ? (
           <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
             Welcome back, <span className="text-teal-600 dark:text-white">{user.username}!</span>
           </h2>
           ) : (
             <>
-              <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
+              <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
                 Welcome!
               </h2>
               <h3 className="text-lg lg:text-xl text-red-600 font-semibold text-center">
