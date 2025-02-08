@@ -122,9 +122,9 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
         {suggestions.length > 0 && (
-          <ul className="bg-white dark:bg-gray-600 border rounded-lg p-2 mt-2 shadow-md text-black dark:text-white">
+          <ul className="bg-white dark:bg-gray-600 border rounded-lg mt-2 py-2 shadow-md text-black dark:text-white">
             {suggestions.map((suggestion) => (
-              <li key={suggestion.name} className="cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-500 transition" onClick={() => {setExercise(suggestion.name);setSuggestions([]);}}>
+              <li key={suggestion.name} className="cursor-pointer p-2 w-full hover:bg-gray-100 dark:hover:bg-gray-500 transition" onClick={() => {setExercise(suggestion.name);setSuggestions([]);}}>
                 {suggestion.name}
               </li>
             ))}
@@ -171,7 +171,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
       </button>
       <ul className="mt-3">
         {sets.map((set, setIndex) => (
-          <div key={setIndex} className="flex items-center justify-between text-lg p-2 border-b border-gray-300">
+          <div key={setIndex} className="flex items-center justify-between text-lg p-2 border-b border-gray-300 text-black">
             <li>{set.weight} {set.unit} - {set.reps} reps</li>
             <button type="button" onClick={handleDeleteSet} className="text-red-600 hover:text-red-700 transition duration-300">
               <span className="material-icons">delete</span>
