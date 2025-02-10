@@ -8,6 +8,8 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -50,32 +52,65 @@ const Register = () => {
             placeholder="Enter username"
             className="dark:bg-gray-700 text-black dark:text-white p-3 border-2 border-gray-300 dark:border-gray-600
             rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+            required
           />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative">
           <label htmlFor="password" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Your Password</label>
           <input
             id="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
             className="dark:bg-gray-700 text-black dark:text-white p-3 border-2 border-gray-300 dark:border-gray-600
             rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+            required
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-10 text-gray-500 dark:text-gray-300 hover:text-teal-500 transition duration-300"
+          >
+            {showPassword ? (
+              <span className="material-icons">
+                visibility_off
+              </span>
+            ) : (
+              <span className="material-icons">
+                visibility
+              </span>
+            )}
+          </button>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 relative">
           <label htmlFor="confirmPassword" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Confirm Password</label>
           <input
             id="confirmPassword"
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm password"
             className="dark:bg-gray-700 text-black dark:text-white p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+            required
           />
+          <button
+            type="button"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            className="absolute right-3 top-10 text-gray-500 dark:text-gray-300 hover:text-teal-500 transition duration-300"
+          >
+            {showConfirmPassword ? (
+              <span className="material-icons">
+                visibility_off
+              </span>
+            ) : (
+              <span className="material-icons">
+                visibility
+              </span>
+            )}
+          </button>
         </div>
 
         <button

@@ -109,7 +109,8 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+          className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600
+          rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
       </div>
       <div className="flex flex-col">
@@ -119,7 +120,9 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           value={exercise}
           onChange={handleExerciseChange}
           placeholder="e.g. Bench press"
-          className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+          className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600
+          rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+          required
         />
         {suggestions.length > 0 && (
           <ul className="bg-white dark:bg-gray-600 border rounded-lg mt-2 py-2 shadow-md text-black dark:text-white">
@@ -142,6 +145,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
             placeholder="Weight"
             className="text-black dark:text-white dark:bg-gray-700 w-full md:w-auto p-3 border-2 border-gray-300 dark:border-gray-600
             rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+            required
           />
           <select className="text-black dark:text-white dark:bg-gray-700 px-3 py-2 border-2 border-gray-300 dark:border-gray-600
           rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300" value={unit} onChange={(e) => setUnit(e.target.value)}>
@@ -157,6 +161,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           placeholder="Reps"
           className="dark:bg-gray-700 md:w-24 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-black dark:text-white focus:outline-none focus:ring-2
           focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+          required
         />
       </div>
       <button
