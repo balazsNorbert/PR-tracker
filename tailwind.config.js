@@ -10,6 +10,9 @@ module.exports = {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
       },
+      fontSize:{
+        'xxs': '10px',
+      }
     },
   },
   plugins: [],

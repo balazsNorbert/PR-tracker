@@ -16,6 +16,8 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
   const today = new Date().toISOString().slice(0, 10);
   const [currentDay, setCurrentDay] = useState(today);
   const [week, setWeek] = useState(getCurrentWeek(currentDay));
+  const [showModal, setShowModal] = useState(null);
+  const [deleteData, setDeleteData] = useState(null);
 
   const handleNavigate = (direction) => {
     const today = new Date(currentDay);
@@ -24,6 +26,22 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
     const newDate = today.toISOString().slice(0, 10);
     setCurrentDay(newDate);
     setWeek(getCurrentWeek(newDate));
+  };
+
+  const handleOpenModal = (date, workoutIndex, exerciseIndex, setIndex) => {
+    setDeleteData({ date, workoutIndex, exerciseIndex, setIndex });
+    setShowModal(setIndex);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (deleteData) {
+      handleDeleteSet(deleteData.date, deleteData.workoutIndex, deleteData.exerciseIndex, deleteData.setIndex);
+    }
+    setShowModal(null);
   };
 
   return (
@@ -42,7 +60,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
           const dayNumber = new Date(date).getDate();
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
           return (
-            <div key={index} className={`aspect-square pt-1 px-3 pb-11 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-500' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
+            <div key={index} className={`aspect-square pt-1 px-1 md:px-3 pb-11 md:pb-14 lg:pb-16 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-500' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
               <h3 className="text-xs lg:text-base font-semibold text-center">{dayName}</h3>
               <p className="text-center text-sm lg:text-lg mb-1">{dayNumber}</p>
               <div className="h-full overflow-y-auto overflow-x-auto w-full">
@@ -57,12 +75,36 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                           </p>
                           <ul>
                             {exercise.sets.map((set, setIndex) => (
-                              <li key={setIndex} className="flex gap-1 items-center">
+                              <li key={setIndex} className="flex gap-1 items-center text-xs md:text-sm 2xl:text-lg">
                                 <span className="font-semibold">{`${setIndex + 1}.`}</span>
-                                <p className="block min-w-28 md:min-w-32 2xl:min-w-40 ">{set.weight} {set.unit} - {set.reps} reps</p>
-                                <button type="button" onClick={() => handleDeleteSet(date, workoutIndex, exerciseIndex, setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
-                                  <span className="material-icons text-[18px] md:text-[24px]">delete</span>
+                                <p>{set.weight} {set.unit} - {set.reps} reps</p>
+                                <button type="button" onClick={() => handleOpenModal(date, workoutIndex, exerciseIndex, setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
+                                  <span className="material-icons text-lg md:text-xl xl:text-2xl 2xl:text-3xl">delete</span>
                                 </button>
+                                {showModal === setIndex && (
+                                <div className="fixed inset-0 flex justify-center items-center mx-8">
+                                  <div className="flex flex-col gap-2 bg-teal-700 dark:bg-teal-600 p-5 rounded-lg shadow-lg">
+                                    <h2 className="font-semibold">Do you really want to delete this set?</h2>
+                                    <div className="bg-teal-800 hard:bg-teal-700 text-white p-2 rounded-md">
+                                      <p className="text-base lg:text-xl font-bold">{set.weight} {set.unit} - {set.reps} reps</p>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <button
+                                        onClick={handleCloseModal}
+                                        className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700"
+                                      >
+                                        Cancel
+                                      </button>
+                                      <button
+                                        onClick={handleConfirmDelete}
+                                        className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400"
+                                      >
+                                        Confirm
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
                               </li>
                             ))}
                           </ul>
