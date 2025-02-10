@@ -34,7 +34,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 bg-gray-700 flex justify-between items-center py-4 px-5 md:px-10">
+    <nav className="sticky top-0 bg-gray-700 flex justify-between items-center py-4 px-5 md:px-10 z-10">
       <h1 className="text-2xl md:text-3xl font-bold hover:text-teal-500"><Link to="/">Workoutracker</Link></h1>
       <button className="block md:hidden" onClick={toggleMenu} aria-label="Toggle Menu">
         {isOpen ? (
