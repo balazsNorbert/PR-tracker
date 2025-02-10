@@ -124,7 +124,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         {suggestions.length > 0 && (
           <ul className="bg-white dark:bg-gray-600 border rounded-lg mt-2 py-2 shadow-md text-black dark:text-white">
             {suggestions.map((suggestion) => (
-              <li key={suggestion.name} className="cursor-pointer p-2 w-full hover:bg-gray-100 dark:hover:bg-gray-500 transition" onClick={() => {setExercise(suggestion.name);setSuggestions([]);}}>
+              <li key={suggestion.name} className="cursor-pointer py-2 px-3 w-full hover:bg-gray-100 dark:hover:bg-gray-500 transition" onClick={() => {setExercise(suggestion.name);setSuggestions([]);}}>
                 {suggestion.name}
               </li>
             ))}
@@ -171,7 +171,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
       </button>
       <ul className="mt-3">
         {sets.map((set, setIndex) => (
-          <div key={setIndex} className="flex items-center justify-between text-lg p-2 border-b border-gray-300 text-black">
+          <div key={setIndex} className="flex items-center justify-between text-lg p-2 border-b border-gray-300 text-black dark:text-white">
             <li>{set.weight} {set.unit} - {set.reps} reps</li>
             <button type="button" onClick={handleDeleteSet} className="text-red-600 hover:text-red-700 transition duration-300">
               <span className="material-icons">delete</span>

@@ -22,7 +22,7 @@ const WorkoutList = () => {
         response.data.forEach(workout => {
           workout.exercise.forEach(ex => {
             if(!previousMaxWeightByExercise[ex.name]) {
-              previousMaxWeightByExercise[ex.name] = {};
+              previousMaxWeightByExercise[ex.name] = 0;
             }
             if(!previousMaxRepsByExercise[ex.name]) {
               previousMaxRepsByExercise[ex.name] = {};
@@ -54,18 +54,21 @@ const WorkoutList = () => {
         newMaxWeightByExercise[ex.name] = 0;
       }
       if(!newMaxRepsByExercise[ex.name]) {
-        newMaxRepsByExercise[ex.name] = 0;
+        newMaxRepsByExercise[ex.name] = {};
       }
       ex.sets.forEach(set => {
         if(set.weight > newMaxWeightByExercise[ex.name]) {
           newMaxWeightByExercise[ex.name] = set.weight;
+          newMaxRepsByExercise[ex.name][set.weight] = set.reps;
           toast.success(`New PR for ${ex.name}: ${set.weight} ${set.unit}!`, { autoClose: 5000 });
         }
-        if(!newMaxRepsByExercise[ex.name][set.weight] || set.reps > newMaxRepsByExercise[ex.name][set.weight]) {
-          newMaxRepsByExercise[ex.name][set.weight] = set.reps;
-          toast.success(`New Reps PR for ${ex.name} at ${set.weight} ${set.unit} - ${set.reps} reps!`, { autoClose: 5000 });
+        else{
+          if(!newMaxRepsByExercise[ex.name][set.weight] || set.reps > newMaxRepsByExercise[ex.name][set.weight]) {
+            newMaxRepsByExercise[ex.name][set.weight] = set.reps;
+            toast.success(`New Reps PR for ${ex.name} at ${set.weight} ${set.unit} - ${set.reps} reps!`, { autoClose: 5000 });
+          }
         }
-    });
+      });
     });
     setMaxWeightByExercise(newMaxWeightByExercise);
     setMaxRepsByExercise(newMaxRepsByExercise);
@@ -164,9 +167,44 @@ const WorkoutList = () => {
         setWorkouts(prevWorkouts =>
           prevWorkouts.map(w => w._id === workout._id ? response.data : w)
         );
+        refreshRecords();
       })
       .catch(error => {
         console.error("Error deleting set:", error);
+      });
+  };
+
+  const refreshRecords = () => {
+    const token = localStorage.getItem("token");
+    axios.get(`${apiURL}/workouts`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(response => {
+        let updatedMaxWeightByExercise = {};
+        let updatedMaxRepsByExercise = {};
+        response.data.forEach(workout => {
+          workout.exercise.forEach(ex => {
+            if (!updatedMaxWeightByExercise[ex.name]) {
+              updatedMaxWeightByExercise[ex.name] = 0;
+            }
+            if (!updatedMaxRepsByExercise[ex.name]) {
+              updatedMaxRepsByExercise[ex.name] = {};
+            }
+            ex.sets.forEach(set => {
+              if (set.weight > updatedMaxWeightByExercise[ex.name]) {
+                updatedMaxWeightByExercise[ex.name] = set.weight;
+              }
+              if (!updatedMaxRepsByExercise[ex.name][set.weight] || set.reps > updatedMaxRepsByExercise[ex.name][set.weight]) {
+                updatedMaxRepsByExercise[ex.name][set.weight] = set.reps;
+              }
+            });
+          });
+        });
+        setMaxWeightByExercise(updatedMaxWeightByExercise);
+        setMaxRepsByExercise(updatedMaxRepsByExercise);
+      })
+      .catch(error => {
+        console.error("Error fetching workouts:", error);
       });
   };
 
