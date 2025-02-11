@@ -10,7 +10,7 @@ const LogBook = () => {
         <p className="text-lg lg:text-2xl mx-auto">Track your workouts here.</p>
         <WorkoutList/>
       </div>
-      <div className="fixed bottom-28 right-5 z-10">
+      <div className="fixed bottom-32 md:bottom-28 right-5 z-10">
         <CountDownTimer />
       </div>
     </div>
