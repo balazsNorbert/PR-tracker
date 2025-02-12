@@ -10,6 +10,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   const [sets, setSets] = useState([]);
   const [unit, setUnit] = useState('kg');
   const [suggestions, setSuggestions] = useState([]);
+  const [muscleGroup, setMuscleGroup] = useState('');
 
   const handleExerciseChange = (e) => {
     const value = e.target.value;
@@ -52,8 +53,8 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!date || !exercise || sets.length === 0) {
-      alert("Please enter date, exercise name, and at least one set!");
+    if (!exercise || !muscleGroup || sets.length === 0) {
+      alert("Please exercise name, muscle group, and at least one set!");
       return;
     }
     const validDate = new Date(date);
@@ -63,7 +64,11 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
     }
     const existingWorkout = existingExercises.find((ex) => {
       const exDate = new Date(ex.date);
-      return ex.name === exercise && !isNaN(exDate) && exDate.toISOString().slice(0, 10) === validDate.toISOString().slice(0, 10);
+      return ( ex.name === exercise &&
+        ex.muscleGroup === muscleGroup &&
+       !isNaN(exDate) &&
+       exDate.toISOString().slice(0, 10) === validDate.toISOString().slice(0, 10)
+      );
     });
 
     if (existingWorkout) {
@@ -78,8 +83,9 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
     } else {
       onAddWorkout({
         date,
-        exercise:{
+        exercise: {
           name: exercise,
+          muscleGroup,
           sets,
         }
       });
@@ -87,6 +93,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
 
     setDate(new Date().toISOString().slice(0, 10));
     setExercise('');
+    setMuscleGroup('');
     setSets([]);
     setCurrentSet({
       reps: '',
@@ -95,37 +102,36 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-xl p-4 md:p-6 mt-5 lg:mt-10">
-      <h2 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-6">Add a New Exercise</h2>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2 md:gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-xl p-4 md:p-6 mt-5 lg:mt-10">
+      <h2 className="text-xl md:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-1 md:mb-4">Add a New Exercise</h2>
       {!localStorage.getItem("token") && (
           <h3 className="text-lg lg:text-xl text-red-600 font-semibold text-center">
             ⚠️ You need to log in to save your workouts!
           </h3>
         )
       }
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <label htmlFor="date" className="text-lg lg:text-xl font-medium text-gray-600 dark:text-white">Date</label>
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600
+          className="text-black dark:text-white dark:bg-gray-700 p-3 border-2 border-gray-300 dark:border-gray-600
           rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <label className="text-lg lg:text-xl font-medium text-gray-600 dark:text-white">Exercise</label>
         <input
           type="text"
           value={exercise}
           onChange={handleExerciseChange}
           placeholder="e.g. Bench press"
-          className="text-black dark:text-white dark:bg-gray-700 mt-2 p-3 border-2 border-gray-300 dark:border-gray-600
+          className="text-black dark:text-white dark:bg-gray-700 p-3 border-2 border-gray-300 dark:border-gray-600
           rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
-          required
         />
         {suggestions.length > 0 && (
-          <ul className="bg-white dark:bg-gray-600 border rounded-lg mt-2 py-2 shadow-md text-black dark:text-white">
+          <ul className="bg-white dark:bg-gray-600 border rounded-lg py-2 shadow-md text-black dark:text-white">
             {suggestions.map((suggestion) => (
               <li key={suggestion.name} className="cursor-pointer py-2 px-3 w-full hover:bg-gray-100 dark:hover:bg-gray-500 transition" onClick={() => {setExercise(suggestion.name);setSuggestions([]);}}>
                 {suggestion.name}
@@ -134,6 +140,33 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           </ul>
         )}
       </div>
+      <div className="flex flex-col gap-2">
+      <label className="text-lg lg:text-xl font-medium text-gray-600 dark:text-white">Muscle Group</label>
+      <select
+        value={muscleGroup}
+        onChange={(e) => setMuscleGroup(e.target.value)}
+        className="text-black dark:text-white dark:bg-gray-700 p-3 border-2 border-gray-300 dark:border-gray-600
+        rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+      >
+        <option value="">Select Muscle Group</option>
+        <option value="chest">Chest</option>
+        <option value="back">Back</option>
+        <option value="shoulders">Shoulders</option>
+        <option value="arms">Arms</option>
+        <option value="biceps">Biceps</option>
+        <option value="triceps">Triceps</option>
+        <option value="forearms">Forearms</option>
+        <option value="legs">Legs</option>
+        <option value="quads">Quads</option>
+        <option value="hamstrings">Hamstrings</option>
+        <option value="calves">Calves</option>
+        <option value="glutes">Glutes</option>
+        <option value="abs">Abs</option>
+        <option value="traps">Traps</option>
+        <option value="push">Push</option>
+        <option value="pull">Pull</option>
+      </select>
+    </div>
       <h3 className="text-lg lg:text-xl font-medium text-gray-600  dark:text-white">Add Set</h3>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex gap-2 w-full">
@@ -145,7 +178,6 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
             placeholder="Weight"
             className="text-black dark:text-white dark:bg-gray-700 w-full md:w-auto p-3 border-2 border-gray-300 dark:border-gray-600
             rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
-            required
           />
           <select className="text-black dark:text-white dark:bg-gray-700 px-3 py-2 border-2 border-gray-300 dark:border-gray-600
           rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300" value={unit} onChange={(e) => setUnit(e.target.value)}>
@@ -161,7 +193,6 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           placeholder="Reps"
           className="dark:bg-gray-700 md:w-24 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-black dark:text-white focus:outline-none focus:ring-2
           focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
-          required
         />
       </div>
       <button
@@ -174,7 +205,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         </span>
         Add Set
       </button>
-      <ul className="mt-3">
+      <ul>
         {sets.map((set, setIndex) => (
           <div key={setIndex} className="flex items-center justify-between text-lg p-2 border-b border-gray-300 text-black dark:text-white">
             <li>{set.weight} {set.unit} - {set.reps} reps</li>

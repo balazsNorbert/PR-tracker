@@ -8,6 +8,7 @@ const setSchema = new mongoose.Schema({
 
 const exerciseSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  muscleGroup: { type: String, required: true },
   sets: [setSchema],
 });
 
