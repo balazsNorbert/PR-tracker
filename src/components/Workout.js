@@ -126,6 +126,14 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           type="text"
           value={exercise}
           onChange={handleExerciseChange}
+          onKeyDown={(e) => {
+            if(e.key === "Enter") {
+              e.preventDefault();
+              if(suggestions.length > 0) {
+                setSuggestions([]);
+              }
+            }
+          }}
           placeholder="e.g. Bench press"
           className="text-black dark:text-white dark:bg-gray-700 p-3 border-2 border-gray-300 dark:border-gray-600
           rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
