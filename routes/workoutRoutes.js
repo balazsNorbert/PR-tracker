@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Workout = require("../models/Workout");
+const Goal = require("../models/Goal");
 const protect = require("../middleware/authMiddleware");
 
-router.post('/', protect, (req, res) => {
+router.post('/', protect, async (req, res) => {
   const userId = req.user.userId;
 
   const newWorkout = new Workout({
@@ -13,8 +14,23 @@ router.post('/', protect, (req, res) => {
   });
 
   newWorkout.save()
-    .then(workout => {
+    .then(async (workout) => {
       console.log("Saved workout:", workout);
+      const goals = await Goal.find({ userId, achieved: false });
+      for(const goal of goals) {
+        for(const ex of workout.exercise) {
+          if(ex.name === goal.exerciseName) {
+            for(const set of ex.sets) {
+              if(set.reps >= goal.set.reps && set.weight >= goal.set.weight) {
+                goal.achieved = true;
+                await goal.save();
+                console.log(`Goal achieved: ${goal.exerciseName}`);
+                break;
+              }
+            }
+          }
+        }
+      }
       res.status(201).json(workout);
     })
     .catch(error => {

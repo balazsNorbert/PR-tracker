@@ -14,9 +14,12 @@ router.get("/:userId", protect, async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { userId, text } = req.body;
+  const { userId, exerciseName, set, baseline } = req.body;
+  if (!set || !set.reps || !set.weight || !set.unit) {
+    return res.status(400).json({ message: 'Missing required fields in set' });
+  }
   try {
-    const newGoal = new Goal({ userId, text });
+    const newGoal = new Goal({ userId, exerciseName, set, baseline });
     await newGoal.save();
     res.status(201).json(newGoal);
   } catch (err) {
