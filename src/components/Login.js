@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from '../axios';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/authSlice';
 
 const Login = () => {
   const apiURL = process.env.REACT_APP_API_URL;
@@ -9,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,9 +21,8 @@ const Login = () => {
       });
 
       if(response.data.token) {
-        localStorage.setItem("token", response.data.token);
+        dispatch(login({ token: response.data.token }))
         navigate('/profile');
-        window.location.reload();
       } else {
         alert(response.data.message);
       }

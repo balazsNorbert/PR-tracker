@@ -11,12 +11,14 @@ import ChartByExercise from './components/ChartByExercise';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DarkModeProvider } from './contexts/DarkModeContext';
+import TokenChecker from './components/TokenChecker';
 
 function App() {
   return (
     <DarkModeProvider>
       <div className="bg-gradient-to-r from-teal-600 dark:from-teal-800 to-teal-900 dark:to-teal-950 text-white relative">
         <Router>
+            <TokenChecker />
             <ToastContainer />
             <Navbar />
             <Routes>
