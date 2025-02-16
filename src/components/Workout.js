@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 
 const Workout = ({ onAddWorkout, existingExercises }) => {
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
@@ -11,6 +12,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   const [unit, setUnit] = useState('kg');
   const [suggestions, setSuggestions] = useState([]);
   const [muscleGroup, setMuscleGroup] = useState('');
+  const user = useSelector((state) => state.auth.user);
 
   const handleExerciseChange = (e) => {
     const value = e.target.value;
@@ -104,7 +106,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2 md:gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-xl p-4 md:p-6 mt-5 lg:mt-10">
       <h2 className="text-xl md:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-1 md:mb-4">Add a New Exercise</h2>
-      {!localStorage.getItem("token") && (
+      {!user && (
           <h3 className="text-lg lg:text-xl text-red-600 font-semibold text-center">
             ⚠️ You need to log in to save your workouts!
           </h3>

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import axios from '../axios';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
   const apiURL = process.env.REACT_APP_API_URL;
-  const [user, setUser] = useState(null);
   const [goals, setGoals] = useState([]);
   const [exerciseName, setExerciseName] = useState('');
   const [reps, setReps] = useState('');
@@ -15,6 +14,7 @@ const Profile = () => {
   const [unit, setUnit] = useState('kg');
   const [workouts, setWorkouts] = useState([]);
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const user = useSelector((state) => state.auth.user);
 
   const fetchGoals = useCallback(async (userId) => {
     try {
@@ -28,20 +28,10 @@ const Profile = () => {
   }, [apiURL]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const decodedToken = jwtDecode(token);
-        setUser(decodedToken);
-        fetchGoals(decodedToken.userId);
-      } catch (error) {
-        console.error("Invalid token", error);
-        setUser(null);
-      }
-    } else {
-      setUser(null);
+    if(user) {
+      fetchGoals(user.userId);
     }
-  }, [fetchGoals]);
+  }, [fetchGoals, user]);
 
   const calculateCurrentMax = (workouts, exerciseName) => {
     let maxWeight = 0;

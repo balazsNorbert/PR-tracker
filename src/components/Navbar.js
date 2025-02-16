@@ -1,32 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/authSlice';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-   if(token) {
-    try {
-      const decodedToken = jwtDecode(token);
-      console.log(decodedToken);
-      setUser(decodedToken);
-    } catch (error) {
-      console.error("Invalid token", error);
-      setUser(null);
-    }
-   } else {
-    setUser(null);
-   }
-  }, []);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    setUser(null);
-    window.location.reload();
+    dispatch(logout());
   }
 
   const toggleMenu = () => {
