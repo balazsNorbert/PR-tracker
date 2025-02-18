@@ -80,7 +80,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                     {workout.exercise.map((exercise, exerciseIndex) => (
                       <li key={exercise._id} className={`flex gap-1 text-xs md:text-sm 2xl:text-lg pr-1 border-r-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
                         <div className="flex flex-col min-w-max">
-                          <p className={`font-semibold text-xs md:text-base 2xl:text-xl border-b-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
+                          <p className={`font-semibold hover:text-teal-600 dark:hover:text-teal-400 text-xs md:text-base 2xl:text-xl border-b-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
                             {`${exerciseIndex + 1}. `}
                             <Link to={`/exercise/${exercise.name}`}>{exercise.name}</Link>
                           </p>
@@ -92,6 +92,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                                 <button type="button" onClick={() => handleOpenModal(date, workoutIndex, exerciseIndex, setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
                                   <span className="material-icons text-base md:text-xl xl:text-2xl 2xl:text-3xl">delete</span>
                                 </button>
+                                <span className="font-bold">{set.record && "PR"}</span>
                                 {showModal === setIndex && (
                                 <div className="fixed inset-0 flex justify-center items-center mx-8">
                                   <div className="flex flex-col gap-2 bg-teal-700 dark:bg-teal-600 p-5 rounded-lg shadow-lg">

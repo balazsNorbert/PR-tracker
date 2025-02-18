@@ -5,6 +5,7 @@ import { LineChart, Line, ResponsiveContainer, CartesianGrid,XAxis, YAxis, Refer
   Legend, Label
 } from 'recharts';
 import { useDarkMode } from '../contexts/DarkModeContext';
+import MuscleGroupPieChart from './MuscleGroupPieChart';
 
 const ChartByExercise = () => {
   const apiURL = process.env.REACT_APP_API_URL;
@@ -67,7 +68,7 @@ const ChartByExercise = () => {
       const { date, weight, reps, unit } = payload[0].payload;
       return (
         <div className="bg-white p-3 border border-gray-300 rounded-lg shadow-md text-sm">
-          <p><span className="font-semibold">Date</span>: {date}</p>
+          <p className="text-black"><span className="font-semibold">Date</span>: {date}</p>
           <p className="text-blue-700"><span className="font-semibold">Weight</span>: {weight} {unit}</p>
           <p className="text-green-700"><span className="font-semibold">Reps</span>: {reps}</p>
         </div>
@@ -79,9 +80,9 @@ const ChartByExercise = () => {
   const gridStrokeColor = darkMode ? "lightGray" : "gray";
 
   return (
-    <div className="flex justify-center flex-col gap-10 lg:gap-20 items-center mx-3 md:mx-10 my-10 text-xs min-h-screen">
-      <h1 className="text-4xl xl:text-5xl font-bold">Exercise: {name}</h1>
-      <ResponsiveContainer width="100%" className="bg-gray-200 dark:bg-gray-700 py-3 pr-5 md:pr-10 md:py-5 rounded-xl min-h-[300px] md:min-h-[500px] xl:min-h-[700px]">
+    <div className="flex justify-center flex-col gap-10 items-center mx-3 md:mx-10 my-10 text-xs min-h-screen">
+      <h1 className="text-3xl xl:text-4xl font-bold">Exercise {name} progress</h1>
+      <ResponsiveContainer width="100%" className="bg-gray-200 dark:bg-gray-700 py-3 pr-5 md:pr-10 md:py-5 rounded-xl min-h-[300px] md:min-h-[400px] xl:min-h-[500px]">
         <LineChart width={600} height={300} data={exerciseData}>
           <CartesianGrid  strokeDasharray="3 3" stroke={gridStrokeColor}/>
           <Line type="monotone" dataKey="weight" stroke="#1d4ed8" animationDuration={1000}/>
@@ -90,7 +91,7 @@ const ChartByExercise = () => {
           angle={-25} textAnchor="end" tick={{ fill: darkMode ? 'white' : 'black' }}/>
           <YAxis dataKey="weight" tick={{ fill: darkMode ? 'white' : 'black' }}/>
           <ReferenceLine y={maxWeight} stroke="Red" label={<Label value="Max weight" className="font-bold text-sm md:text-lg xl:text-xl fill-red-700 dark:fill-red-600"/>}/>
-          <Tooltip content={<CustomTooltip />}/>
+          <Tooltip content={CustomTooltip}/>
           <Legend
             verticalAlign="top"
             align="center"
@@ -99,6 +100,7 @@ const ChartByExercise = () => {
           />
         </LineChart>
       </ResponsiveContainer>
+      <MuscleGroupPieChart/>
     </div>
   )
 };

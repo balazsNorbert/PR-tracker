@@ -91,4 +91,31 @@ router.put('/:id', protect, async (req, res) => {
   }
 });
 
+router.put('/:workoutId/sets/:setId', protect, async (req, res) => {
+  const {workoutId, setId} = req.params;
+  console.log("Bele ment ?");
+  const { record } = req.body;
+  try {
+    const workout = await Workout.findById(workoutId);
+    if(!workout) {
+      return res.status(404).json({ message: "Workout not found!"})
+    }
+    const exercise = workout.exercise.find((ex) =>
+      ex.sets.some((set) => set._id.toString() === setId)
+    );
+    if (!exercise) {
+      return res.status(404).json({ message: "Exercise not found" });
+    }
+    const set = exercise.sets.find((set) => set._id.toString() === setId);
+    if (!set) {
+      return res.status(404).json({ message: "Set not found" });
+    }
+    set.record = record;
+    await workout.save();
+    return res.status(200).json({ message: "Set updated successfully", workout })
+  } catch (error) {
+      res.status(500).json({ message: "Error updating workout", error });
+  }
+});
+
 module.exports = router;
