@@ -60,18 +60,35 @@ const WorkoutList = () => {
         if(set.weight > newMaxWeightByExercise[ex.name]) {
           newMaxWeightByExercise[ex.name] = set.weight;
           newMaxRepsByExercise[ex.name][set.weight] = set.reps;
+          set.record = true;
           toast.success(`New PR for ${ex.name}: ${set.weight} ${set.unit}!`, { autoClose: 5000 });
+          updateWorkoutRecord(newWorkout._id, set, true);
         }
         else{
           if(!newMaxRepsByExercise[ex.name][set.weight] || set.reps > newMaxRepsByExercise[ex.name][set.weight]) {
             newMaxRepsByExercise[ex.name][set.weight] = set.reps;
+            set.record = true;
             toast.success(`New Reps PR for ${ex.name} at ${set.weight} ${set.unit} - ${set.reps} reps!`, { autoClose: 5000 });
+            updateWorkoutRecord(newWorkout._id, set, true);
           }
         }
       });
     });
     setMaxWeightByExercise(newMaxWeightByExercise);
     setMaxRepsByExercise(newMaxRepsByExercise);
+  };
+
+  const updateWorkoutRecord = (workoutId, set, recordStatus) => {
+    const token = localStorage.getItem("token");
+    axios.put(`${apiURL}/workouts/${workoutId}/sets/${set._id}`, { record: recordStatus }, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(response => {
+        console.log('Updated record in the database:', response.data);
+      })
+      .catch(error => {
+        console.error('Error updating record:', error);
+      });
   };
 
   const addWorkout = (newWorkout) => {
