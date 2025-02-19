@@ -12,6 +12,9 @@ module.exports = {
       },
       fontSize:{
         'xxs': '10px',
+      },
+      screens: {
+        xs: '450px',
       }
     },
   },

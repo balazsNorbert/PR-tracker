@@ -154,7 +154,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center">
-        <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white rounded-3xl shadow-xl p-6 mx-5 md:mx-10 md:p-8 mt-10 mb-20">
+        <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white w-full xs:w-auto xs:rounded-3xl shadow-xl p-4 xs:p-6 xs:mx-5 md:mx-10 md:p-8 mt-10 mb-20">
           {user ? (
           <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
             Welcome back, <span className="text-teal-600 dark:text-white">{user.username}!</span>
@@ -205,10 +205,11 @@ const Profile = () => {
               value={weight}
               onChange={(e) => setWeight(parseInt(e.target.value))}
               placeholder="Weight"
-              className="dark:bg-gray-700 text-black dark:text-white dark:border-gray-600 border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300 flex-grow"
+              className="dark:bg-gray-700 text-black dark:text-white dark:border-gray-600 border p-3 rounded-lg focus:outline-none
+              focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300 flex-grow min-w-0"
             />
             <select className="text-black dark:text-white dark:bg-gray-700 px-3 py-2 border border-gray-300 dark:border-gray-600
-            rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300" value={unit} onChange={(e) => setUnit(e.target.value)}>
+            rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300 w-18" value={unit} onChange={(e) => setUnit(e.target.value)}>
               <option value="kg">kg</option>
               <option value="lbs">lbs</option>
             </select>
@@ -234,7 +235,7 @@ const Profile = () => {
           <div className="w-full">
             <h3 className="text-xl font-semibold mb-3 text-orange-600 dark:text-orange-500">Your Active Goals</h3>
             <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto">
-              {goals.length > 0 ? (
+              {goals.filter(goal => !goal.achieved).length > 0 ? (
                 goals.map(goal => {
                   const progress = calculateProgress(goal, workouts)
                   return (
