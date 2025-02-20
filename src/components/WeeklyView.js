@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Note from './Note';
 
 const getCurrentWeek = (startDate) => {
   const startOfWeek = new Date(startDate);
@@ -12,13 +13,15 @@ const getCurrentWeek = (startDate) => {
   return week;
 };
 
-const WeeklyView = ({ workouts, handleDeleteSet }) => {
+const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
   const today = new Date().toISOString().slice(0, 10);
   const [currentDay, setCurrentDay] = useState(today);
   const [week, setWeek] = useState(getCurrentWeek(currentDay));
   const [showModal, setShowModal] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [showMuscleGroups, setShowMuscleGroups] = useState(false);
+  console.log("workouts: ", workouts);
+  
 
   const handleNavigate = (direction) => {
     const today = new Date(currentDay);
@@ -58,13 +61,13 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
           Next Week
         </button>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 w-full gap-3">
         {week.map((date, index) => {
           const isToday = date === today;
           const dayNumber = new Date(date).getDate();
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
           return (
-            <div key={date} className={`aspect-square pt-1 px-1 md:px-3 pb-7 lg:pb-10 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-500' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
+            <div key={date} className={`aspect-video pt-2 px-2 md:px-3 pb-7 lg:pb-10 min-h-20 lg:min-h-52 rounded-lg shadow-xl relative ${isToday ? 'bg-teal-500' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
               <h3 className="text-xs lg:text-base font-semibold text-center mb-2">{dayNumber} {dayName}</h3>
               <div className="h-full overflow-y-auto overflow-x-auto w-full">
                 {workouts.filter((workout) => new Date(workout.date).toISOString().slice(0, 10) === date).map((workout, workoutIndex) => (
@@ -78,15 +81,15 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                   ) : (
                   <ul className="flex gap-3" key={`${date}-${workoutIndex}`}>
                     {workout.exercise.map((exercise, exerciseIndex) => (
-                      <li key={exercise._id} className={`flex gap-1 text-xs md:text-sm 2xl:text-lg pr-1 border-r-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
+                      <li key={exercise._id} className={`flex gap-1 text-xs md:text-sm 2xl:text-lg pr-3 border-r-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
                         <div className="flex flex-col min-w-max">
-                          <p className={`font-semibold hover:text-teal-600 dark:hover:text-teal-400 text-xs md:text-base 2xl:text-xl border-b-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
+                          <p className={`font-semibold hover:text-teal-600 dark:hover:text-teal-400 text-xs xs:text-base 2xl:text-xl border-b-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
                             {`${exerciseIndex + 1}. `}
                             <Link to={`/exercise/${exercise.name}`}>{exercise.name}</Link>
                           </p>
                           <ul>
                             {exercise.sets.map((set, setIndex) => (
-                              <li key={set._id} className="flex gap-1 items-center text-xxs md:text-sm 2xl:text-lg">
+                              <li key={set._id} className="flex gap-1 items-center text-xxs xs:text-sm 2xl:text-lg">
                                 <span className="font-semibold">{`${setIndex + 1}.`}</span>
                                 <p>{set.weight} {set.unit} - {set.reps} reps</p>
                                 <button type="button" onClick={() => handleOpenModal(date, workoutIndex, exerciseIndex, setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
@@ -94,7 +97,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                                 </button>
                                 <span className="font-bold">{set.record && "PR"}</span>
                                 {showModal === setIndex && (
-                                <div className="fixed inset-0 flex justify-center items-center mx-8">
+                                <div className="fixed inset-0 bg-gray-500 bg-opacity-20 flex justify-center items-center z-10">
                                   <div className="flex flex-col gap-2 bg-teal-700 dark:bg-teal-600 p-5 rounded-lg shadow-lg">
                                     <h2 className="font-semibold text-lg text-white">Do you really want to delete this set?</h2>
                                     <div className="bg-teal-800 hard:bg-teal-700 text-white p-2 rounded-md">
@@ -125,8 +128,11 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                     ))}
                   </ul>
                   )
-                ))}
+                ))
+              }
               </div>
+              <Note workoutDate={new Date(date).toISOString()} onNoteSaved={handleSaveNote}
+              existingNote={workouts.find(workout => workout.date === new Date(date).toISOString())?.note || ""} />
             </div>
           )
         })}

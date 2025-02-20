@@ -93,7 +93,6 @@ router.put('/:id', protect, async (req, res) => {
 
 router.put('/:workoutId/sets/:setId', protect, async (req, res) => {
   const {workoutId, setId} = req.params;
-  console.log("Bele ment ?");
   const { record } = req.body;
   try {
     const workout = await Workout.findById(workoutId);
@@ -115,6 +114,41 @@ router.put('/:workoutId/sets/:setId', protect, async (req, res) => {
     return res.status(200).json({ message: "Set updated successfully", workout })
   } catch (error) {
       res.status(500).json({ message: "Error updating workout", error });
+  }
+});
+
+router.put('/:date/note', protect, async (req,res) => {
+  const { date } = req.params;
+  const { note } = req.body;
+  try{
+    const formattedDate = new Date(date).toISOString();
+    const workout = await Workout.findOne({date: formattedDate});
+    if(!workout) {
+      return res.status(404).json({ message: 'Workout not found' });
+    }
+    workout.note = note;
+    await workout.save();
+    res.status(200).json({ message: 'Note saved successfully', workout });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Server error'});
+  }
+});
+
+router.delete('/:date/note', protect, async (req,res) => {
+  const { date } = req.params;
+  try{
+    const formattedDate = new Date(date).toISOString();
+    const workout = await Workout.findOne({date: formattedDate});
+    if(!workout) {
+      return res.status(404).json({ message: 'Workout not found' });
+    }
+    workout.note = "";
+    await workout.save();
+    res.status(200).json({ message: 'Note deleted successfully', workout });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Server error'});
   }
 });
 
