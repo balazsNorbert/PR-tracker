@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Note from './Note';
 
 const getCurrentWeek = (startDate) => {
   const startOfWeek = new Date(startDate);
@@ -12,13 +13,15 @@ const getCurrentWeek = (startDate) => {
   return week;
 };
 
-const WeeklyView = ({ workouts, handleDeleteSet }) => {
+const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
   const today = new Date().toISOString().slice(0, 10);
   const [currentDay, setCurrentDay] = useState(today);
   const [week, setWeek] = useState(getCurrentWeek(currentDay));
   const [showModal, setShowModal] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [showMuscleGroups, setShowMuscleGroups] = useState(false);
+  console.log("workouts: ", workouts);
+  
 
   const handleNavigate = (direction) => {
     const today = new Date(currentDay);
@@ -64,7 +67,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
           const dayNumber = new Date(date).getDate();
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
           return (
-            <div key={date} className={`aspect-video pt-2 px-2 md:px-3 pb-7 lg:pb-10 min-h-20 lg:min-h-52 rounded-lg shadow-xl ${isToday ? 'bg-teal-500' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
+            <div key={date} className={`aspect-video pt-2 px-2 md:px-3 pb-7 lg:pb-10 min-h-20 lg:min-h-52 rounded-lg shadow-xl relative ${isToday ? 'bg-teal-500' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
               <h3 className="text-xs lg:text-base font-semibold text-center mb-2">{dayNumber} {dayName}</h3>
               <div className="h-full overflow-y-auto overflow-x-auto w-full">
                 {workouts.filter((workout) => new Date(workout.date).toISOString().slice(0, 10) === date).map((workout, workoutIndex) => (
@@ -94,7 +97,7 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                                 </button>
                                 <span className="font-bold">{set.record && "PR"}</span>
                                 {showModal === setIndex && (
-                                <div className="fixed inset-0 flex justify-center items-center mx-8">
+                                <div className="fixed inset-0 bg-gray-500 bg-opacity-20 flex justify-center items-center z-10">
                                   <div className="flex flex-col gap-2 bg-teal-700 dark:bg-teal-600 p-5 rounded-lg shadow-lg">
                                     <h2 className="font-semibold text-lg text-white">Do you really want to delete this set?</h2>
                                     <div className="bg-teal-800 hard:bg-teal-700 text-white p-2 rounded-md">
@@ -125,8 +128,11 @@ const WeeklyView = ({ workouts, handleDeleteSet }) => {
                     ))}
                   </ul>
                   )
-                ))}
+                ))
+              }
               </div>
+              <Note workoutDate={new Date(date).toISOString()} onNoteSaved={handleSaveNote}
+              existingNote={workouts.find(workout => workout.date === new Date(date).toISOString())?.note || ""} />
             </div>
           )
         })}

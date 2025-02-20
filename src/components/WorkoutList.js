@@ -225,13 +225,21 @@ const WorkoutList = () => {
       });
   };
 
+  const handleSaveNote = (date, newNote) => {
+    setWorkouts((prevWorkouts) =>
+      prevWorkouts.map((workout) =>
+        workout.date === date ? { ...workout, note: newNote } : workout
+      )
+    );
+  };
+
   return (
     <div className="flex flex-col h-full gap-5">
       <div className="mx-auto">
         <Workout onAddWorkout={addWorkout} existingExercises={workouts.flatMap((w) => w.exercise)}/>
       </div>
       <h2 className="font-bold text-2xl lg:text-3xl text-center mt-10">This week's workouts</h2>
-      <WeeklyView workouts={workouts} handleDeleteSet={handleDeleteSet}/>
+      <WeeklyView workouts={workouts} handleDeleteSet={handleDeleteSet} handleSaveNote={handleSaveNote}/>
     </div>
   )
 }

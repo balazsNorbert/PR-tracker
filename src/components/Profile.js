@@ -255,8 +255,8 @@ const Profile = () => {
                         <div className="text-sm text-white mx-auto font-medium mt-1">
                           {Math.round(progress)}% completed
                         </div>
-                        <div className="w-full bg-gray-300 rounded-full shadow-xl h-2.5 overflow-hidden">
-                          <div className="bg-teal-600 h-2.5 rounded-full progress-bar" style={{ width: `${progress}%` }}></div>
+                        <div className="w-full bg-gray-300 rounded-full border border-white shadow-xl h-3 overflow-hidden">
+                          <div className="bg-teal-600 h-3 rounded-full progress-bar" style={{ width: `${progress}%` }}></div>
                         </div>
                       </div>
                       <div className="flex items-center gap-1 ">

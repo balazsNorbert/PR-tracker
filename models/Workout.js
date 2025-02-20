@@ -16,7 +16,8 @@ const exerciseSchema = new mongoose.Schema({
 const workoutSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref:"User", required: true },
   date: { type: Date, required: true },
-  exercise: [exerciseSchema]
+  exercise: [exerciseSchema],
+  note: { type: String, default: "" }
 });
 
 module.exports = mongoose.model("Workout", workoutSchema);
