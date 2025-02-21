@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Note = ({workoutDate, onNoteSaved, existingNote}) => {
-  console.log('existingNote: ', existingNote);
   const apiURL = process.env.REACT_APP_API_URL;
   const [note, setNote] = useState(existingNote || "");
   const [showModal,setShowModal] = useState(false);

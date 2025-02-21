@@ -20,8 +20,6 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
   const [showModal, setShowModal] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [showMuscleGroups, setShowMuscleGroups] = useState(false);
-  console.log("workouts: ", workouts);
-  
 
   const handleNavigate = (direction) => {
     const today = new Date(currentDay);
