@@ -12,12 +12,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DarkModeProvider } from './contexts/DarkModeContext';
 import TokenChecker from './components/TokenChecker';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <DarkModeProvider>
       <div className="bg-gradient-to-r from-teal-600 dark:from-teal-800 to-teal-900 dark:to-teal-950 text-white relative">
         <Router>
+            <ScrollToTop />
             <TokenChecker />
             <ToastContainer />
             <Navbar />
