@@ -4,6 +4,8 @@ import axios from '../axios';
 import { useDarkMode } from '../contexts/DarkModeContext';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import StreakTracker from './StreakTracker';
+import Idea from './Idea';
 
 const Profile = () => {
   const apiURL = process.env.REACT_APP_API_URL;
@@ -57,8 +59,6 @@ const Profile = () => {
   const handleAddGoal = async () => {
     if (exerciseName && weight && reps) {
       const { maxWeight: currentMaxWeight, maxReps: currentMaxReps } = calculateCurrentMax(workouts, exerciseName);
-      console.log("currentMaxWeight:", currentMaxWeight);
-      console.log("currentMaxReps:", currentMaxReps);
       try {
         const response = await axios.post(`${apiURL}/goals`, {
           userId: user.userId,
@@ -130,7 +130,6 @@ const Profile = () => {
     if(targetWeight > bestCurrentSet.weight) {
       weightProgress = (((bestCurrentSet.weight - baselineWeight) * 100 )/ (targetWeight - baselineWeight));
       weightProgress = Math.max(0, Math.min(100, weightProgress));
-      console.log("WeightProgress: ", weightProgress);
       finalProgress = weightProgress;
     }
     else {
@@ -190,6 +189,12 @@ const Profile = () => {
              </Link>
             </button>
           </div>
+          {user && (
+            <>
+              <h3 className="text-2xl 2xl:text-3xl font-semibold text-teal-600 dark:text-white">Consistency</h3>
+              <StreakTracker userId={user.userId} workouts={workouts}/>
+            </>
+          )}
           <h3 className="text-2xl 2xl:text-3xl font-semibold text-teal-600 dark:text-white">Goals</h3>
           <div className="w-full flex flex-col items-center gap-4">
           <input
@@ -323,6 +328,7 @@ const Profile = () => {
               )}
             </ul>
           </div>
+        {user && <Idea />}
         </div>
     </div>
   );
