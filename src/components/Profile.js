@@ -5,6 +5,7 @@ import { useDarkMode } from '../contexts/DarkModeContext';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import StreakTracker from './StreakTracker';
+import Idea from './Idea';
 
 const Profile = () => {
   const apiURL = process.env.REACT_APP_API_URL;
@@ -188,7 +189,12 @@ const Profile = () => {
              </Link>
             </button>
           </div>
-          {user && <StreakTracker userId={user.userId} workouts={workouts}/>}
+          {user && (
+            <>
+              <h3 className="text-2xl 2xl:text-3xl font-semibold text-teal-600 dark:text-white">Consistency</h3>
+              <StreakTracker userId={user.userId} workouts={workouts}/>
+            </>
+          )}
           <h3 className="text-2xl 2xl:text-3xl font-semibold text-teal-600 dark:text-white">Goals</h3>
           <div className="w-full flex flex-col items-center gap-4">
           <input
@@ -322,6 +328,7 @@ const Profile = () => {
               )}
             </ul>
           </div>
+        {user && <Idea />}
         </div>
     </div>
   );

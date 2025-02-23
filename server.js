@@ -20,6 +20,7 @@ app.use("/api/workouts", require("./routes/workoutRoutes"));
 app.use("/api/exercise", require("./routes/exerciseRoutes"));
 app.use("/api/goals", require("./routes/goalRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/idea", require("./routes/ideaRoutes"));
 
 app.use(express.static(path.join(__dirname, 'build')));
 
