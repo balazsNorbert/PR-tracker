@@ -31,10 +31,12 @@ const Idea = () => {
           value={idea}
           onChange={(e) => setIdea(e.target.value)}
           placeholder="Write you feedback here..."
-          className="text-black w-full p-3 border dark:border-none rounded-lg focus:ring-2 focus:ring-teal-500 dark:bg-gray-900 dark:text-white dark:border-teal-400"
+          className="text-black dark:text-white w-full rounded-lg p-3 border dark:border-none shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-400 dark:bg-gray-900
+        dark:focus:ring-teal-400 transition duration-300"
           rows="3"
         />
-        <button type="submit" className="flex items-center gap-2 ml-auto w-fit bg-teal-800 dark:bg-gray-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition">
+        <button type="submit" className="flex items-center gap-2 ml-auto w-fit bg-teal-800 dark:bg-gray-900 text-white
+        font-bold py-2 px-4 rounded-lg hover:bg-teal-400 transition mt-1">
           <span className="text-lg">Send</span>
           <span className="material-icons">send</span>
         </button>
