@@ -239,7 +239,7 @@ const Profile = () => {
           </div>
           <div className="w-full bg-teal-600 dark:bg-gray-700 rounded-lg p-4">
             <h3 className="text-xl font-semibold">Your Active Goals</h3>
-            <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-5">
+            <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-3">
               {goals.filter(goal => !goal.achieved).length > 0 ? (
                 goals.map(goal => {
                   const progress = calculateProgress(goal, workouts)
@@ -247,17 +247,17 @@ const Profile = () => {
                     !goal.achieved ? (
                     <li key={goal._id} className="flex justify-between p-4 rounded-lg shadow-md bg-teal-400/70 dark:bg-gray-500/80 transition duration-300 relative">
                       {progress === 100 && !goal.achieved && (
-                        <div className="absolute top-2 right-2 text-green-600 dark:text-green-500 font-bold text-center animate-pulse">
+                        <div className="absolute top-1 right-1 text-green-600 dark:text-green-500 font-bold text-sm md:text-base text-center animate-pulse">
                           Achieved! 🎯
                         </div>
                       )}
                       <div className="flex flex-col items-start gap-1 w-full">
                         {goal.set && (
-                          <h4 className="text-sm md:text-base xl:text-lg font-semibold">
-                            <span className="text-base md:text-lg xl:text-xl">{goal.exerciseName}</span>: {goal.set.weight} kg - {goal.set.reps} reps
+                          <h4 className="text-xs md:text-sm xl:text-base font-semibold">
+                            <span className="text-sm md:text-base xl:text-lg">{goal.exerciseName}:  </span>{goal.set.weight} kg - {goal.set.reps} reps
                           </h4>
                         )}
-                        <div className="text-sm text-white mx-auto font-medium mt-1">
+                        <div className="text-xs md:text-sm text-white mx-auto font-medium mt-1">
                           {Math.round(progress)}% completed
                         </div>
                         <div className="w-full bg-gray-300 rounded-full border border-white shadow-xl h-3 overflow-hidden">
@@ -270,7 +270,7 @@ const Profile = () => {
                           className={`flex items-center gap-2 text-green-700 dark:text-green-500 ${progress === 100 && !goal.achieved ? '' : 'opacity-50 cursor-not-allowed'}`}
                           disabled={progress !== 100 || goal.achieved}
                         >
-                          <span className="material-icons text-3xl">
+                          <span className="material-icons text-2xl md:text-3xl">
                             done
                           </span>
                         </button>
@@ -278,7 +278,7 @@ const Profile = () => {
                           onClick={() => deleteGoal(goal._id)}
                           className="text-red-600 hover:text-red-700 transition duration-300"
                         >
-                          <span className="material-icons mt-2">
+                          <span className="material-icons mt-2 text-2xl md:text-3xl">
                             delete
                           </span>
                         </button>
@@ -290,7 +290,7 @@ const Profile = () => {
                 );
               })
               ) : (
-                <p className="italic">No active goals. Add one above! 🚀</p>
+                <p className="italic mt-2">No active goals. Add one above! 🚀</p>
               )}
             </ul>
           </div>

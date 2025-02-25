@@ -6,6 +6,7 @@ const StreakTracker = ({ userId, workouts }) => {
   const [streak, setStreak] = useState(0);
   const [weeklyGoal, setWeeklyGoal] = useState(0);
   const [completedWorkouts, setCompletedWorkouts] = useState(0);
+  const [hovered, setHovered] = useState(false);
 
   const calculateCompletedWorkouts = (workouts) => {
     const today = new Date();
@@ -57,17 +58,19 @@ const StreakTracker = ({ userId, workouts }) => {
   }
 
   const getStreakLevel = (streak) => {
-    if (streak >= 250) return { label: "Gym rat", color: "bg-lime-600"};
-    if (streak >= 125) return { label: "Legendary", color: "bg-red-600" };
-    if (streak >= 50) return { label: "Advanced", color: "bg-blue-600" };
-    if (streak >= 20) return { label: "Intermediate", color: "bg-green-600" };
-    if (streak >= 12) return { label: "Consistent", color: "bg-yellow-600" };
-    if (streak >= 8) return { label: "Dedicated", color: "bg-orange-600" };
-    if (streak >= 4) return { label: "Beginner", color: "bg-gray-600" };
-    return { label: "Newbie", color: "bg-gray-400" };
+    if (streak >= 250) return { label: "Titan", color: "text-cyan-800", icon: "diamond" };
+    if (streak >= 175) return { label: "Legend", color: "text-amber-800", icon: "volcano", nextRank: "Titan", nextStreak: "250 weeks", nextIcon: "diamond", nextColor: "text-cyan-800" };
+    if (streak >= 125) return { label: "Unstoppable", color: "text-purple-700", icon: "rocket_launch", nextRank: "Legend", nextStreak: "175 weeks", nextIcon: "volcano", nextColor: "text-amber-800" };
+    if (streak >= 75) return { label: "Elite", color: "text-red-700", icon: "military_tech", nextRank: "Unstoppable", nextStreak: "125 weeks", nextIcon: "rocket_launch", nextColor: "text-purple-700" };
+    if (streak >= 50) return { label: "Warrior", color: "text-blue-700", icon: "fitness_center", nextRank: "Elite", nextStreak: "75 weeks", nextIcon: "military_tech", nextColor: "text-red-700" };
+    if (streak >= 20) return { label: "Challenger", color: "text-green-700", icon: "whatshot", nextRank: "Warrior", nextStreak: "50 weeks", nextIcon: "fitness_center", nextColor: "text-blue-700" };
+    if (streak >= 12) return { label: "Disciplined", color: "text-yellow-600", icon: "emoji_events", nextRank: "Challenger", nextStreak: "20 weeks", nextIcon: "whatshot", nextColor: "text-green-700" };
+    if (streak >= 8) return { label: "Committed", color: "text-orange-600", icon: "fitness_center", nextRank: "Disciplined", nextStreak: "12 weeks", nextIcon: "emoji_events", nextColor: "text-yellow-600" };
+    if (streak >= 4) return { label: "Rising Star", color: "text-cyan-500", icon: "star", nextRank: "Committed", nextStreak: "8 weeks", nextIcon: "fitness_center", nextColor: "text-orange-600"};
+    return { label: "Newbie", color: "text-gray-500", icon: "eco", nextRank: "Rising Star", nextStreak: "4 weeks", nextIcon: "star", nextColor: "text-cyan-500"};
   };
 
-  const { label, color } = getStreakLevel(streak);
+  const { label, color, icon, nextRank, nextIcon, nextColor, nextStreak } = getStreakLevel(streak);
 
   return (
     <div className="flex flex-col gap-4 w-full">
@@ -80,15 +83,29 @@ const StreakTracker = ({ userId, workouts }) => {
           No streak yet! 😞
         </h3>
       )}
-      <div className="flex flex-col gap-4 bg-teal-600 dark:bg-gray-700 w-full shadow-xl rounded-lg p-6">
+      <div className="flex flex-col gap-4 bg-teal-600 dark:bg-gray-700 w-full shadow-xl rounded-lg p-6"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <h4 className="font-bold text-xl">
           Your rank
         </h4>
-        <div className={`flex justify-center items-center gap-3 ${color} text-white text-lg md:text-xl rounded-xl p-2`}>
-          <p className="font-semibold">{label}</p>
-          <span className={`material-icons text-2xl`}>
-            token
+        <div className="flex justify-center items-center gap-3 bg-white text-white text-lg md:text-xl rounded-xl p-2 relative">
+          <p className={`font-semibold ${color}`}>{label}</p>
+          <span className={`material-icons text-2xl ${color}`}>
+            {icon}
           </span>
+          {hovered && (
+            <div className="absolute top-14 flex flex-col gap-1 bg-gray-800 text-white text-lg md:text-xl rounded-lg p-3 shadow-lg">
+              <p className="font-semibold text-base md:text-lg">Next rank at {nextStreak} :</p>
+              <div className="flex justify-center items-center gap-2">
+                <p className={`text-base font-semibold ${nextColor}`}>{nextRank}</p>
+                <span className={`material-icons text-2xl ${nextColor}`}>
+                  {nextIcon}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex flex-col items-center gap-4 bg-teal-600 dark:bg-gray-700 w-full rounded-lg p-4">
