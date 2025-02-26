@@ -131,7 +131,7 @@ const StreakTracker = ({ userId, workouts }) => {
           <span className="text-lg md:text-xl">{completedWorkouts} / {weeklyGoal} </span>
           workout done this week
         </p>
-        <p className="text-lg md:text-xl">
+        <p className="text-lg md:text-xl italic">
           {completedWorkouts >= weeklyGoal ? (
             " Good job! 💪"
           ) : (

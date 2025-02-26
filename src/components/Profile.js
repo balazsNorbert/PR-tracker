@@ -15,6 +15,7 @@ const Profile = () => {
   const [weight, setWeight] = useState('');
   const [unit, setUnit] = useState('kg');
   const [workouts, setWorkouts] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const { darkMode, toggleDarkMode } = useDarkMode();
   const user = useSelector((state) => state.auth.user);
 
@@ -29,11 +30,34 @@ const Profile = () => {
     }
   }, [apiURL]);
 
+  const existingExercises=workouts.flatMap((w) => w.exercise);
+
   useEffect(() => {
     if(user) {
       fetchGoals(user.userId);
     }
   }, [fetchGoals, user]);
+
+  const handleExerciseChange = (e) => {
+    const value = e.target.value;
+    setExerciseName(value);
+    if(!value.trim()){
+      setSuggestions([]);
+      return;
+    }
+    const matchedExercises = existingExercises.filter((ex) =>
+      ex.name && ex.name.toLowerCase().includes(value.toLowerCase())
+    );
+    const uniqueExercises = [];
+    const seen = new Set();
+    matchedExercises.forEach(exercise => {
+      if (!seen.has(exercise.name)) {
+        seen.add(exercise.name);
+        uniqueExercises.push(exercise);
+      }
+    });
+    setSuggestions(uniqueExercises);
+  }
 
   const calculateCurrentMax = (workouts, exerciseName) => {
     let maxWeight = 0;
@@ -198,11 +222,28 @@ const Profile = () => {
               <input
                 type="text"
                 value={exerciseName}
-                onChange={(e) => setExerciseName(e.target.value)}
+                onChange={handleExerciseChange}
+                onKeyDown={(e) => {
+                  if(e.key === "Enter") {
+                    e.preventDefault();
+                    if(suggestions.length > 0) {
+                      setSuggestions([]);
+                    }
+                  }
+                }}
                 placeholder="Exercise Name"
                 className="dark:bg-gray-900 text-black dark:text-white p-3 rounded-lg
                 focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-400 transition duration-300 w-full"
               />
+              {suggestions.length > 0 && (
+                <ul className="bg-white dark:bg-gray-800 border border-teal-400 rounded-lg py-2 shadow-md text-black dark:text-white w-full">
+                  {suggestions.map((suggestion) => (
+                    <li key={suggestion.name} className="cursor-pointer flex py-2 px-3 w-full hover:bg-gray-200 dark:hover:bg-gray-500 transition" onClick={() => {setExerciseName(suggestion.name);setSuggestions([]);}}>
+                      {suggestion.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
               <div className="flex justify-between gap-4 w-full">
                 <input
                   type="number"
