@@ -70,7 +70,7 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
               <div className="h-full overflow-y-auto overflow-x-auto w-full">
                 {workouts.filter((workout) => new Date(workout.date).toISOString().slice(0, 10) === date).map((workout, workoutIndex) => (
                   showMuscleGroups ? (
-                    <div key={`${date}-${workoutIndex}`} className="flex flex-col gap-1 md:gap-4">
+                    <div key={`${date}-${workoutIndex}`} className="grid grid-cols-2 gap-1 md:gap-4">
                       {[...new Set(workout.exercise.map((exercise) => exercise.muscleGroup))].map((muscle, muscleIndex) => (
                         <span key={`${muscle}-${muscleIndex}`} className={`text-center ${isToday ? 'bg-teal-700 dark:bg-teal-700' : 'bg-teal-600 dark:bg-teal-500 text-white'}
                         p-2 rounded-md shadow-md text-sm md:text-xl 2xl:text-2xl font-bold`}>{muscle}</span>
@@ -89,16 +89,16 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
                             {exercise.sets.map((set, setIndex) => (
                               <li key={set._id} className="flex gap-1 items-center text-xxs xs:text-sm 2xl:text-lg">
                                 <span className="font-semibold">{`${setIndex + 1}.`}</span>
-                                <p>{set.weight} {set.unit} - {set.reps} reps</p>
+                                <p className="w-20 xs:w-28 2xl:w-36">{set.weight} {set.unit} - {set.reps} reps</p>
                                 <button type="button" onClick={() => handleOpenModal(date, workoutIndex, exerciseIndex, setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
                                   <span className="material-icons text-base md:text-xl xl:text-2xl 2xl:text-3xl">delete</span>
                                 </button>
                                 <span className="font-bold">{set.record && "PR"}</span>
                                 {showModal === setIndex && (
                                 <div className="fixed inset-0 bg-gray-500 bg-opacity-20 flex justify-center items-center z-10">
-                                  <div className="flex flex-col gap-2 bg-teal-700 dark:bg-teal-600 p-5 rounded-lg shadow-lg">
+                                  <div className="flex flex-col gap-2 bg-teal-700 dark:bg-gray-700 p-5 rounded-lg shadow-lg">
                                     <h2 className="font-semibold text-lg text-white">Do you really want to delete this set?</h2>
-                                    <div className="bg-teal-800 hard:bg-teal-700 text-white p-2 rounded-md">
+                                    <div className="bg-teal-800 dark:bg-gray-900 text-white p-2 rounded-md">
                                       <p className="text-base lg:text-xl font-bold">{set.weight} {set.unit} - {set.reps} reps</p>
                                     </div>
                                     <div className="flex justify-between">
