@@ -118,7 +118,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="text-black dark:text-white dark:bg-gray-700 p-3 border-2 border-gray-300 dark:border-gray-600
+          className="text-black dark:text-white dark:bg-gray-700 p-3 border border-gray-300 dark:border-gray-600
           rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
       </div>
@@ -137,7 +137,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
             }
           }}
           placeholder="e.g. Bench press"
-          className="text-black dark:text-white dark:bg-gray-700 p-3 border-2 border-gray-300 dark:border-gray-600
+          className="text-black dark:text-white dark:bg-gray-700 p-3 border border-gray-300 dark:border-gray-600
           rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
         {suggestions.length > 0 && (
@@ -155,7 +155,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
       <select
         value={muscleGroup}
         onChange={(e) => setMuscleGroup(e.target.value)}
-        className="text-black dark:text-white dark:bg-gray-700 p-3 border-2 border-gray-300 dark:border-gray-600
+        className="text-black dark:text-white dark:bg-gray-700 p-3 border border-gray-300 dark:border-gray-600
         rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
       >
         <option value="">Select Muscle Group</option>
@@ -186,10 +186,10 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
             value={currentSet.weight}
             onChange={(e) => setCurrentSet({ ...currentSet, weight: e.target.value })}
             placeholder="Weight"
-            className="text-black dark:text-white dark:bg-gray-700 w-full md:w-auto p-3 border-2 border-gray-300 dark:border-gray-600
+            className="text-black dark:text-white dark:bg-gray-700 w-full md:w-auto p-3 border border-gray-300 dark:border-gray-600
             rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
           />
-          <select className="text-black dark:text-white dark:bg-gray-700 px-3 py-2 border-2 border-gray-300 dark:border-gray-600
+          <select className="text-black dark:text-white dark:bg-gray-700 px-3 py-2 border border-gray-300 dark:border-gray-600
           rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300" value={unit} onChange={(e) => setUnit(e.target.value)}>
             <option value="kg">kg</option>
             <option value="lbs">lbs</option>
@@ -201,7 +201,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           value={currentSet.reps}
           onChange={(e) => setCurrentSet({ ...currentSet, reps: e.target.value })}
           placeholder="Reps"
-          className="dark:bg-gray-700 md:w-24 p-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg text-black dark:text-white focus:outline-none focus:ring-2
+          className="dark:bg-gray-700 md:w-24 p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-black dark:text-white focus:outline-none focus:ring-2
           focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
         />
       </div>
