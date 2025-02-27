@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const handleLinkClick = () => {
     setIsOpen(false);
-  }
+  };
 
   return (
     <nav className="sticky top-0 bg-gray-700 flex justify-between items-center py-4 px-5 md:px-10 z-10">

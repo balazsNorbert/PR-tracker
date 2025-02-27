@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -7,16 +7,50 @@ import 'swiper/css/autoplay';
 import { Pagination, Autoplay, Navigation, Thumbs } from 'swiper/modules';
 
 function Home() {
-  const images = [
-    { src: "/images/HomePage.png", alt: "Home Page" },
-    { src: "/images/HomePage.png", alt: "Home Page" },
-    { src: "/images/HomePage.png", alt: "Home Page" },
-    { src: "/images/HomePage.png", alt: "Home Page" },
-    { src: "/images/HomePage.png", alt: "Home Page" },
-    { src: "/images/HomePage.png", alt: "Home Page" }
-  ];
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const images = {
+    mobile: [
+      { src: "/images/addExercise.png", alt: "Add exercise image", description: "Log new exercises" },
+      { src: "/images/PrNotification.png", alt: "Pr notification image", description: "Get PR alerts" },
+      { src: "/images/workoutExercisesMobile.png", alt: "Weekly workouts image", description: "Plan weekly workouts" },
+      { src: "/images/workoutMuscleGroupsMobile.png", alt: "Weekly workouts by muscle groups image", description: "Target muscle groups weekly" },
+      { src: "/images/addNote.png", alt: "Add note image", description: "Add workout notes" },
+      { src: "/images/exerciseProgress.png", alt: "Progress by exercise", description: "Track exercise progress" },
+      { src: "/images/muscleGroupPrMobile.png", alt: "PRs by muscle groups image", description: "See PRs by muscle group in a time range" },
+      { src: "/images/pieChartMobile.png", alt: "Piechart by muscle groups", description: "Analyze muscle groups with charts" },
+      { src: "/images/darkMode.png", alt: "Dark Mode button", description: "Switch to Dark Mode" },
+      { src: "/images/rank.png", alt: "Rank", description: "See your weekly rank" },
+      { src: "/images/workoutFrequency.png", alt: "Workout frequency", description: "Monitor workout consistency" },
+      { src: "/images/trackGoals.png", alt: "Track Goals", description: "Set & track goals" },
+      { src: "/images/feedback.png", alt: "Feedback", description: "Share your feedback" },
+    ],
+    desktop: [
+      { src: "/images/addExercise.png", alt: "Add exercise image", description: "Log new exercises" },
+      { src: "/images/PrNotification.png", alt: "Pr notification image", description: "Get PR alerts" },
+      { src: "/images/workoutExercisesDesktop.png", alt: "Weekly workouts image", description: "Plan weekly workouts" },
+      { src: "/images/workoutMuscleGroupsDesktop.png", alt: "Weekly workouts by muscle groups image", description: "Target muscle groups weekly" },
+      { src: "/images/addNote.png", alt: "Add note image", description: "Add workout notes" },
+      { src: "/images/exerciseProgress.png", alt: "Progress by exercise", description: "Track exercise progress" },
+      { src: "/images/muscleGroupPrDesktop.png", alt: "PRs by muscle groups image", description: "See PRs by muscle group in a time range" },
+      { src: "/images/darkMode.png", alt: "Dark Mode button", description: "Switch to Dark Mode" },
+      { src: "/images/rank.png", alt: "Rank", description: "See your weekly rank" },
+      { src: "/images/workoutFrequency.png", alt: "Workout frequency", description: "Monitor workout consistency" },
+      { src: "/images/trackGoals.png", alt: "Track Goals", description: "Set & track goals" },
+      { src: "/images/feedback.png", alt: "Feedback", description: "Share your feedback" },
+    ]
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const selectedImages = isMobile ? images.mobile : images.desktop;
 
   return (
     <div className="flex flex-col gap-8 min-h-screen items-center justify-center mx-5 md:mx-10 mb-20">
@@ -40,8 +74,14 @@ function Home() {
           </span>
         </Link>
       </button>
-      <h2 className="text-2xl lg:text-3xl font-bold text-center">Explore our features</h2>
+      <div className="flex items-center gap-2">
+        <h2 className="text-2xl lg:text-3xl font-bold text-center">Explore our features</h2>
+        <span class="material-icons text-3xl md:text-4xl">
+          keyboard_double_arrow_down
+        </span>
+      </div>
       <div className="flex flex-col gap-2 w-full max-w-2xl">
+        <h3 className="text-xl lg:text-2xl font-semibold text-center">{selectedImages[activeIndex].description}</h3>
         <div className="flex w-full max-w-2xl mx-auto">
           <button className="button-prev">
             <span className="material-icons text-2xl md:text-4xl">
@@ -56,15 +96,16 @@ function Home() {
                 delay: 4000,
                 disableOnInteraction: false
               }}
+              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
               loop={true}
               spaceBetween={20}
               slidesPerView={1}
               pagination={{ clickable: true }}
               className="rounded-xl shadow-lg"
             >
-              {images.map((image, index) => (
+              {selectedImages.map((image, index) => (
                 <SwiperSlide key={index} className="flex justify-center w-full">
-                  <img src={image.src} alt={image.alt} className="rounded-xl border-2 w-full" />
+                  <img src={image.src} alt={image.alt} className="rounded-xl border-2 w-full object-contain aspect-square" />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -84,9 +125,9 @@ function Home() {
             watchSlidesProgress={true}
             className="thumbs-swiper"
           >
-            {images.map((image, index) => (
-              <SwiperSlide key={index} className="flex justify-center max-w-20 max-h-20">
-                <img src={image.src} alt={image.alt} className="rounded-lg border-2 w-full" />
+            {selectedImages.map((image, index) => (
+              <SwiperSlide key={index} className="flex justify-center w-1/4 md:w-1/5 h-1/4 md:h-1/5 py-2 px-1 overflow-hidden">
+                <img src={image.src} alt={image.alt} className={`rounded-lg border-2 w-full object-contain aspect-square  ${activeIndex === index ? "border-teal-400 scale-105 shadow-lg" : "border-gray-300 opacity-75"}`}/>
               </SwiperSlide>
             ))}
           </Swiper>
