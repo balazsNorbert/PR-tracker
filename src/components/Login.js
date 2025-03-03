@@ -1,28 +1,53 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../axios';
 import { useDispatch } from 'react-redux';
-import { login } from '../redux/authSlice';
+import { login, logout } from '../redux/authSlice';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Login = () => {
   const apiURL = process.env.REACT_APP_API_URL;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if(!isSubscribed) {
+      dispatch(logout());
+    }
+  }, [dispatch, isSubscribed]);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
+    try {
       const response = await axios.post(`${apiURL}/auth/login`, {
         username,
         password
       });
 
-      if(response.data.token) {
+      if (response.data.token) {
         dispatch(login({ token: response.data.token }))
-        navigate('/profile');
+        setIsSubscribed(response.data.isSubscribed);
+        if(response.data.isSubscribed === false) {
+          const stripe = await stripePromise;
+          const checkoutResponse = await axios.post(`${apiURL}/pricing/create-checkout-session`);
+          const session = checkoutResponse.data;
+          const { error } = await stripe.redirectToCheckout({
+            sessionId: session.id,
+          });
+          if (error) {
+            console.error("Stripe Checkout error:", error);
+            alert("Something went wrong with the payment process.");
+          }
+        } else {
+          navigate('/profile');
+        }
       } else {
         alert(response.data.message);
       }
@@ -64,7 +89,7 @@ const Login = () => {
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-10 text-gray-500 dark:text-gray-300 hover:text-teal-500 transition duration-300"
+            className="absolute right-3 top-10 lg:top-12 text-gray-500 dark:text-gray-300 hover:text-teal-500 transition duration-300"
           >
             {showPassword ? (
               <span className="material-icons">

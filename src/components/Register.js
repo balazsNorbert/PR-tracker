@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from '../axios';
 import { Link } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Register = () => {
   const apiURL = process.env.REACT_APP_API_URL;
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,10 +26,25 @@ const Register = () => {
       const response = await axios.post(`${apiURL}/auth/register`, {
         username,
         password,
+        email,
       });
 
       if(response.data.message === "User registered successfully") {
-        navigate('/login');
+        const stripeCustomerId = response.data.stripeCustomerId;
+        const stripe = await stripePromise;
+        const checkoutResponse = await axios.post(`${apiURL}/pricing/create-checkout-session`, {
+          customerId: stripeCustomerId,
+          email: response.data.email,
+          name: response.data.name,
+        });
+        const session = checkoutResponse.data;
+        const { error } = await stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
+        if (error) {
+          console.error("Stripe Checkout error:", error);
+          alert("Something went wrong with the payment process.");
+        }
       } else {
         alert(response.data.message);
       }
@@ -55,7 +72,19 @@ const Register = () => {
             required
           />
         </div>
-
+        <div className="flex flex-col gap-2">
+          <label htmlFor="email" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Your Email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="dark:bg-gray-700 text-black dark:text-white p-3 border-2 border-gray-300 dark:border-gray-600
+            rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+            required
+          />
+        </div>
         <div className="flex flex-col gap-2 relative">
           <label htmlFor="password" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Your Password</label>
           <input
@@ -71,7 +100,7 @@ const Register = () => {
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-10 text-gray-500 dark:text-gray-300 hover:text-teal-500 transition duration-300"
+            className="absolute right-3 top-10 lg:top-12 text-gray-500 dark:text-gray-300 hover:text-teal-500 transition duration-300"
           >
             {showPassword ? (
               <span className="material-icons">
@@ -99,7 +128,7 @@ const Register = () => {
           <button
             type="button"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            className="absolute right-3 top-10 text-gray-500 dark:text-gray-300 hover:text-teal-500 transition duration-300"
+            className="absolute right-3 top-10 lg:top-12 text-gray-500 dark:text-gray-300 hover:text-teal-500 transition duration-300"
           >
             {showConfirmPassword ? (
               <span className="material-icons">
@@ -117,7 +146,7 @@ const Register = () => {
           type="submit"
           className="text-lg lg:text-xl mt-6 py-3 bg-teal-500 font-semibold rounded-lg shadow-md hover:bg-teal-600 dark:hover:bg-teal-400 transition duration-300"
         >
-          Register
+          Sign up for free trial
         </button>
 
         <div className="mt-4 text-center">

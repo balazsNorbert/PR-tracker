@@ -13,6 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { DarkModeProvider } from './contexts/DarkModeContext';
 import TokenChecker from './components/TokenChecker';
 import ScrollToTop from './components/ScrollToTop';
+import Success from './components/Success';
+import Cancel from './components/Cancel';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/exercise/:name" element={<ChartByExercise />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="/cancel" element={<Cancel />} />
             </Routes>
             <Footer />
         </Router>
