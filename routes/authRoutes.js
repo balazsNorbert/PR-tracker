@@ -6,13 +6,15 @@ const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 router.post("/register", async (req, res) => {
   const { username, password, email } = req.body;
-  const userExists = await User.findOne({ username });
-  if(userExists) {
-    return res.status(400).json({ message: "User already exists!" });
-  }
-  const emailExists = await User.findOne({ email });
-  if(emailExists) {
-    return res.status(400).json({ message: "Email already in use!" });
+  const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+
+  if (existingUser) {
+    if (existingUser.email === email) {
+      return res.status(400).json({ message: "Email already exists!" });
+    }
+    if (existingUser.username === username) {
+      return res.status(400).json({ message: "Username already exists!" });
+    }
   }
   const customer = await stripe.customers.create({
     email: email,
