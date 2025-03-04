@@ -50,11 +50,9 @@ router.post("/login", async(req, res) => {
 
     let isSubscribed = false;
     if (user.stripeCustomerId) {
-      console.log("van customerId");
       const subscriptions = await stripe.subscriptions.list({
         customer: user.stripeCustomerId
       });
-      console.log("Subscriptions:", subscriptions);
       if (subscriptions.data.length > 0 && (subscriptions.data[0].status === 'active' || subscriptions.data[0].status === 'trialing')) {
         isSubscribed = true;
       }
@@ -64,7 +62,7 @@ router.post("/login", async(req, res) => {
       expiresIn: "2h",
     });
 
-    res.json({ message: "Login successful", token, isSubscribed });
+    res.json({ message: "Login successful", token, isSubscribed, customerId: user.stripeCustomerId });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }

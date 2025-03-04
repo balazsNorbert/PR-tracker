@@ -36,7 +36,9 @@ const Login = () => {
         setIsSubscribed(response.data.isSubscribed);
         if(response.data.isSubscribed === false) {
           const stripe = await stripePromise;
-          const checkoutResponse = await axios.post(`${apiURL}/pricing/create-checkout-session`);
+          const checkoutResponse = await axios.post(`${apiURL}/pricing/create-checkout-session`, {
+            customerId: response.data.customerId,
+          });
           const session = checkoutResponse.data;
           const { error } = await stripe.redirectToCheckout({
             sessionId: session.id,

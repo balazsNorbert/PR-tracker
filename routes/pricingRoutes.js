@@ -5,22 +5,50 @@ const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
 router.post('/create-checkout-session', async (req, res) => {
   try {
     const clientURL = process.env.CLIENT_URL;
-    let { customerId, email, name} = req.body;
+    let { customerId } = req.body;
+    let trialPeriod = 14;
+
     if (!customerId) {
-      const existingCustomers = await stripe.customers.list({ email, limit: 1 });
-      if (existingCustomers.data.length > 0) {
-        customerId = existingCustomers.data[0].id;
-      } else {
-        const customer = await stripe.customers.create({
+      return res.status(400).send("Customer ID is missing.");
+    }
+
+    const customer = await stripe.customers.retrieve(customerId);
+    if(!customer) {
+      return res.status(404).send("Customer not found");
+    }
+
+    const {email, name} = customer;
+    let stripeCustomerId = customerId;
+    if (!stripeCustomerId) {
+        const newCustomer = await stripe.customers.create({
           email,
-          name
+          name,
         });
-        customerId = customer.id;
+        stripeCustomerId = newCustomer.id;
+    } else {
+      const customer = await stripe.customers.retrieve(stripeCustomerId);
+      console.log("Customer: ", customer);
+      const subscriptions = await stripe.subscriptions.list({
+        customer: stripeCustomerId,
+        status: 'all',
+        limit: 100
+      });
+      console.log("Subscriptions: ", subscriptions);
+      console.log("Subscriptions data: ", subscriptions.data);
+
+      const hasUsedTrial = subscriptions.data.some(sub => sub.status === 'canceled');
+      if (hasUsedTrial) {
+        console.log("User has already used a trial or canceled before, no trial.");
+        trialPeriod = undefined;
+      } else {
+        console.log("No previous trial or subscription, offering trial.");
+        trialPeriod = 14;
       }
     }
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      customer: customerId,
+      customer: stripeCustomerId,
       line_items: [
         {
           price: 'price_1QxS12DsK47a6W2mSg4hYCZT',
@@ -28,7 +56,7 @@ router.post('/create-checkout-session', async (req, res) => {
         },
       ],
       subscription_data: {
-        trial_period_days: 14,
+        trial_period_days: trialPeriod,
       },
       mode: 'subscription',
       success_url: `${clientURL}/success?session_id={CHECKOUT_SESSION_ID}`,

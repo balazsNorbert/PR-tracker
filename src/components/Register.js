@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import axios from '../axios';
-import { Link } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
-
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const apiURL = process.env.REACT_APP_API_URL;
@@ -13,6 +10,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,22 +27,8 @@ const Register = () => {
         email,
       });
 
-      if(response.data.message === "User registered successfully") {
-        const stripeCustomerId = response.data.stripeCustomerId;
-        const stripe = await stripePromise;
-        const checkoutResponse = await axios.post(`${apiURL}/pricing/create-checkout-session`, {
-          customerId: stripeCustomerId,
-          email: response.data.email,
-          name: response.data.name,
-        });
-        const session = checkoutResponse.data;
-        const { error } = await stripe.redirectToCheckout({
-          sessionId: session.id,
-        });
-        if (error) {
-          console.error("Stripe Checkout error:", error);
-          alert("Something went wrong with the payment process.");
-        }
+      if (response.data.message === "User registered successfully") {
+        navigate("/login");
       } else {
         alert(response.data.message);
       }
