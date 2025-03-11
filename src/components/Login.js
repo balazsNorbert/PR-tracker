@@ -60,9 +60,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center m-5 items-center h-screen">
+    <div className="flex justify-center mx-5 my-14 items-center h-screen">
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 rounded-3xl bg-white dark:bg-teal-700 shadow-lg w-96 p-4 md:p-6">
-        <h2 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-6">Login</h2>
+        <h2 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-2">Login</h2>
 
         <div className="flex flex-col gap-2">
           <label htmlFor="username" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Your Username</label>
@@ -107,12 +107,12 @@ const Login = () => {
         {error && <p className="text-red-500">{error}</p>}
         <button
           type="submit"
-          className="text-lg lg:text-xl mt-6 py-3 bg-teal-500 font-semibold rounded-lg shadow-md hover:bg-teal-600 dark:hover:bg-teal-400 transition duration-300"
+          className="text-lg lg:text-xl mt-2 py-3 bg-teal-500 font-semibold rounded-lg shadow-md hover:bg-teal-600 dark:hover:bg-teal-400 transition duration-300"
         >
           Login
         </button>
 
-        <div className="mt-4 text-center">
+        <div className="text-center">
           <p className="text-sm lg:text-lg text-gray-600 dark:text-white">Don't have an account? <Link to="/register" className="text-teal-500 hover:text-teal-600 dark:text-teal-300 dark:hover:text-teal-400">Register</Link></p>
         </div>
       </form>

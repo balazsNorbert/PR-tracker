@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 
 const Pricing = () => {
   return (
-    <div className="flex flex-col max-w-sm md:max-w-md gap-10 items-center py-20 mx-auto">
+    <div className="flex flex-col max-w-sm md:max-w-md gap-10 items-center pt-14 pb-20 mx-auto">
       <div className="flex items-center gap-2">
-        <h3 className="text-3xl lg:text-4xl font-bold">Pricing</h3>
+        <h2 className="text-3xl lg:text-4xl font-bold">Pricing</h2>
         <span className="material-icons text-4xl md:text-5xl">
           paid
         </span>
       </div>
       <div className="flex flex-col gap-4 items-center bg-white rounded-xl shadow-2xl relative">
-        <div className="flex flex-col items-center gap-4 p-6 w-full relative">
-          <h4 className="text-2xl lg:text-3xl font-medium text-teal-700">Membership</h4>
+        <div className="flex flex-col items-center gap-4 px-6 pt-6 w-full relative">
           <div className="relative">
             <span className="absolute -top-2 -right-3 bg-yellow-400 text-xs px-2 py-1 rounded-full font-bold text-gray-800">Best Value</span>
             <p className="text-5xl font-bold text-teal-600">$3.99<span className="font-normal text-lg">/month</span></p>

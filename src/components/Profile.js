@@ -193,17 +193,17 @@ const Profile = () => {
     <div className="min-h-screen flex justify-center items-center">
         <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white w-full xs:w-auto xs:rounded-3xl shadow-xl p-4 xs:p-6 xs:mx-5 md:mx-10 md:p-8 mt-10 mb-20">
           {user ? (
-          <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
+          <h1 style={{ fontDisplay: 'swap' }} className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
             Welcome back, <span className="text-teal-600 dark:text-white">{user.username}!</span>
-          </h2>
+          </h1>
           ) : (
             <>
-              <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
+              <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
                 Welcome!
-              </h2>
-              <h3 className="text-lg lg:text-xl text-red-600 font-semibold text-center">
+              </h1>
+              <p className="text-lg lg:text-xl text-red-600 font-semibold text-center">
               ⚠️ You need to log in to see your profile!
-              </h3>
+              </p>
             </>
           )}
           <div className="flex justify-between gap-3 w-full">
