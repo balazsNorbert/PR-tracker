@@ -46,17 +46,18 @@ const Navbar = () => {
         <li className="hover:text-teal-500">
           <Link to="/profile" onClick={handleLinkClick}>Profile</Link>
         </li>
-        {!user ? (
-          <div className="flex gap-1 items-center ml-auto">
-            <li className="hover:text-teal-500"><Link to="/login" onClick={handleLinkClick}>Login</Link></li>
-            /
-            <li className="hover:text-teal-500"><Link to="/register" onClick={handleLinkClick}>Register</Link></li>
-          </div>
-        )
-        :(
-          <li className="hover:text-teal-500"><button onClick={() => {handleLogout();handleLinkClick();}}>Logout</button>
-          </li>
-        )}
+        <li className="flex gap-1 items-center ml-auto">
+          {!user ? (
+            <>
+              <Link className="hover:text-teal-500" to="/login" onClick={handleLinkClick}>Login</Link>
+              /
+              <Link className="hover:text-teal-500" to="/register" onClick={handleLinkClick}>Register</Link>
+            </>
+          )
+          :(
+            <button className="hover:text-teal-500" onClick={() => {handleLogout();handleLinkClick();}}>Logout</button>
+          )}
+        </li>
       </ul>
     </nav>
   );

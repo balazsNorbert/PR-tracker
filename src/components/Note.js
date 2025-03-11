@@ -59,7 +59,7 @@ const Note = ({workoutDate, onNoteSaved, existingNote}) => {
         </span>
       </button>
       {showModal && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10">
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-30 flex justify-center items-center z-10">
           <div className="flex flex-col gap-2 xl:w-1/4 2xl:w-1/5 bg-teal-700 dark:bg-gray-700 rounded-lg p-4">
             <h3 className="text-lg font-semibold text-white">Add Note</h3>
             <textarea

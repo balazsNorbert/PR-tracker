@@ -75,21 +75,21 @@ const StreakTracker = ({ userId, workouts }) => {
   return (
     <div className="flex flex-col gap-4 w-full">
       {streak > 0 ? (
-        <h3 className="text-lg md:text-xl font-bold text-orange-500">
+        <h2 className="text-lg md:text-xl font-bold text-orange-500">
           <span className="text-xl md:text-2xl">{streak} week 🔥</span> streak!
-        </h3>
+        </h2>
       ) : (
-        <h3 className="text-lg md:text-xl font-bold text-red-600">
+        <h2 className="text-lg md:text-xl font-bold text-red-600">
           No streak yet! 😞
-        </h3>
+        </h2>
       )}
       <div className="flex flex-col gap-4 bg-teal-600 dark:bg-gray-700 w-full shadow-xl rounded-lg p-6"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        <h4 className="font-bold text-xl">
+        <h3 className="font-bold text-xl">
           Your rank
-        </h4>
+        </h3>
         <div className="flex justify-center items-center gap-3 bg-white text-white text-lg md:text-xl rounded-xl p-2 relative">
           <p className={`font-semibold ${color}`}>{label}</p>
           <span className={`material-icons text-2xl ${color}`}>
@@ -109,9 +109,9 @@ const StreakTracker = ({ userId, workouts }) => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-4 bg-teal-600 dark:bg-gray-700 w-full rounded-lg p-4">
-        <h4 className="font-bold text-xl">
+        <h3 className="font-bold text-xl">
           Workout frequency
-        </h4>
+        </h3>
         <select
           value={weeklyGoal}
           onChange={(e) => updateWeeklyGoal(userId, e.target.value)}
