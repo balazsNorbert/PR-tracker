@@ -4,7 +4,8 @@ const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 router.post('/create-checkout-session', async (req, res) => {
   try {
-    const clientURL = process.env.CLIENT_URL;
+    const clientURL = process.env.REACT_APP_CLIENT_URL;
+    const priceID = process.env.REACT_APP_STRIPE_PRICE_ID;
     let { customerId } = req.body;
     let trialPeriod = 14;
 
@@ -51,7 +52,7 @@ router.post('/create-checkout-session', async (req, res) => {
       customer: stripeCustomerId,
       line_items: [
         {
-          price: 'price_1QxS12DsK47a6W2mSg4hYCZT',
+          price: priceID,
           quantity: 1,
         },
       ],
