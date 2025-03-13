@@ -65,29 +65,44 @@ function Home() {
         <h2 className="text-lg md:text-xl xl:text-2xl font-semibold text-center">Track your progress and stay motivated to reach your fitness goals</h2>
         <div className="bg-white dark:bg-teal-700 text-black dark:text-white p-6 rounded-xl shadow-xl max-w-2xl mx-auto mt-6">
           <h3 className="text-xl lg:text-2xl font-bold mb-8 text-center">Why Track Your Workouts?</h3>
-          <ul className="flex flex-col gap-4 text-base md:text-lg">
+          <ul className="flex flex-col gap-4 text-base md:text-lg text-gray-600">
             <li>
-              ✅ <span className="font-bold">Track Your Progress</span>
-              <p className="text-gray-600">
-                Monitor your weights, reps, and exercises to see how far you've come. Tracking progress is an essential part of achieving fitness goals. It helps you set new targets and understand your strengths and weaknesses.
+              ✅ <span className="font-bold text-black">Track Your Progress</span>
+              <p>
+                Monitor your weights, reps, and exercises to see how far you've come.
+              </p>
+              <p>
+                Tracking progress is an essential part of achieving fitness goals.
+              </p>
+              <p>
+                It helps you set new targets and understand your strengths and weaknesses.
               </p>
             </li>
             <li>
-              ✅ <span className="font-bold">Stay Motivated</span>
-              <p className="text-gray-600">
-                Seeing your progress over time keeps you engaged and motivated. Consistency is key, and monitoring your progress keeps you on track to achieve your goals.
+              ✅ <span className="font-bold text-black">Stay Motivated</span>
+              <p>
+                Seeing your progress over time keeps you engaged and motivated.
+              </p>
+              <p>
+                Consistency is key, and monitoring your progress keeps you on track to achieve your goals.
               </p>
             </li>
             <li>
-              ✅ <span className="font-bold">Optimize Your Training</span>
-              <p className="text-gray-600">
-                Analyze your data and make smarter workout decisions. By tracking your performance, you can tailor your workouts to your needs, avoid burnout, and prevent injury.
+              ✅ <span className="font-bold text-black">Optimize Your Training</span>
+              <p>
+                Analyze your data and make smarter workout decisions.
+              </p>
+              <p>
+                By tracking your performance, you can tailor your workouts to your needs, avoid burnout, and prevent injury.
               </p>
             </li>
             <li>
-              ✅ <span className="font-bold">Avoid Plateaus</span>
-              <p className="text-gray-600">
-                Identify when progress slows down and make adjustments to keep improving. A plateau can be frustrating, but recognizing the signs early allows you to adjust your routine.
+              ✅ <span className="font-bold text-black">Avoid Plateaus</span>
+              <p>
+                Identify when progress slows down and make adjustments to keep improving.
+              </p>
+              <p>
+                A plateau can be frustrating, but recognizing the signs early allows you to adjust your routine.
               </p>
             </li>
           </ul>
