@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -55,28 +56,40 @@ function Home() {
 
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://workoutracker.com" />
+      </Helmet>
       <section className="flex flex-col gap-8 items-center mint-h-screen justify-center px-5 py-14">
-        <h1 style={{ fontDisplay: 'swap' }}  className="text-2xl md:text-3xl xl:text-4xl font-bold text-center">Welcome to your Workout Tracker!</h1>
+        <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-center">Welcome to your Workout Tracker!</h1>
         <h2 className="text-lg md:text-xl xl:text-2xl font-semibold text-center">Track your progress and stay motivated to reach your fitness goals</h2>
         <div className="bg-white dark:bg-teal-700 text-black dark:text-white p-6 rounded-xl shadow-xl max-w-2xl mx-auto mt-6">
           <h3 className="text-xl lg:text-2xl font-bold mb-8 text-center">Why Track Your Workouts?</h3>
           <ul className="flex flex-col gap-4 text-base md:text-lg">
-          <li>
-            ✅ <span className="font-bold">Track Your Progress</span>
-            <p className="text-gray-600">Monitor your weights, reps, and exercises to see how far you've come.</p>
-          </li>
-          <li>
-            ✅ <span className="font-bold">Stay Motivated</span>
-            <p className="text-gray-600">Seeing your progress over time keeps you engaged and motivated.</p>
-          </li>
-          <li>
-            ✅ <span className="font-bold">Optimize Your Training</span>
-            <p className="text-gray-600">Analyze your data and make smarter workout decisions.</p>
-          </li>
-          <li>
-            ✅ <span className="font-bold">Avoid Plateaus</span>
-            <p className="text-gray-600">Identify when progress slows down and make adjustments to keep improving.</p>
-          </li>
+            <li>
+              ✅ <span className="font-bold">Track Your Progress</span>
+              <p className="text-gray-600">
+                Monitor your weights, reps, and exercises to see how far you've come. Tracking progress is an essential part of achieving fitness goals. It helps you set new targets and understand your strengths and weaknesses.
+              </p>
+            </li>
+            <li>
+              ✅ <span className="font-bold">Stay Motivated</span>
+              <p className="text-gray-600">
+                Seeing your progress over time keeps you engaged and motivated. Consistency is key, and monitoring your progress keeps you on track to achieve your goals.
+              </p>
+            </li>
+            <li>
+              ✅ <span className="font-bold">Optimize Your Training</span>
+              <p className="text-gray-600">
+                Analyze your data and make smarter workout decisions. By tracking your performance, you can tailor your workouts to your needs, avoid burnout, and prevent injury.
+              </p>
+            </li>
+            <li>
+              ✅ <span className="font-bold">Avoid Plateaus</span>
+              <p className="text-gray-600">
+                Identify when progress slows down and make adjustments to keep improving. A plateau can be frustrating, but recognizing the signs early allows you to adjust your routine.
+              </p>
+            </li>
           </ul>
         </div>
         <button className="bg-gray-700 dark:bg-teal-600 hover:bg-teal-500 dark:hover:bg-teal-500 font-semibold text-xl xl:text-2xl

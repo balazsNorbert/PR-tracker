@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Helmet } from 'react-helmet';
 import { toast } from 'react-toastify';
 import axios from '../axios';
 import { useDarkMode } from '../contexts/DarkModeContext';
@@ -190,222 +191,227 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-        <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white w-full xs:w-auto xs:rounded-3xl shadow-xl p-4 xs:p-6 xs:mx-5 md:mx-10 md:p-8 mt-10 mb-20">
-          {user ? (
-          <h1 style={{ fontDisplay: 'swap' }} className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
-            Welcome back, <span className="text-teal-600 dark:text-white">{user.username}!</span>
-          </h1>
-          ) : (
-            <>
-              <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
-                Welcome!
-              </h1>
-              <p className="text-lg lg:text-xl text-red-600 font-semibold text-center">
-              ⚠️ You need to log in to see your profile!
-              </p>
-            </>
-          )}
-          <div className="flex justify-between gap-3 w-full">
-            <button
-              onClick={toggleDarkMode}
-              className="flex items-center gap-2 text-sm md:text-lg dark:bg-white dark:text-black bg-gray-600 px-2 md:px-4 py-2 rounded-lg transition duration-300"
-            >
-              {darkMode ? 'Light Mode' : 'Dark Mode'}
-              <span className="material-icons text-white dark:text-yellow-400">
-                light_mode
-              </span>
-            </button>
-            <button
-              className="text-sm md:text-lg dark:bg-white dark:text-black bg-gray-600 px-2 md:px-4 py-2 rounded-lg transition duration-300"
-            >
-             <Link to="/logbook" className="flex items-center gap-2">
-                Your logbook
-                <span className="material-icons text-white dark:text-gray-600">
-                  arrow_forward
+    <>
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      <div className="min-h-screen flex justify-center items-center">
+          <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white w-full xs:w-auto xs:rounded-3xl shadow-xl p-4 xs:p-6 xs:mx-5 md:mx-10 md:p-8 mt-10 mb-20">
+            {user ? (
+            <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
+              Welcome back, <span className="text-teal-600 dark:text-white">{user.username}!</span>
+            </h1>
+            ) : (
+              <>
+                <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
+                  Welcome!
+                </h1>
+                <p className="text-lg lg:text-xl text-red-600 font-semibold text-center">
+                ⚠️ You need to log in to see your profile!
+                </p>
+              </>
+            )}
+            <div className="flex justify-between gap-3 w-full">
+              <button
+                onClick={toggleDarkMode}
+                className="flex items-center gap-2 text-sm md:text-lg dark:bg-white dark:text-black bg-gray-600 px-2 md:px-4 py-2 rounded-lg transition duration-300"
+              >
+                {darkMode ? 'Light Mode' : 'Dark Mode'}
+                <span className="material-icons text-white dark:text-yellow-400">
+                  light_mode
                 </span>
-             </Link>
-            </button>
-          </div>
-          {user && (
-              <StreakTracker userId={user.userId} workouts={workouts}/>
-          )}
-          <div className="bg-teal-600 dark:bg-gray-700 w-full rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Add new goal</h3>
-            <div className="w-full flex flex-col items-center gap-4 mt-5">
-              <input
-                type="text"
-                value={exerciseName}
-                onChange={handleExerciseChange}
-                onKeyDown={(e) => {
-                  if(e.key === "Enter") {
-                    e.preventDefault();
-                    if(suggestions.length > 0) {
-                      setSuggestions([]);
-                    }
-                  }
-                }}
-                placeholder="Exercise Name"
-                className="dark:bg-gray-900 text-black dark:text-white p-3 rounded-lg
-                focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-400 transition duration-300 w-full"
-              />
-              {suggestions.length > 0 && (
-                <ul className="bg-white dark:bg-gray-800 border border-teal-400 rounded-lg py-2 shadow-md text-black dark:text-white w-full">
-                  {suggestions.map((suggestion) => (
-                    <li key={suggestion.name} className="cursor-pointer flex py-2 px-3 w-full hover:bg-gray-200 dark:hover:bg-gray-500 transition" onClick={() => {setExerciseName(suggestion.name);setSuggestions([]);}}>
-                      {suggestion.name}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <div className="flex justify-between gap-4 w-full">
-                <input
-                  type="number"
-                  value={weight}
-                  onChange={(e) => setWeight(parseInt(e.target.value))}
-                  placeholder="Weight"
-                  className="dark:bg-gray-900 text-black dark:text-white p-3 rounded-lg focus:outline-none
-                  focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300 flex-grow min-w-0"
-                />
-                <select className="text-black dark:text-white dark:bg-gray-900 px-3 py-2
-                rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-400 transition duration-300 w-18" value={unit} onChange={(e) => setUnit(e.target.value)}>
-                  <option value="kg">kg</option>
-                  <option value="lbs">lbs</option>
-                </select>
-              </div>
-              <div className="flex justify-between gap-4 w-full">
-                <input
-                  type="number"
-                  value={reps}
-                  onChange={(e) => setReps(parseInt(e.target.value))}
-                  placeholder="Reps"
-                  className="dark:bg-gray-900 text-black dark:text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-400 transition duration-300 w-full md:w-auto flex-grow"
-                />
-                <button
-                  onClick={handleAddGoal}
-                  className="flex items-center gap-2 text-sm ml-auto md:text-lg bg-green-500 dark:bg-green-700 hover:bg-green-600 dark:hover:bg-green-800 py-3 pl-2 pr-3 rounded-lg transition duration-300 shadow-md">
-                  <span className="material-icons">
-                    add
+              </button>
+              <button
+                className="text-sm md:text-lg dark:bg-white dark:text-black bg-gray-600 px-2 md:px-4 py-2 rounded-lg transition duration-300"
+              >
+              <Link to="/logbook" className="flex items-center gap-2">
+                  Your logbook
+                  <span className="material-icons text-white dark:text-gray-600">
+                    arrow_forward
                   </span>
-                  Goal
-                </button>
+              </Link>
+              </button>
+            </div>
+            {user && (
+                <StreakTracker userId={user.userId} workouts={workouts}/>
+            )}
+            <div className="bg-teal-600 dark:bg-gray-700 w-full rounded-lg p-4">
+              <h3 className="text-xl font-semibold">Add new goal</h3>
+              <div className="w-full flex flex-col items-center gap-4 mt-5">
+                <input
+                  type="text"
+                  value={exerciseName}
+                  onChange={handleExerciseChange}
+                  onKeyDown={(e) => {
+                    if(e.key === "Enter") {
+                      e.preventDefault();
+                      if(suggestions.length > 0) {
+                        setSuggestions([]);
+                      }
+                    }
+                  }}
+                  placeholder="Exercise Name"
+                  className="dark:bg-gray-900 text-black dark:text-white p-3 rounded-lg
+                  focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-400 transition duration-300 w-full"
+                />
+                {suggestions.length > 0 && (
+                  <ul className="bg-white dark:bg-gray-800 border border-teal-400 rounded-lg py-2 shadow-md text-black dark:text-white w-full">
+                    {suggestions.map((suggestion) => (
+                      <li key={suggestion.name} className="cursor-pointer flex py-2 px-3 w-full hover:bg-gray-200 dark:hover:bg-gray-500 transition" onClick={() => {setExerciseName(suggestion.name);setSuggestions([]);}}>
+                        {suggestion.name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div className="flex justify-between gap-4 w-full">
+                  <input
+                    type="number"
+                    value={weight}
+                    onChange={(e) => setWeight(parseInt(e.target.value))}
+                    placeholder="Weight"
+                    className="dark:bg-gray-900 text-black dark:text-white p-3 rounded-lg focus:outline-none
+                    focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300 flex-grow min-w-0"
+                  />
+                  <select className="text-black dark:text-white dark:bg-gray-900 px-3 py-2
+                  rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-400 transition duration-300 w-18" value={unit} onChange={(e) => setUnit(e.target.value)}>
+                    <option value="kg">kg</option>
+                    <option value="lbs">lbs</option>
+                  </select>
+                </div>
+                <div className="flex justify-between gap-4 w-full">
+                  <input
+                    type="number"
+                    value={reps}
+                    onChange={(e) => setReps(parseInt(e.target.value))}
+                    placeholder="Reps"
+                    className="dark:bg-gray-900 text-black dark:text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-400 transition duration-300 w-full md:w-auto flex-grow"
+                  />
+                  <button
+                    onClick={handleAddGoal}
+                    className="flex items-center gap-2 text-sm ml-auto md:text-lg bg-green-500 dark:bg-green-700 hover:bg-green-600 dark:hover:bg-green-800 py-3 pl-2 pr-3 rounded-lg transition duration-300 shadow-md">
+                    <span className="material-icons">
+                      add
+                    </span>
+                    Goal
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="w-full bg-teal-600 dark:bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Your Active Goals</h3>
-            <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-3">
-              {goals.filter(goal => !goal.achieved).length > 0 ? (
-                goals.map(goal => {
-                  const progress = calculateProgress(goal, workouts)
-                  return (
-                    !goal.achieved ? (
-                    <li key={goal._id} className="flex justify-between p-4 rounded-lg shadow-md bg-teal-400/70 dark:bg-gray-500/80 transition duration-300 relative">
-                      {progress === 100 && !goal.achieved && (
-                        <div className="absolute top-1 right-1 text-green-600 dark:text-green-500 font-bold text-sm md:text-base text-center animate-pulse">
-                          Achieved! 🎯
+            <div className="w-full bg-teal-600 dark:bg-gray-700 rounded-lg p-4">
+              <h3 className="text-xl font-semibold">Your Active Goals</h3>
+              <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-3">
+                {goals.filter(goal => !goal.achieved).length > 0 ? (
+                  goals.map(goal => {
+                    const progress = calculateProgress(goal, workouts)
+                    return (
+                      !goal.achieved ? (
+                      <li key={goal._id} className="flex justify-between p-4 rounded-lg shadow-md bg-teal-400/70 dark:bg-gray-500/80 transition duration-300 relative">
+                        {progress === 100 && !goal.achieved && (
+                          <div className="absolute top-1 right-1 text-green-600 dark:text-green-500 font-bold text-sm md:text-base text-center animate-pulse">
+                            Achieved! 🎯
+                          </div>
+                        )}
+                        <div className="flex flex-col items-start gap-1 w-full">
+                          {goal.set && (
+                            <h4 className="text-xs md:text-sm xl:text-base font-semibold">
+                              <span className="text-sm md:text-base xl:text-lg">{goal.exerciseName}:  </span>{goal.set.weight} kg - {goal.set.reps} reps
+                            </h4>
+                          )}
+                          <div className="text-xs md:text-sm text-white mx-auto font-medium mt-1">
+                            {Math.round(progress)}% completed
+                          </div>
+                          <div className="w-full bg-gray-300 rounded-full border border-white shadow-xl h-3 overflow-hidden">
+                            <div className="bg-teal-600 h-3 rounded-full progress-bar" style={{ width: `${progress}%` }}></div>
+                          </div>
                         </div>
-                      )}
-                      <div className="flex flex-col items-start gap-1 w-full">
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => changeGoalStatus(goal._id)}
+                            className={`flex items-center gap-2 text-green-700 dark:text-green-500 ${progress === 100 && !goal.achieved ? '' : 'opacity-50 cursor-not-allowed'}`}
+                            disabled={progress !== 100 || goal.achieved}
+                          >
+                            <span className="material-icons text-2xl md:text-3xl">
+                              done
+                            </span>
+                          </button>
+                          <button
+                            onClick={() => deleteGoal(goal._id)}
+                            className="text-red-600 hover:text-red-700 transition duration-300"
+                          >
+                            <span className="material-icons mt-2 text-2xl md:text-3xl">
+                              delete
+                            </span>
+                          </button>
+                        </div>
+                      </li>
+                    ) : (
+                      <div key={goal._id}></div>
+                    )
+                  );
+                })
+                ) : (
+                  <p className="italic mt-2">No active goals. Add one above! 🚀</p>
+                )}
+              </ul>
+            </div>
+            <div className="w-full bg-teal-600 dark:bg-gray-700 rounded-lg p-4">
+              <h3 className="text-xl font-semibold">Achieved Goals</h3>
+              <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-5">
+                {goals.filter(goal => goal.achieved).length > 0 ? (
+                  goals.filter(goal => goal.achieved)
+                  .slice()
+                  .reverse()
+                  .map(goal => (
+                    <li
+                      key={goal._id}
+                      className="flex justify-between items-center p-4 rounded-lg shadow-md bg-white/30 dark:bg-gray-900 transition duration-300"
+                    >
+                      <div className="flex flex-col">
                         {goal.set && (
-                          <h4 className="text-xs md:text-sm xl:text-base font-semibold">
-                            <span className="text-sm md:text-base xl:text-lg">{goal.exerciseName}:  </span>{goal.set.weight} kg - {goal.set.reps} reps
+                          <h4 className="text-sm md:text-base xl:text-lg font-semibold">
+                            <span className="text-base md:text-lg xl:text-xl">{goal.exerciseName}</span>: {goal.set.weight} kg - {goal.set.reps} reps
                           </h4>
                         )}
-                        <div className="text-xs md:text-sm text-white mx-auto font-medium mt-1">
-                          {Math.round(progress)}% completed
-                        </div>
-                        <div className="w-full bg-gray-300 rounded-full border border-white shadow-xl h-3 overflow-hidden">
-                          <div className="bg-teal-600 h-3 rounded-full progress-bar" style={{ width: `${progress}%` }}></div>
-                        </div>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <button
-                          onClick={() => changeGoalStatus(goal._id)}
-                          className={`flex items-center gap-2 text-green-700 dark:text-green-500 ${progress === 100 && !goal.achieved ? '' : 'opacity-50 cursor-not-allowed'}`}
-                          disabled={progress !== 100 || goal.achieved}
-                        >
-                          <span className="material-icons text-2xl md:text-3xl">
-                            done
-                          </span>
-                        </button>
-                        <button
-                          onClick={() => deleteGoal(goal._id)}
-                          className="text-red-600 hover:text-red-700 transition duration-300"
-                        >
-                          <span className="material-icons mt-2 text-2xl md:text-3xl">
-                            delete
-                          </span>
-                        </button>
-                      </div>
+                      <button
+                        onClick={() => deleteGoal(goal._id)}
+                        className="text-red-600 hover:text-red-700 transition duration-300"
+                      >
+                        <span className="material-icons">
+                          delete
+                        </span>
+                      </button>
                     </li>
-                  ) : (
-                    <div key={goal._id}></div>
-                  )
-                );
-              })
-              ) : (
-                <p className="italic mt-2">No active goals. Add one above! 🚀</p>
-              )}
-            </ul>
-          </div>
-          <div className="w-full bg-teal-600 dark:bg-gray-700 rounded-lg p-4">
-            <h3 className="text-xl font-semibold">Achieved Goals</h3>
-            <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-5">
-              {goals.filter(goal => goal.achieved).length > 0 ? (
-                goals.filter(goal => goal.achieved)
-                .slice()
-                .reverse()
-                .map(goal => (
-                  <li
-                    key={goal._id}
-                    className="flex justify-between items-center p-4 rounded-lg shadow-md bg-white/30 dark:bg-gray-900 transition duration-300"
-                  >
-                    <div className="flex flex-col">
-                      {goal.set && (
-                        <h4 className="text-sm md:text-base xl:text-lg font-semibold">
-                          <span className="text-base md:text-lg xl:text-xl">{goal.exerciseName}</span>: {goal.set.weight} kg - {goal.set.reps} reps
-                        </h4>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => deleteGoal(goal._id)}
-                      className="text-red-600 hover:text-red-700 transition duration-300"
-                    >
-                      <span className="material-icons">
-                        delete
-                      </span>
-                    </button>
-                  </li>
-                ))
-              ) : (
-                <p className="italic">You haven't achieved any goals yet. Keep going! 💪</p>
-              )}
-            </ul>
-          </div>
-        {user && (
-          <div className="flex flex-col gap-4 w-full">
-            <Idea />
-            <div className="w-full relative">
-              {!subscriptionCanceled ? (
-                <button onClick={handleCancelSubscription} className="bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 px-4 py-2 rounded-lg w-full">
-                  Cancel Subscription
-                </button>
-              ) : (
-                <div className="flex flex-col">
-                  <button className="bg-gray-500 px-4 py-2 rounded-lg" disabled>
-                    Subscription canceled
-                  </button>
-                  <div className="mt-4 bg-gray-100 text-gray-700 p-3 rounded-md inline-block border border-gray-300">
-                    <span className="text-sm">You can resubscribe once your current subscription expires.</span>
-                  </div>
-                </div>
-              )}
+                  ))
+                ) : (
+                  <p className="italic">You haven't achieved any goals yet. Keep going! 💪</p>
+                )}
+              </ul>
             </div>
+          {user && (
+            <div className="flex flex-col gap-4 w-full">
+              <Idea />
+              <div className="w-full relative">
+                {!subscriptionCanceled ? (
+                  <button onClick={handleCancelSubscription} className="bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 px-4 py-2 rounded-lg w-full">
+                    Cancel Subscription
+                  </button>
+                ) : (
+                  <div className="flex flex-col">
+                    <button className="bg-gray-500 px-4 py-2 rounded-lg" disabled>
+                      Subscription canceled
+                    </button>
+                    <div className="mt-4 bg-gray-100 text-gray-700 p-3 rounded-md inline-block border border-gray-300">
+                      <span className="text-sm">You can resubscribe once your current subscription expires.</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
           </div>
-        )}
-        </div>
-    </div>
+      </div>
+    </>
   );
 };
 
