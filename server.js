@@ -1,4 +1,5 @@
 const express = require("express");
+const compression = require('compression');
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
@@ -10,6 +11,8 @@ app.use(cors({
   origin: ["http://localhost:3000", "https://workoutracker.com"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
+
+app.use(compression());
 
 mongoose.connect(process.env.MONGO_URL)
 .then(() => console.log("MongoDB connected"))
