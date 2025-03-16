@@ -59,7 +59,6 @@ function Home() {
     <>
       <Helmet>
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://workoutracker.com" />
       </Helmet>
       <section className="flex flex-col gap-8 items-center mint-h-screen justify-center px-5 py-14">
         <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-center">Welcome to your Ultimate Workout Tracker!</h1>
