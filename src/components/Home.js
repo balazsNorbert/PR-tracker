@@ -65,31 +65,31 @@ function Home() {
         <h2 className="text-lg md:text-xl xl:text-2xl font-semibold text-center">Use this Workout Tracker to Stay Motivated and Reach Your Fitness Goals!</h2>
         <div className="bg-white dark:bg-teal-700 text-black dark:text-white p-6 rounded-xl shadow-xl max-w-2xl mx-auto mt-6">
           <h3 className="text-lg lg:text-xl font-bold mb-8 text-center">Why Use a Workout Tracker for Your Workouts?</h3>
-          <ul className="flex flex-col gap-4 text-sm md:text-lg text-gray-600">
+          <ul className="flex flex-col gap-4 text-sm md:text-lg text-gray-600 dark:text-white">
             <li>
-              ✅ <span className="font-bold text-black">Track Your Progress</span>
+              ✅ <span className="font-bold text-black dark:text-white">Track Your Progress</span>
               <p>
-                Using a <span className="font-bold text-black">workout tracker</span> allows you to log your weights, reps, and exercises to see how far you've come.
+                Using a <span className="font-bold text-black dark:text-white">workout tracker</span> allows you to log your weights, reps, and exercises to see how far you've come.
                 Tracking progress is an essential part of achieving fitness goals.
                 It helps you set new targets and understand your strengths and weaknesses.
               </p>
             </li>
             <li>
-              ✅ <span className="font-bold text-black">Stay Motivated</span>
+              ✅ <span className="font-bold text-black dark:text-white">Stay Motivated</span>
               <p>
                 Seeing your progress over time keeps you engaged and motivated.
                 Consistency is key, and logging your progress keeps you on track to achieve your goals.
               </p>
             </li>
             <li>
-              ✅ <span className="font-bold text-black">Optimize Your Training</span>
+              ✅ <span className="font-bold text-black dark:text-white">Optimize Your Training</span>
               <p>
                 Analyze your training and make smarter workout decisions.
                 By tracking your performance, you can tailor your workouts to your needs, avoid burnout, and prevent injury.
               </p>
             </li>
             <li>
-              ✅ <span className="font-bold text-black">Avoid Plateaus</span>
+              ✅ <span className="font-bold text-black dark:text-white">Avoid Plateaus</span>
               <p>
                 Identify when progress slows down and make adjustments to keep improving.
                 A plateau can be frustrating, but recognizing the signs early allows you to adjust your routine.
@@ -97,7 +97,7 @@ function Home() {
             </li>
             <a href="https://www.fitnessfirst.co.uk/blog/how-and-why-should-i-track-my-workouts"
             target="_blank" rel="noopener"
-            className="font-bold text-teal-600 hover:text-teal-800 underline">
+            className="font-bold text-teal-600 dark:text-white hover:text-teal-800 dark:hover:text-teal-500 underline">
               Read more about why tracking workouts helps fitness progress.
             </a>
           </ul>
