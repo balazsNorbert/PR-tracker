@@ -21,8 +21,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 bg-gray-700 flex justify-between items-center py-4 px-5 md:px-10 z-10">
-      <span className="text-xl md:text-2xl font-bold hover:text-teal-500"><Link to="/">Workout Tracker</Link></span>
+    <nav className="sticky top-0 bg-gray-700 flex justify-between items-center px-5 md:px-10 z-10">
+      <div className="h-14 md:h-20">
+        <Link to="/">
+          <img src="/images/workout-tracker-logo-white.webp" alt="Workout Tracker logo" className="relative bottom-7 md:bottom-10 hover:scale-110 h-28 md:h-40 object-contain" />
+        </Link>
+      </div>
       <button className="block md:hidden" onClick={toggleMenu} aria-label="Toggle Menu">
         {isOpen ? (
         <span className="material-icons">

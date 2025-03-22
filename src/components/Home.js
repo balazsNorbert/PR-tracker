@@ -62,7 +62,6 @@ function Home() {
       </Helmet>
       <section className="flex flex-col gap-8 items-center mint-h-screen justify-center px-5 py-14">
         <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-center">Welcome to your Ultimate Workout Tracker!</h1>
-        <h2 className="text-lg md:text-xl xl:text-2xl font-semibold text-center">Use this Workout Tracker to Stay Motivated and Reach Your Fitness Goals!</h2>
         <div className="bg-white dark:bg-teal-700 text-black dark:text-white p-6 rounded-xl shadow-xl max-w-2xl mx-auto mt-6">
           <h3 className="text-lg lg:text-xl font-bold mb-8 text-center">Why Use a Workout Tracker for Your Workouts?</h3>
           <ul className="flex flex-col gap-4 text-sm md:text-lg text-gray-600 dark:text-white">

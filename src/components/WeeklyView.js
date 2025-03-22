@@ -17,7 +17,7 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
   const today = new Date().toISOString().slice(0, 10);
   const [currentDay, setCurrentDay] = useState(today);
   const [week, setWeek] = useState(getCurrentWeek(currentDay));
-  const [showModal, setShowModal] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [deleteData, setDeleteData] = useState(null);
   const [showMuscleGroups, setShowMuscleGroups] = useState(false);
 
@@ -30,20 +30,20 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
     setWeek(getCurrentWeek(newDate));
   };
 
-  const handleOpenModal = (date, workoutIndex, exerciseIndex, setIndex) => {
-    setDeleteData({ date, workoutIndex, exerciseIndex, setIndex });
-    setShowModal(setIndex);
+  const handleOpenModal = (date, workoutIndex, exerciseIndex, setIndex, set) => {
+    setDeleteData({ date, workoutIndex, exerciseIndex, setIndex, ...set });
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowModal(null);
+    setShowModal(false);
   };
 
   const handleConfirmDelete = () => {
     if (deleteData) {
       handleDeleteSet(deleteData.date, deleteData.workoutIndex, deleteData.exerciseIndex, deleteData.setIndex);
     }
-    setShowModal(null);
+    setShowModal(false);
   };
 
   return (
@@ -90,16 +90,16 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
                               <li key={set._id} className="flex gap-1 items-center text-xxs xs:text-sm 2xl:text-lg">
                                 <span className="font-semibold">{`${setIndex + 1}.`}</span>
                                 <p className="w-20 xs:w-28 2xl:w-36">{set.weight} {set.unit} - {set.reps} reps</p>
-                                <button type="button" onClick={() => handleOpenModal(date, workoutIndex, exerciseIndex, setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
+                                <button type="button" onClick={() => handleOpenModal(date, workoutIndex, exerciseIndex, setIndex, set)} className="text-red-600 hover:text-red-700 transition duration-300">
                                   <span className="material-icons text-base md:text-xl xl:text-2xl 2xl:text-3xl">delete</span>
                                 </button>
                                 <span className="font-bold">{set.record && "PR"}</span>
-                                {showModal === setIndex && (
-                                <div className="fixed inset-0 bg-gray-500 bg-opacity-20 flex justify-center items-center z-10">
-                                  <div className="flex flex-col gap-2 bg-teal-700 dark:bg-gray-700 p-5 rounded-lg shadow-lg">
+                                {showModal && deleteData && (
+                                <div className="fixed inset-0 bg-gray-500 bg-opacity-5 flex justify-center items-center z-10">
+                                  <div className="flex flex-col gap-2 w-3/4 md:w-auto bg-teal-700 dark:bg-gray-700 p-5 rounded-lg shadow-lg">
                                     <h2 className="font-semibold text-lg text-white">Do you really want to delete this set?</h2>
                                     <div className="bg-teal-800 dark:bg-gray-900 text-white p-2 rounded-md">
-                                      <p className="text-base lg:text-xl font-bold">{set.weight} {set.unit} - {set.reps} reps</p>
+                                      <p className="text-base lg:text-xl font-bold">{deleteData.weight} {deleteData.unit} - {deleteData.reps} reps</p>
                                     </div>
                                     <div className="flex justify-between">
                                       <button

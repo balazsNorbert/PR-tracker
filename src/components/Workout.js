@@ -219,7 +219,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         {sets.map((set, setIndex) => (
           <div key={setIndex} className="flex items-center justify-between text-lg p-2 border-b border-gray-300 text-black dark:text-white">
             <li>{set.weight} {set.unit} - {set.reps} reps</li>
-            <button type="button" onClick={handleDeleteSet} className="text-red-600 hover:text-red-700 transition duration-300">
+            <button type="button" onClick={() => handleDeleteSet(setIndex)} className="text-red-600 hover:text-red-700 transition duration-300">
               <span className="material-icons">delete</span>
             </button>
           </div>
