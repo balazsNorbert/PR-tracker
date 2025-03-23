@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const setSchema = new mongoose.Schema({
   reps: { type: Number, required: true },
   weight: { type: Number, required: true },
-  unit: { type: String, enum: ["kg", "lb"], default: "kg" },
+  unit: { type: String, enum: ["kg", "lbs"], default: "kg" },
   record: { type: Boolean, default: false },
 });
 
