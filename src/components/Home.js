@@ -69,7 +69,7 @@ function Home() {
               ✅ <span className="font-bold text-black dark:text-white">Track Your Workout Progress</span>
               <p>
                 Using a workout progress tracker allows you to log your weights, reps, and exercises to see how far you've come.
-                Tracking your <strong className="text-teal-600 dark:text-white">fitness progress</strong> is an essential part of achieving your <strong className="text-teal-600 dark:text-white">fitness goals</strong>.
+                Tracking your <strong className="text-teal-800 dark:text-white">fitness progress</strong> is an essential part of achieving your <strong className="text-teal-800 dark:text-white">fitness goals</strong>.
                 It helps you set new targets and understand your strengths and weaknesses.
               </p>
             </li>
@@ -77,15 +77,15 @@ function Home() {
               ✅ <span className="font-bold text-black dark:text-white">Stay Motivated Throughout Your Fitness Journey</span>
               <p>
                 Seeing your progress over time keeps you engaged and motivated.
-                Consistency is key in <strong className="text-teal-600 dark:text-white">workout progress tracking</strong>, and logging your progress keeps you on track to achieve your fitness goals.
-                Track your workouts <Link to="/logbook" className="font-bold text-teal-600 hover:text-teal-800 dark:hover:text-teal-500 dark:text-white">here</Link> to stay motivated and consistent!
+                Consistency is key in <strong className="text-teal-800 dark:text-white">workout progress tracking</strong>, and logging your progress keeps you on track to achieve your fitness goals.
+                <Link to="/logbook" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white">Track your workouts here</Link> to stay motivated and consistent!
               </p>
             </li>
             <li>
               ✅ <span className="font-bold text-black dark:text-white">Optimize Your Strength Training</span>
               <p>
                 Analyze your strength training sessions and make smarter workout decisions.
-                By tracking your <span className="font-bold text-teal-600 dark:text-white">performance during workouts</span>, you can tailor your workouts to your needs, avoid burnout, and prevent injury.
+                By tracking your <span className="font-bold text-teal-800 dark:text-white">performance during workouts</span>, you can tailor your workouts to your needs, avoid burnout, and prevent injury.
               </p>
             </li>
             <li>
@@ -95,11 +95,13 @@ function Home() {
                 A fitness plateau can be frustrating, but recognizing the signs early through your workout progress tracker allows you to adjust your routine for better results.
               </p>
             </li>
-            <a href="https://www.fitnessfirst.co.uk/blog/how-and-why-should-i-track-my-workouts"
-            target="_blank" rel="noopener"
-            className="font-bold text-teal-600 dark:text-white hover:text-teal-800 dark:hover:text-teal-500 underline">
-              Read more about why tracking workouts helps fitness progress.
-            </a>
+            <li>
+              <a href="https://www.fitnessfirst.co.uk/blog/how-and-why-should-i-track-my-workouts"
+              target="_blank" rel="noopener"
+              className="font-bold text-teal-800 dark:text-white hover:text-black dark:hover:text-teal-500 underline">
+                Read more about why tracking workouts helps fitness progress.
+              </a>
+            </li>
           </ul>
         </div>
         <button className="bg-gray-700 dark:bg-teal-600 hover:bg-teal-500 dark:hover:bg-teal-500 font-semibold text-lg xl:text-2xl

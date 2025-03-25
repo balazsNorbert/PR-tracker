@@ -79,11 +79,11 @@ const StreakTracker = ({ userId, workouts }) => {
           <span className="text-xl md:text-2xl">{streak} week 🔥</span> streak!
         </h2>
       ) : (
-        <h2 className="text-lg md:text-xl font-bold text-red-600">
+        <h2 className="text-lg md:text-xl font-bold text-red-700 dark:text-red-500">
           No streak yet! 😞
         </h2>
       )}
-      <div className="flex flex-col gap-4 bg-teal-600 dark:bg-gray-700 w-full shadow-xl rounded-lg p-6"
+      <div className="flex flex-col gap-4 bg-teal-700 dark:bg-gray-700 w-full shadow-xl rounded-lg p-6"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -108,7 +108,7 @@ const StreakTracker = ({ userId, workouts }) => {
           )}
         </div>
       </div>
-      <div className="flex flex-col items-center gap-4 bg-teal-600 dark:bg-gray-700 w-full rounded-lg p-4">
+      <div className="flex flex-col items-center gap-4 bg-teal-700 dark:bg-gray-700 w-full rounded-lg p-4">
         <h3 className="font-bold text-xl">
           Workout frequency
         </h3>

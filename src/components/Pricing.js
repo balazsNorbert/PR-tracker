@@ -14,17 +14,17 @@ const Pricing = () => {
         <div className="flex flex-col items-center gap-4 px-6 pt-6 w-full relative">
           <div className="relative">
             <span className="absolute -top-2 -right-3 bg-yellow-400 text-xs px-2 py-1 rounded-full font-bold text-gray-800">Best Value</span>
-            <p className="text-4xl md:text-5xl font-bold text-teal-600">$3.99<span className="font-semibold text-lg">/month</span></p>
+            <p className="text-4xl md:text-5xl font-bold text-teal-800">$3.99<span className="font-semibold text-lg">/month</span></p>
           </div>
           <p className="text-center text-gray-600 italic">Enjoy premium workout tracking, complete stats, and personalized goals!</p>
-          <p className="text-xl text-teal-600 font-semibold w-fit mx-auto"><span className="text-2xl">14</span>-day free trial!</p>
+          <p className="text-xl text-teal-800 font-semibold w-fit mx-auto"><span className="text-2xl">14</span>-day free trial!</p>
         </div>
         <div className="w-full">
           <svg className="w-full" viewBox="0 0 500 50" preserveAspectRatio="none">
             <path d="M0,0 Q250,50 500,0 V50 H0 Z" fill="#374151"></path>
           </svg>
         </div>
-        <button className="absolute -bottom-5 bg-teal-600 hover:bg-teal-700 text-xl lg:text-2xl py-2 px-8 rounded-lg
+        <button className="absolute -bottom-5 bg-teal-700 hover:bg-teal-800 text-xl lg:text-2xl py-2 px-8 rounded-lg
           font-semibold transition-all duration-300 transform hover:scale-105 shadow-md">
           <Link to='/register'>Try it now</Link>
         </button>

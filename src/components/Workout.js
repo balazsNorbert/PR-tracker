@@ -123,8 +123,9 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <label className="text-base md:text-xl font-medium text-gray-600 dark:text-white">Exercise</label>
+        <label htmlFor="exercise" className="text-base md:text-xl font-medium text-gray-600 dark:text-white">Exercise</label>
         <input
+          id="exercise"
           type="text"
           value={exercise}
           onChange={handleExerciseChange}
@@ -151,8 +152,9 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         )}
       </div>
       <div className="flex flex-col gap-2">
-      <label className="text-base md:text-xl font-medium text-gray-600 dark:text-white">Muscle Group</label>
+      <label htmlFor="muscleGroup" className="text-base md:text-xl font-medium text-gray-600 dark:text-white">Muscle Group</label>
       <select
+        id="muscleGroup"
         value={muscleGroup}
         onChange={(e) => setMuscleGroup(e.target.value)}
         className="text-black text-sm md:text-base dark:text-white dark:bg-gray-700 p-3 border border-gray-300 dark:border-gray-600
@@ -177,7 +179,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         <option value="pull">Pull</option>
       </select>
     </div>
-      <h3 className="text-base md:text-xl font-medium text-gray-600  dark:text-white">Add Set</h3>
+      <label className="text-base md:text-xl font-medium text-gray-600  dark:text-white">Add Set</label>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex gap-2 w-full">
           <input
@@ -208,7 +210,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
       <button
         type="button"
         onClick={handleAddSet}
-        className="flex items-center justify-center gap-2 mt-3 py-3 bg-teal-500 font-semibold rounded-lg shadow-md hover:bg-teal-600 dark:hover:bg-teal-400 transition duration-300"
+        className="flex items-center justify-center gap-2 mt-3 py-3 bg-teal-800 dark:bg-teal-900 font-semibold rounded-lg shadow-md hover:bg-teal-900 dark:hover:bg-teal-600 transition duration-300"
       >
         <span className="material-icons">
           add
@@ -225,7 +227,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           </div>
         ))}
       </ul>
-      <button type="submit" className="py-3 bg-teal-500 font-semibold rounded-lg shadow-md hover:bg-teal-600 dark:hover:bg-teal-400 transition duration-300">
+      <button type="submit" className="py-3 bg-teal-800 dark:bg-teal-900 font-semibold rounded-lg shadow-md hover:bg-teal-900 dark:hover:bg-teal-600 transition duration-300">
         Save Exercise
       </button>
     </form>

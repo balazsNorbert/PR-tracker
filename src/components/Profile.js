@@ -199,7 +199,7 @@ const Profile = () => {
           <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white w-full xs:w-auto xs:rounded-3xl shadow-xl p-4 xs:p-6 xs:mx-5 md:mx-10 md:p-8 mt-10 mb-20">
             {user ? (
             <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
-              Welcome back, <span className="text-teal-600 dark:text-white">{user.username}!</span>
+              Welcome back, <span className="text-teal-700 dark:text-white">{user.username}!</span>
             </h1>
             ) : (
               <>
@@ -235,7 +235,7 @@ const Profile = () => {
             {user && (
                 <StreakTracker userId={user.userId} workouts={workouts}/>
             )}
-            <div className="bg-teal-600 dark:bg-gray-700 w-full rounded-lg p-4">
+            <div className="bg-teal-700 dark:bg-gray-700 w-full rounded-lg p-4">
               <h3 className="text-xl font-semibold">Add new goal</h3>
               <div className="w-full flex flex-col items-center gap-4 mt-5">
                 <input
@@ -288,7 +288,7 @@ const Profile = () => {
                   />
                   <button
                     onClick={handleAddGoal}
-                    className="flex items-center gap-2 text-sm ml-auto md:text-lg bg-green-500 dark:bg-green-700 hover:bg-green-600 dark:hover:bg-green-800 py-3 pl-2 pr-3 rounded-lg transition duration-300 shadow-md">
+                    className="flex items-center gap-2 text-sm ml-auto md:text-lg bg-green-600 dark:bg-green-700 hover:bg-green-600 dark:hover:bg-green-800 py-3 pl-2 pr-3 rounded-lg transition duration-300 shadow-md">
                     <span className="material-icons">
                       add
                     </span>
@@ -297,7 +297,7 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full bg-teal-600 dark:bg-gray-700 rounded-lg p-4">
+            <div className="w-full bg-teal-700 dark:bg-gray-700 rounded-lg p-4">
               <h3 className="text-xl font-semibold">Your Active Goals</h3>
               <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-3">
                 {goals.filter(goal => !goal.achieved).length > 0 ? (
@@ -305,10 +305,10 @@ const Profile = () => {
                     const progress = calculateProgress(goal, workouts)
                     return (
                       !goal.achieved ? (
-                      <li key={goal._id} className="flex justify-between p-4 rounded-lg shadow-md bg-teal-400/70 dark:bg-gray-500/80 transition duration-300 relative">
+                      <li key={goal._id} className="flex justify-between p-4 rounded-lg shadow-md bg-teal-500/70 dark:bg-gray-500/80 transition duration-300 relative">
                         {progress === 100 && !goal.achieved && (
-                          <div className="absolute top-1 right-1 text-green-600 dark:text-green-500 font-bold text-sm md:text-base text-center animate-pulse">
-                            Achieved! 🎯
+                          <div className="absolute top-1 right-1 animate-pulse">
+                            🎯
                           </div>
                         )}
                         <div className="flex flex-col items-start gap-1 w-full">
@@ -336,7 +336,7 @@ const Profile = () => {
                           </button>
                           <button
                             onClick={() => deleteGoal(goal._id)}
-                            className="text-red-600 hover:text-red-700 transition duration-300"
+                            className="text-red-700 hover:text-red-800 transition duration-300"
                           >
                             <span className="material-icons mt-2 text-2xl md:text-3xl">
                               delete
@@ -354,7 +354,7 @@ const Profile = () => {
                 )}
               </ul>
             </div>
-            <div className="w-full bg-teal-600 dark:bg-gray-700 rounded-lg p-4">
+            <div className="w-full bg-teal-700 dark:bg-gray-700 rounded-lg p-4">
               <h3 className="text-xl font-semibold">Achieved Goals</h3>
               <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-5">
                 {goals.filter(goal => goal.achieved).length > 0 ? (
@@ -364,7 +364,7 @@ const Profile = () => {
                   .map(goal => (
                     <li
                       key={goal._id}
-                      className="flex justify-between items-center p-4 rounded-lg shadow-md bg-white/30 dark:bg-gray-900 transition duration-300"
+                      className="flex justify-between items-center p-4 rounded-lg shadow-md bg-teal-600 dark:bg-gray-900 transition duration-300"
                     >
                       <div className="flex flex-col">
                         {goal.set && (
