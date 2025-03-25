@@ -81,7 +81,7 @@ const ChartByExercise = () => {
 
   return (
     <div className="flex justify-center flex-col gap-10 items-center mx-3 md:mx-10 my-10 text-xs min-h-screen">
-      <h1 className="text-3xl xl:text-4xl font-bold">Exercise {name} progress</h1>
+      <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-center">Exercise {name} progress</h1>
       <ResponsiveContainer width="100%" className="bg-gray-200 dark:bg-gray-700 py-3 pr-5 md:pr-10 md:py-5 rounded-xl min-h-[300px] md:min-h-[400px] xl:min-h-[500px]">
         <LineChart width={600} height={300} data={exerciseData}>
           <CartesianGrid  strokeDasharray="3 3" stroke={gridStrokeColor}/>
