@@ -23,7 +23,7 @@ const Idea = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2 bg-teal-600 dark:bg-gray-700 w-full rounded-lg p-4">
+    <div className="flex flex-col items-center gap-2 bg-teal-700 dark:bg-gray-700 w-full rounded-lg p-4">
       <h3 className="font-bold text-xl">Feedback</h3>
       <label className="text-sm md:text-base self-start mt-2">Give us an idea, if you have one!</label>
       <form onSubmit={handleSubmit} className="w-full">

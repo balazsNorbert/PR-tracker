@@ -65,7 +65,7 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
           const dayNumber = new Date(date).getDate();
           const dayName = new Date(date).toLocaleDateString('en-US', { weekday: 'short' });
           return (
-            <div key={date} className={`aspect-video pt-2 px-2 md:px-3 pb-7 lg:pb-10 min-h-20 lg:min-h-52 rounded-lg shadow-xl relative ${isToday ? 'bg-teal-500' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
+            <div key={date} className={`aspect-video pt-2 px-2 md:px-3 pb-7 lg:pb-10 min-h-20 lg:min-h-52 rounded-lg shadow-xl relative ${isToday ? 'bg-teal-600' : 'bg-white dark:bg-teal-700 text-black dark:text-white'}`}>
               <h3 className="text-xs lg:text-base font-semibold text-center mb-2">{dayNumber} {dayName}</h3>
               <div className="h-full overflow-y-auto overflow-x-auto w-full">
                 {workouts.filter((workout) => new Date(workout.date).toISOString().slice(0, 10) === date).map((workout, workoutIndex) => (
