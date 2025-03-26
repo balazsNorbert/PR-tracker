@@ -25,6 +25,7 @@ function Home() {
       { src: "/images/darkMode.webp", alt: "Enable dark mode for better workout tracking experience", description: "Switch to Dark Mode" },
       { src: "/images/rank.webp", alt: "Weekly workout ranking based on performance", description: "See your weekly rank" },
       { src: "/images/workoutFrequency.webp", alt: "Monitor workout frequency and training consistency", description: "Monitor workout consistency" },
+      { src: "/images/bodyWeightTracker.webp", alt: "Monitor body weight on a diagramm", description: "Track body weight" },
       { src: "/images/trackGoals.webp", alt: "Set and track fitness goals with progress updates", description: "Set & track goals" },
       { src: "/images/feedback.webp", alt: "Share feedback to improve the workout tracker app", description: "Share your feedback" },
     ],
@@ -36,11 +37,12 @@ function Home() {
       { src: "/images/addNoteDesktop.webp", alt: "Add custom workout notes for better tracking", description: "Add workout notes" },
       { src: "/images/exerciseProgress.webp", alt: "Exercise progress tracker with performance history", description: "Track exercise progress" },
       { src: "/images/muscleGroupPrDesktop.webp", alt: "View personal records (PRs) by muscle groups over time", description: "See PRs by muscle group in a time range" },
-      { src: "/images/darkModeDesktop.webp", alt: "Enable dark mode for better workout tracking experience", description: "Switch to Dark Mode" },
+      { src: "/images/darkMode.webp", alt: "Enable dark mode for better workout tracking experience", description: "Switch to Dark Mode" },
       { src: "/images/rankDesktop.webp", alt: "Ranking based on consistency", description: "See your weekly rank" },
       { src: "/images/workoutFrequencyDesktop.webp", alt: "Monitor workout frequency and training consistency", description: "Monitor workout consistency" },
+      { src: "/images/bodyWeightTracker.webp", alt: "Monitor body weight on a diagramm", description: "Track body weight" },
       { src: "/images/trackGoals.webp", alt: "Set and track fitness goals with progress updates", description: "Set & track goals" },
-      { src: "/images/feedbackDesktop.webp", alt: "Share feedback to improve the workout tracker app", description: "Share your feedback" },
+      { src: "/images/feedback.webp", alt: "Share feedback to improve the workout tracker app", description: "Share your feedback" },
     ]
   };
 

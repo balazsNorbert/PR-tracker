@@ -69,7 +69,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 rounded-3xl bg-white dark:bg-teal-700 shadow-lg w-96 p-4 md:p-6">
           <h1 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-2">Login</h1>
           <div className="flex flex-col gap-2">
-            <label htmlFor="username" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Your Username</label>
+            <label htmlFor="username" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Username</label>
             <input
               id="username"
               type="text"
@@ -82,7 +82,7 @@ const Login = () => {
           </div>
 
           <div className="flex flex-col gap-2 relative">
-            <label htmlFor="password" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Your Password</label>
+            <label htmlFor="password" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Password</label>
             <input
               id="password"
               type={showPassword ? "text" : "password"}
@@ -111,7 +111,7 @@ const Login = () => {
           {error && <p className="text-red-500">{error}</p>}
           <button
             type="submit"
-            className="text-lg lg:text-xl mt-2 py-3 bg-teal-500 font-semibold rounded-lg shadow-md hover:bg-teal-600 dark:hover:bg-teal-400 transition duration-300"
+            className="text-lg lg:text-xl mt-2 py-3 bg-teal-700 dark:bg-teal-900 font-semibold rounded-lg shadow-md hover:bg-teal-800 dark:hover:bg-teal-600 transition duration-300"
           >
             Login
           </button>
