@@ -6,6 +6,7 @@ import { useDarkMode } from '../contexts/DarkModeContext';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import StreakTracker from './StreakTracker';
+import WeightTracker from './WeightTracker';
 import Idea from './Idea';
 
 const Profile = () => {
@@ -206,7 +207,7 @@ const Profile = () => {
                 <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
                   Welcome!
                 </h1>
-                <p className="text-lg lg:text-xl text-red-600 font-semibold text-center">
+                <p className="text-lg lg:text-xl text-red-600 dark:text-red-500 font-semibold text-center">
                 ⚠️ You need to log in to see your profile!
                 </p>
               </>
@@ -233,7 +234,10 @@ const Profile = () => {
               </button>
             </div>
             {user && (
+              <>
                 <StreakTracker userId={user.userId} workouts={workouts}/>
+                <WeightTracker userId={user.userId} />
+              </>
             )}
             <div className="bg-teal-700 dark:bg-gray-700 w-full rounded-lg p-4">
               <h3 className="text-xl font-semibold">Add new goal</h3>

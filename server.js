@@ -25,6 +25,7 @@ app.use("/api/goals", require("./routes/goalRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/idea", require("./routes/ideaRoutes"));
 app.use("/api/pricing", require("./routes/pricingRoutes"));
+app.use("/api/weights", require("./routes/weightRoutes"));
 
 app.use(express.static(path.join(__dirname, 'build')));
 

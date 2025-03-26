@@ -88,7 +88,7 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
                           <ul>
                             {exercise.sets.map((set, setIndex) => (
                               <li key={set._id} className="flex gap-1 items-center text-xxs xs:text-sm 2xl:text-lg">
-                                <span className="font-semibold">{`${setIndex + 1}.`}</span>
+                                <span className="font-semibold w-3">{`${setIndex + 1}.`}</span>
                                 <p className="w-20 xs:w-28 2xl:w-36">{set.weight} {set.unit} - {set.reps} reps</p>
                                 <button type="button" onClick={() => handleOpenModal(date, workoutIndex, exerciseIndex, setIndex, set)} className="text-red-600 hover:text-red-700 transition duration-300">
                                   <span className="material-icons text-base md:text-xl xl:text-2xl 2xl:text-3xl">delete</span>

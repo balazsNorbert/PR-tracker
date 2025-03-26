@@ -36,7 +36,7 @@ const Idea = () => {
           rows="3"
         />
         <button type="submit" className="flex items-center gap-2 ml-auto w-fit bg-teal-800 dark:bg-gray-900 text-white
-        font-bold py-2 px-4 rounded-lg hover:bg-teal-400 transition mt-1">
+        font-bold py-2 px-4 rounded-lg transition mt-1">
           <span className="text-lg">Send</span>
           <span className="material-icons">send</span>
         </button>
