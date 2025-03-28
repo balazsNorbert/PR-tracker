@@ -22,6 +22,8 @@ function Home() {
       { src: "/images/exerciseProgress.webp", alt: "Exercise progress tracker with performance history", description: "Track exercise progress" },
       { src: "/images/muscleGroupPrMobile.webp", alt: "View personal records (PRs) by muscle groups over time", description: "See PRs by muscle group in a time range" },
       { src: "/images/pieChartMobile.webp", alt: "Pie chart analysis of muscle group training distribution", description: "Analyze muscle groups with charts" },
+      { src: "/images/nutritionTrackerFormMobile.webp", alt: "Nutrition tracker form for tracking macros and goals", description: "Track nutrition to help monitor macros." },
+      { src: "/images/nutritionTrackerChartMobile.webp", alt: "Pie chart showing nutrition distribution and macro tracking", description: "Nutrition chart displaying macro distribution" },
       { src: "/images/darkMode.webp", alt: "Enable dark mode for better workout tracking experience", description: "Switch to Dark Mode" },
       { src: "/images/rank.webp", alt: "Weekly workout ranking based on performance", description: "See your weekly rank" },
       { src: "/images/workoutFrequency.webp", alt: "Monitor workout frequency and training consistency", description: "Monitor workout consistency" },
@@ -37,6 +39,7 @@ function Home() {
       { src: "/images/addNoteDesktop.webp", alt: "Add custom workout notes for better tracking", description: "Add workout notes" },
       { src: "/images/exerciseProgress.webp", alt: "Exercise progress tracker with performance history", description: "Track exercise progress" },
       { src: "/images/muscleGroupPrDesktop.webp", alt: "View personal records (PRs) by muscle groups over time", description: "See PRs by muscle group in a time range" },
+      { src: "/images/nutritionTrackerDesktop.webp", alt: "Nutrition tracker for tracking macros and goals", description: "Track nutrition to help monitor macros for a balanced diet." },
       { src: "/images/darkMode.webp", alt: "Enable dark mode for better workout tracking experience", description: "Switch to Dark Mode" },
       { src: "/images/rankDesktop.webp", alt: "Ranking based on consistency", description: "See your weekly rank" },
       { src: "/images/workoutFrequencyDesktop.webp", alt: "Monitor workout frequency and training consistency", description: "Monitor workout consistency" },
@@ -70,31 +73,36 @@ function Home() {
             <li>
               ✅ <span className="font-bold text-black dark:text-white">Track Your Workout Progress</span>
               <p>
-                Using a workout progress tracker allows you to log your weights, reps, and exercises to see how far you've come.
-                Tracking your <strong className="text-teal-800 dark:text-white">fitness progress</strong> is an essential part of achieving your <strong className="text-teal-800 dark:text-white">fitness goals</strong>.
-                It helps you set new targets and understand your strengths and weaknesses.
+                Using a workout tracker allows you to log your weights, reps, and exercises to see how far you've come.
+                It's an essential part of achieving your <strong className="text-teal-800 dark:text-white">fitness goals </strong>
+                and staying on track. While tracking your <Link to="/logbook" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white">workout performance</Link> is key,
+                incorporating nutrition tracking can further help you optimize your results.
               </p>
             </li>
             <li>
               ✅ <span className="font-bold text-black dark:text-white">Stay Motivated Throughout Your Fitness Journey</span>
               <p>
-                Seeing your progress over time keeps you engaged and motivated.
-                Consistency is key in <strong className="text-teal-800 dark:text-white">workout progress tracking</strong>, and logging your progress keeps you on track to achieve your fitness goals.
-                <Link to="/logbook" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white">Track your workouts here</Link> to stay motivated and consistent!
+                Consistent tracking of your workouts keeps you motivated and engaged. Monitoring your
+                <strong className="text-teal-800 dark:text-white"> workout progress</strong> ensures you're always moving toward
+                your goals. If you're interested in tracking your nutrition alongside your workouts, our
+                <Link to="/nutrition-tracker" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white"> nutrition tracker </Link>
+                can help you refine your diet and further boost your progress.
               </p>
             </li>
             <li>
               ✅ <span className="font-bold text-black dark:text-white">Optimize Your Strength Training</span>
               <p>
-                Analyze your strength training sessions and make smarter workout decisions.
-                By tracking your <span className="font-bold text-teal-800 dark:text-white">performance during workouts</span>, you can tailor your workouts to your needs, avoid burnout, and prevent injury.
+                By tracking your workout sessions, you can analyze your performance and tailor your routines to maximize strength gains.
+                In addition, our nutrition tracker can provide insights into your diet, ensuring you're fueling your body properly for
+                <strong className="text-teal-800 dark:text-white"> maximum performance</strong>.
               </p>
             </li>
             <li>
-              ✅ <span className="font-bold text-black dark:text-white">Avoid Fitness Plateaus</span>
+              ✅ <span className="font-bold text-black dark:text-white">Break Through Fitness Plateaus</span>
               <p>
-                Identify when your workout progress slows down and make adjustments to keep improving.
-                A fitness plateau can be frustrating, but recognizing the signs early through your workout progress tracker allows you to adjust your routine for better results.
+                Tracking your progress helps you identify when you hit a plateau. Whether it's your workout performance or your nutrition,
+                understanding both sides helps you make the necessary adjustments. Combining a workout tracker with a nutrition tracker
+                can be the key to overcoming obstacles and continuing to progress.
               </p>
             </li>
             <li>
