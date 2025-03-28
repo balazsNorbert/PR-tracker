@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import LogBook from './components/LogBook';
+import MacroTracker from './components/MacroTracker';
 import Profile from './components/Profile';
 import Footer from './components/Footer';
 import Login from './components/Login';
@@ -28,6 +29,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/logbook" element={<LogBook />} />
+              <Route path="/nutrition-tracker" element={<MacroTracker />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
