@@ -21,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 bg-gray-700 flex justify-between items-center px-5 md:px-10 z-10">
+    <nav className="sticky top-0 bg-gray-700  shadow-xl flex justify-between items-center px-5 md:px-10 z-10">
       <div className="h-14 md:h-20 flex items-center overflow-hidden">
         <Link to="/">
           <img src="/images/workout-tracker-logo-white.webp" alt="Workout Tracker logo" className="hover:scale-110 h-28 md:h-40 object-contain" />

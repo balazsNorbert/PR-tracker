@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import { useDarkMode } from '../contexts/DarkModeContext';
 
 const WeightTracker = ({ userId }) => {
   const apiURL = process.env.REACT_APP_API_URL;
   const [weight, setWeight] = useState("");
   const [unit, setUnit] = useState("kg");
   const [weightData, setWeightData] = useState([]);
+  const { darkMode } = useDarkMode();
 
   useEffect(() => {
     const featchWeightData = async () => {
@@ -55,6 +57,8 @@ const WeightTracker = ({ userId }) => {
     return null;
   };
 
+  const gridStrokeColor = darkMode ? "white" : "gray";
+
   return (
     <div className="flex flex-col items-center gap-4 bg-teal-700 dark:bg-gray-700 w-full rounded-lg p-4">
       <h3 className="font-bold text-xl">Body Weight Tracker</h3>
@@ -88,9 +92,9 @@ const WeightTracker = ({ userId }) => {
               <ResponsiveContainer width="100%" height="100%" className="relative right-5">
                   <LineChart data={weightData}>
                       <XAxis dataKey="date" tickFormatter={(tick) => new Date(tick).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                      angle={-25} textAnchor="end" tick={{ fontSize: 10 }}/>
-                      <YAxis tick={{ fontSize: 10 }}  domain={['dataMin', 'dataMax']}/>
-                      <CartesianGrid  strokeDasharray="2 3"/>
+                      angle={-25} textAnchor="end" tick={{ fontSize: 10, fill: darkMode ? 'white' : 'black' }}/>
+                      <YAxis tick={{ fontSize: 10, fill: darkMode ? 'white' : 'black' }}  domain={['dataMin', 'dataMax']}/>
+                      <CartesianGrid  strokeDasharray="2 3" stroke={gridStrokeColor}/>
                       <Tooltip content={CustomTooltip} />
                       <Line type="monotone" dataKey="weight" stroke="#14b8a6" strokeWidth={2} />
                   </LineChart>
