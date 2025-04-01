@@ -17,7 +17,7 @@ const MacroTracker = () => {
 
   const addMacros = async () => {
     const formattedDate = selectedDate.toISOString().split("T")[0];
-    if (inputValues.calories === '') {
+    if (inputValues.calories === '' || inputValues.calories === 0) {
       inputValues.calories = 4 * inputValues.protein + 4 * inputValues.carbs + 9 * inputValues.fat;
     }
     const updatedMacros = {
@@ -81,7 +81,7 @@ const MacroTracker = () => {
     <div className="flex flex-col items-center gap-8 md:gap-14 min-h-screen w-full my-10 mx-auto p-5 md:px-10">
       <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold">Nutrition Tracker</h1>
       <div className="flex flex-col lg:flex-row items-center gap-10">
-        <div className="flex flex-1 flex-col gap-6 w-full bg-white text-gray-600 p-4 md:p-6 rounded-3xl shadow-xl">
+        <div className="flex flex-1 flex-col gap-6 w-full bg-white dark:bg-gray-700 text-gray-600 dark:text-white p-4 md:p-6 rounded-3xl shadow-xl">
         <div className="flex flex-col gap-2">
           <label htmlFor="Date" className="font-bold text-lg">Date</label>
           <input
@@ -89,7 +89,7 @@ const MacroTracker = () => {
             type="date"
             value={selectedDate ? selectedDate.toISOString().split('T')[0] : ''}
             onChange={(e) => setSelectedDate(new Date(e.target.value))}
-            className="w-full text-center text-sm md:text-base text-black dark:text-white dark:bg-gray-700 p-3 border border-gray-300 dark:border-gray-600
+            className="w-full text-center text-sm md:text-base text-black dark:text-white dark:bg-gray-900 p-3 border border-gray-300 dark:border-gray-600
             rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
           />
         </div>
@@ -103,9 +103,9 @@ const MacroTracker = () => {
               >
                 <span className="material-icons">info</span>
                 {showInfo && (
-                  <div className="absolute top-0 left-0 mt-6 bg-gray-800 text-white p-4 rounded-lg shadow-xl w-64 z-10">
-                    <p className="text-base font-semibold">
-                      <span className="font-extrabold text-yellow-300 text-lg">Note:</span> The calorie count will be automatically calculated if you don't provide it.
+                  <div className="absolute top-0 -left-5 mt-6 bg-gray-800 dark:bg-gray-900 text-white p-4 rounded-lg shadow-xl w-52 md:w-64  z-10">
+                    <p className="text-sm md:text-base font-semibold">
+                      <span className="font-extrabold text-yellow-300 text-base md:text-lg">Note:</span> The calorie count will be automatically calculated if you don't provide it.
                     </p>
                   </div>
                 )}
@@ -119,12 +119,12 @@ const MacroTracker = () => {
                   value={inputValues[key]}
                   onChange={(e) => setInputValues({ ...inputValues, [key]: Number(e.target.value) })}
                   placeholder="0"
-                  className="text-sm md:text-base dark:text-white dark:bg-gray-700 py-2 px-2 md:px-0 border border-gray-300 dark:border-gray-600
+                  className="text-sm md:text-base dark:text-white dark:bg-gray-900 py-2 px-2 md:px-0 border border-gray-300 dark:border-gray-600
                   rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300 w-40 text-black text-right"
                 />
               </div>
             ))}
-            <button onClick={addMacros} className="flex items-center justify-center gap-2 mt-3 py-3 bg-teal-800 dark:bg-teal-900 font-semibold rounded-lg shadow-md hover:bg-teal-900 dark:hover:bg-teal-600 transition duration-300 text-white">
+            <button onClick={addMacros} className="flex items-center justify-center gap-2 mt-3 py-3 bg-teal-800 dark:bg-teal-900 font-semibold rounded-lg shadow-md hover:bg-teal-900 dark:hover:bg-teal-700 transition duration-300 text-white">
               <span className="material-icons">
                 add
               </span>
@@ -132,7 +132,7 @@ const MacroTracker = () => {
             </button>
             <button
               onClick={clearMacros}
-              className="flex items-center justify-center gap-2 mt-3 py-3 bg-red-700 font-semibold rounded-lg shadow-md hover:bg-red-800 dark:hover:bg-red-500 transition duration-300 text-white"
+              className="flex items-center justify-center gap-2 mt-3 py-3 bg-red-700 font-semibold rounded-lg shadow-md hover:bg-red-800 dark:hover:bg-red-600 transition duration-300 text-white"
             >
               <span className="material-icons">delete</span>
               Clear
@@ -147,7 +147,7 @@ const MacroTracker = () => {
                   type="number"
                   value={goals[key]}
                   onChange={(e) => setGoals({ ...goals, [key]: Number(e.target.value) })}
-                  className="w-40 text-right text-sm md:text-base text-black dark:text-white dark:bg-gray-700 py-2 px-2 md:px-0 border border-gray-300 dark:border-gray-600
+                  className="w-40 text-right text-sm md:text-base text-black dark:text-white dark:bg-gray-900 py-2 px-2 md:px-0 border border-gray-300 dark:border-gray-600
                   rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
                 />
               </div>
@@ -159,6 +159,7 @@ const MacroTracker = () => {
           const realValuePercent = (macro.value / macro.goal) * 100;
           const valuePercent = realValuePercent > 100 ? 100 : realValuePercent;
           const remainingPercent = 100 - valuePercent;
+          const unit = macro.name === 'Calories' ? 'kcal' : 'g'
           return (
             <div key={index} className="text-center">
               <h3 className="font-semibold text-xl">{macro.name}</h3>
@@ -183,6 +184,7 @@ const MacroTracker = () => {
                   />
                 </Pie>
               </PieChart>
+              <p className="text-lg font-semibold">{macro.value} {unit}</p>
             </div>
           );
         })}

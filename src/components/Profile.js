@@ -301,9 +301,9 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full bg-teal-700 dark:bg-gray-700 rounded-lg p-4">
+            <div className="flex flex-col gap-3 w-full bg-teal-700 dark:bg-gray-700 rounded-lg p-4">
               <h3 className="text-xl font-semibold">Your Active Goals</h3>
-              <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-3">
+              <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto">
                 {goals.filter(goal => !goal.achieved).length > 0 ? (
                   goals.map(goal => {
                     const progress = calculateProgress(goal, workouts)
@@ -358,9 +358,9 @@ const Profile = () => {
                 )}
               </ul>
             </div>
-            <div className="w-full bg-teal-700 dark:bg-gray-700 rounded-lg p-4">
+            <div className="flex flex-col gap-5 w-full bg-teal-700 dark:bg-gray-700 rounded-lg p-4">
               <h3 className="text-xl font-semibold">Achieved Goals</h3>
-              <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto mt-5">
+              <ul className="flex flex-col gap-3 w-full max-h-64 overflow-y-auto">
                 {goals.filter(goal => goal.achieved).length > 0 ? (
                   goals.filter(goal => goal.achieved)
                   .slice()
