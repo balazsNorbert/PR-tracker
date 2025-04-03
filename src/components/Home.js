@@ -59,6 +59,11 @@ function Home() {
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const selectedImages = isMobile ? images.mobile : images.desktop;
+  const [expandedParagraph, setExpandedParagraph] = useState(null);
+
+  const toggleExpand = (index) => {
+    setExpandedParagraph(expandedParagraph === index ? null : index);
+  };
 
   return (
     <>
@@ -72,38 +77,62 @@ function Home() {
           <ul className="flex flex-col gap-4 text-sm md:text-lg text-gray-600 dark:text-white">
             <li>
               ✅ <span className="font-bold text-black dark:text-white">Track Your Workout Progress</span>
-              <p>
+              <p className={`${expandedParagraph === 1 ? '' : 'line-clamp-3'}`}>
                 Using a workout tracker allows you to log your weights, reps, and exercises to see how far you've come.
                 It's an essential part of achieving your <strong className="text-teal-800 dark:text-white">fitness goals </strong>
                 and staying on track. While tracking your <Link to="/logbook" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white">workout performance</Link> is key,
                 incorporating nutrition tracking can further help you optimize your results.
               </p>
+              <button
+                onClick={() => toggleExpand(1)}
+                className="text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white"
+              >
+                {expandedParagraph === 1 ? 'Show Less' : 'Show More'}
+              </button>
             </li>
             <li>
               ✅ <span className="font-bold text-black dark:text-white">Stay Motivated Throughout Your Fitness Journey</span>
-              <p>
+              <p className={`${expandedParagraph === 2 ? '' : 'line-clamp-3'}`}>
                 Consistent tracking of your workouts keeps you motivated and engaged. Monitoring your
                 <strong className="text-teal-800 dark:text-white"> workout progress</strong> ensures you're always moving toward
                 your goals. If you're interested in tracking your nutrition alongside your workouts, our
                 <Link to="/nutrition-tracker" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white"> nutrition tracker </Link>
                 can help you refine your diet and further boost your progress.
               </p>
+              <button
+                onClick={() => toggleExpand(2)}
+                className="text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white"
+              >
+                {expandedParagraph === 2 ? 'Show Less' : 'Show More'}
+              </button>
             </li>
             <li>
               ✅ <span className="font-bold text-black dark:text-white">Optimize Your Strength Training</span>
-              <p>
+              <p className={`${expandedParagraph === 3 ? '' : 'line-clamp-3'}`}>
                 By tracking your workout sessions, you can analyze your performance and tailor your routines to maximize strength gains.
                 In addition, our nutrition tracker can provide insights into your diet, ensuring you're fueling your body properly for
                 <strong className="text-teal-800 dark:text-white"> maximum performance</strong>.
               </p>
+              <button
+                onClick={() => toggleExpand(3)}
+                className="text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white"
+              >
+                {expandedParagraph === 3 ? 'Show Less' : 'Show More'}
+              </button>
             </li>
             <li>
               ✅ <span className="font-bold text-black dark:text-white">Break Through Fitness Plateaus</span>
-              <p>
+              <p className={`${expandedParagraph === 4 ? '' : 'line-clamp-3'}`}>
                 Tracking your progress helps you identify when you hit a plateau. Whether it's your workout performance or your nutrition,
                 understanding both sides helps you make the necessary adjustments. Combining a workout tracker with a nutrition tracker
                 can be the key to overcoming obstacles and continuing to progress.
               </p>
+              <button
+                onClick={() => toggleExpand(4)}
+                className="text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white"
+              >
+                {expandedParagraph === 4 ? 'Show Less' : 'Show More'}
+              </button>
             </li>
             <li>
               <a href="https://www.fitnessfirst.co.uk/blog/how-and-why-should-i-track-my-workouts"
