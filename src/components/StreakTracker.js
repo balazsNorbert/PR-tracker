@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import WorkoutCalendar from './WorkoutCalendar';
 
 const StreakTracker = ({ userId, workouts }) => {
   const apiURL = process.env.REACT_APP_API_URL;
@@ -7,6 +8,8 @@ const StreakTracker = ({ userId, workouts }) => {
   const [weeklyGoal, setWeeklyGoal] = useState(0);
   const [completedWorkouts, setCompletedWorkouts] = useState(0);
   const [hovered, setHovered] = useState(false);
+  const [workoutDays, setWorkoutDays] = useState([]);
+  const [streakAchievedWeeks, setStreakAchievedWeeks] = useState(0);
 
   const calculateCompletedWorkouts = (workouts) => {
     const today = new Date();
@@ -25,6 +28,43 @@ const StreakTracker = ({ userId, workouts }) => {
     return uniqueWorkoutDays.size;
   }
 
+  const calculateWorkoutDaysAndStreak = useCallback((workouts) => {
+    const workoutDaysSet = new Set();
+    const streakWeeksMap = new Map();
+
+    workouts.forEach((workout) => {
+      const workoutDate = new Date(workout.date);
+      const startOfWeek = new Date(workoutDate);
+      startOfWeek.setDate(workoutDate.getDate() - workoutDate.getDay());
+      startOfWeek.setHours(0, 0, 0, 0);
+
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6);
+      endOfWeek.setHours(23, 59, 59, 999);
+
+      const weekIdentifier = startOfWeek.toISOString().split("T")[0];
+
+      if (!streakWeeksMap.has(weekIdentifier)) {
+        streakWeeksMap.set(weekIdentifier, { startDate: startOfWeek, endDate: endOfWeek, workouts: [] });
+      } streakWeeksMap.get(weekIdentifier).workouts.push(workoutDate);
+      workoutDaysSet.add(workoutDate.toDateString());
+    });
+
+    const streakAchievedWeeks = [];
+    streakWeeksMap.forEach((week, weekIdentifier) => {
+      const completedWorkoutsInWeek = week.workouts.length;
+      if (completedWorkoutsInWeek >= weeklyGoal) {
+        streakAchievedWeeks.push({
+          ...week,
+          completedWorkoutsInWeek,
+          weekIdentifier,
+        });
+      }
+    });
+    setWorkoutDays(Array.from(workoutDaysSet));
+    setStreakAchievedWeeks(Array.from(streakWeeksMap.values()));
+  }, [weeklyGoal]);
+
   useEffect(() => {
     const completedWorkoutsThisWeek = calculateCompletedWorkouts(workouts);
 
@@ -34,12 +74,13 @@ const StreakTracker = ({ userId, workouts }) => {
         setStreak( response.data.streak );
         setWeeklyGoal(response.data.weeklyGoal);
         setCompletedWorkouts(completedWorkoutsThisWeek);
+        calculateWorkoutDaysAndStreak(workouts);
       } catch (error) {
         console.error("Error fetching streak:", error);
       }
     };
     fetchStreak();
-  }, [userId, apiURL, workouts]);
+  }, [userId, apiURL, workouts, calculateWorkoutDaysAndStreak]);
 
   const updateWeeklyGoal = async (userId, newGoal) => {
     const completedWorkoutsThisWeek = calculateCompletedWorkouts(workouts);
@@ -112,6 +153,9 @@ const StreakTracker = ({ userId, workouts }) => {
         <h3 className="font-bold text-xl">
           Workout frequency
         </h3>
+        <div className="w-full">
+          <WorkoutCalendar workoutDays={workoutDays} streakAchievedWeeks={streakAchievedWeeks}/>
+        </div>
         <select
           value={weeklyGoal}
           onChange={(e) => updateWeeklyGoal(userId, e.target.value)}

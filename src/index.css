@@ -13,3 +13,50 @@
   background-size: 200px 200px;
   background-color: green;
 }
+
+.react-calendar__navigation {
+    .react-calendar__navigation__label {
+      font-weight: bold;
+    }
+}
+
+.react-calendar__navigation button{
+  color: #00796b;
+}
+
+.react-calendar abbr {
+  color: #004d40;
+}
+
+.react-calendar {
+  background-color: #e0f7fa !important;
+  color: #004d40 !important;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+.react-calendar__tile {
+  border: 1px solid lightgray !important;
+}
+
+.react-calendar__tile--now {
+  border: 2px solid rgb(255, 0, 0) !important;
+}
+
+
+abbr[title] {
+  text-decoration: none;
+}
+
+.workout-day {
+  background-color: rgb(4, 217, 33) !important;
+}
+
+.streak-week {
+  background-color: rgb(220, 125, 0) !important;
+}
+
+.workout-day.streak-week {
+  background-color: rgb(220, 125, 0) !important;
+}
