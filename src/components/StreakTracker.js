@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Range } from 'react-range';
 import axios from 'axios';
 import WorkoutCalendar from './WorkoutCalendar';
 
 const StreakTracker = ({ userId, workouts }) => {
   const apiURL = process.env.REACT_APP_API_URL;
   const [streak, setStreak] = useState(0);
-  const [weeklyGoal, setWeeklyGoal] = useState(0);
+  const [weeklyGoal, setWeeklyGoal] = useState(3);
   const [completedWorkouts, setCompletedWorkouts] = useState(0);
   const [hovered, setHovered] = useState(false);
   const [workoutDays, setWorkoutDays] = useState([]);
@@ -156,21 +157,38 @@ const StreakTracker = ({ userId, workouts }) => {
         <div className="max-w-full shadow-xl">
           <WorkoutCalendar workoutDays={workoutDays} streakAchievedWeeks={streakAchievedWeeks}/>
         </div>
-        <select
-          value={weeklyGoal}
-          onChange={(e) => updateWeeklyGoal(userId, e.target.value)}
-          className="font-semibold text-base md:text-lg text-black dark:text-white p-4 rounded-2xl border dark:border-none shadow-lg
-          focus:outline-none focus:ring-2 focus:ring-teal-400 dark:bg-gray-900
-        dark:focus:ring-teal-400 transition duration-300 w-full"
-        >
-          <option value="1">1 workout / week</option>
-          <option value="2">2 workouts / week</option>
-          <option value="3">3 workouts / week</option>
-          <option value="4">4 workouts / week</option>
-          <option value="5">5 workouts / week</option>
-          <option value="6">6 workouts / week</option>
-          <option value="7">7 workouts / week</option>
-        </select>
+        <h4 className="text-xl font-semibold text-center">Select Your Weekly Workout Goal</h4>
+        <div className="w-full mt-4">
+          <Range
+            step={1}
+            min={1}
+            max={7}
+            values={[weeklyGoal]}
+            onChange={(values) => {
+              setWeeklyGoal(values[0]);
+              updateWeeklyGoal(userId, values[0]);
+            }}
+            renderTrack={({ props, children }) => (
+              <div
+                {...props}
+                className="w-full h-2 bg-teal-300 dark:bg-teal-700 rounded-full"
+              >
+                {children}
+              </div>
+            )}
+            renderThumb={({ index, props }) => (
+              <div
+                {...props}
+                className="w-6 h-6 bg-teal-600 dark:bg-teal-400 rounded-full shadow-md"
+              />
+            )}
+          />
+          <div className="flex justify-between w-full mt-2 text-xs font-semibold text-teal-400">
+            {[...Array(7).keys()].map((i) => (
+              <span key={i + 1}>{i + 1}</span>
+            ))}
+          </div>
+        </div>
         <div className="w-full bg-white dark:bg-gray-900 transition duration-300 rounded-xl p-4 shadow-md">
           <p className="text-base md:text-lg font-semibold text-black dark:text-white mb-2">
             <span className="font-bold">{completedWorkouts} / {weeklyGoal}</span> workouts done this week
