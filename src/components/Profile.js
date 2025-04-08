@@ -309,7 +309,7 @@ const Profile = () => {
                     const progress = calculateProgress(goal, workouts)
                     return (
                       !goal.achieved ? (
-                      <li key={goal._id} className="flex justify-between p-4 rounded-lg shadow-md bg-teal-500/70 dark:bg-gray-500/80 transition duration-300 relative">
+                      <li key={goal._id} className="flex justify-between md:gap-5 p-4 rounded-lg shadow-md bg-teal-500/70 dark:bg-gray-500/80 transition duration-300 relative">
                         {progress === 100 && !goal.achieved && (
                           <div className="absolute top-1 right-1 animate-pulse">
                             🎯
@@ -317,8 +317,8 @@ const Profile = () => {
                         )}
                         <div className="flex flex-col items-start gap-1 w-full">
                           {goal.set && (
-                            <h4 className="text-xs md:text-sm xl:text-base font-semibold">
-                              <span className="text-sm md:text-base xl:text-lg">{goal.exerciseName}:  </span>{goal.set.weight} kg - {goal.set.reps} reps
+                            <h4 className="text-sm md:text-base xl:text-lg font-semibold">
+                              <span className="text-base md:text-lg xl:text-xl">{goal.exerciseName}:</span> {goal.set.weight} kg x {goal.set.reps} reps
                             </h4>
                           )}
                           <div className="text-xs md:text-sm text-white mx-auto font-medium mt-1">
@@ -373,7 +373,7 @@ const Profile = () => {
                       <div className="flex flex-col">
                         {goal.set && (
                           <h4 className="text-sm md:text-base xl:text-lg font-semibold">
-                            <span className="text-base md:text-lg xl:text-xl">{goal.exerciseName}</span>: {goal.set.weight} kg - {goal.set.reps} reps
+                            <span className="text-base md:text-lg xl:text-xl">{goal.exerciseName}</span>: {goal.set.weight} kg x {goal.set.reps} reps
                           </h4>
                         )}
                       </div>
@@ -381,7 +381,7 @@ const Profile = () => {
                         onClick={() => deleteGoal(goal._id)}
                         className="text-red-600 hover:text-red-700 transition duration-300"
                       >
-                        <span className="material-icons">
+                        <span className="material-icons mt-2">
                           delete
                         </span>
                       </button>

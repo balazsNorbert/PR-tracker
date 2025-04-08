@@ -1,12 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { Range } from 'react-range';
 import axios from 'axios';
+import WorkoutCalendar from './WorkoutCalendar';
 
 const StreakTracker = ({ userId, workouts }) => {
   const apiURL = process.env.REACT_APP_API_URL;
   const [streak, setStreak] = useState(0);
-  const [weeklyGoal, setWeeklyGoal] = useState(0);
+  const [weeklyGoal, setWeeklyGoal] = useState(3);
   const [completedWorkouts, setCompletedWorkouts] = useState(0);
   const [hovered, setHovered] = useState(false);
+  const [workoutDays, setWorkoutDays] = useState([]);
+  const [streakAchievedWeeks, setStreakAchievedWeeks] = useState(0);
 
   const calculateCompletedWorkouts = (workouts) => {
     const today = new Date();
@@ -25,6 +29,43 @@ const StreakTracker = ({ userId, workouts }) => {
     return uniqueWorkoutDays.size;
   }
 
+  const calculateWorkoutDaysAndStreak = useCallback((workouts) => {
+    const workoutDaysSet = new Set();
+    const streakWeeksMap = new Map();
+
+    workouts.forEach((workout) => {
+      const workoutDate = new Date(workout.date);
+      const startOfWeek = new Date(workoutDate);
+      startOfWeek.setDate(workoutDate.getDate() - workoutDate.getDay());
+      startOfWeek.setHours(0, 0, 0, 0);
+
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6);
+      endOfWeek.setHours(23, 59, 59, 999);
+
+      const weekIdentifier = startOfWeek.toISOString().split("T")[0];
+
+      if (!streakWeeksMap.has(weekIdentifier)) {
+        streakWeeksMap.set(weekIdentifier, { startDate: startOfWeek, endDate: endOfWeek, workouts: [] });
+      } streakWeeksMap.get(weekIdentifier).workouts.push(workoutDate);
+      workoutDaysSet.add(workoutDate.toDateString());
+    });
+
+    const streakAchievedWeeks = [];
+    streakWeeksMap.forEach((week, weekIdentifier) => {
+      const completedWorkoutsInWeek = week.workouts.length;
+      if (completedWorkoutsInWeek >= weeklyGoal) {
+        streakAchievedWeeks.push({
+          ...week,
+          completedWorkoutsInWeek,
+          weekIdentifier,
+        });
+      }
+    });
+    setWorkoutDays(Array.from(workoutDaysSet));
+    setStreakAchievedWeeks(streakAchievedWeeks);
+  }, [weeklyGoal]);
+
   useEffect(() => {
     const completedWorkoutsThisWeek = calculateCompletedWorkouts(workouts);
 
@@ -34,12 +75,13 @@ const StreakTracker = ({ userId, workouts }) => {
         setStreak( response.data.streak );
         setWeeklyGoal(response.data.weeklyGoal);
         setCompletedWorkouts(completedWorkoutsThisWeek);
+        calculateWorkoutDaysAndStreak(workouts);
       } catch (error) {
         console.error("Error fetching streak:", error);
       }
     };
     fetchStreak();
-  }, [userId, apiURL, workouts]);
+  }, [userId, apiURL, workouts, calculateWorkoutDaysAndStreak]);
 
   const updateWeeklyGoal = async (userId, newGoal) => {
     const completedWorkoutsThisWeek = calculateCompletedWorkouts(workouts);
@@ -112,25 +154,53 @@ const StreakTracker = ({ userId, workouts }) => {
         <h3 className="font-bold text-xl">
           Workout frequency
         </h3>
-        <select
-          value={weeklyGoal}
-          onChange={(e) => updateWeeklyGoal(userId, e.target.value)}
-          className="font-bold text-base md:text-lg text-black dark:text-white p-3 rounded-lg border dark:border-none shadow-lg
-          focus:outline-none focus:ring-2 focus:ring-teal-400 dark:bg-gray-900
-        dark:focus:ring-teal-400 transition duration-300 w-full"
-        >
-          <option value="1">1 workout / week</option>
-          <option value="2">2 workouts / week</option>
-          <option value="3">3 workouts / week</option>
-          <option value="4">4 workouts / week</option>
-          <option value="5">5 workouts / week</option>
-          <option value="6">6 workouts / week</option>
-          <option value="7">7 workouts / week</option>
-        </select>
-        <p className="bg-white dark:bg-gray-900 rounded-lg text-base md:text-lg text-black dark:text-white w-full p-2 font-semibold transition duration-300">
-          <span className="text-lg md:text-xl">{completedWorkouts} / {weeklyGoal} </span>
-          workout done this week
-        </p>
+        <div className="max-w-full shadow-xl">
+          <WorkoutCalendar workoutDays={workoutDays} streakAchievedWeeks={streakAchievedWeeks}/>
+        </div>
+        <h4 className="text-xl font-semibold text-center">Select Your Weekly Workout Goal</h4>
+        <div className="w-full mt-4">
+          <Range
+            step={1}
+            min={1}
+            max={7}
+            values={[weeklyGoal]}
+            onChange={(values) => {
+              setWeeklyGoal(values[0]);
+              updateWeeklyGoal(userId, values[0]);
+            }}
+            renderTrack={({ props, children }) => (
+              <div
+                {...props}
+                className="w-full h-2 bg-teal-300 dark:bg-teal-700 rounded-full"
+              >
+                {children}
+              </div>
+            )}
+            renderThumb={({ index, props }) => (
+              <div
+                {...props}
+                className="w-6 h-6 bg-teal-600 dark:bg-teal-400 rounded-full shadow-md"
+                key={index}
+              />
+            )}
+          />
+          <div className="flex justify-between w-full mt-2 text-xs font-semibold text-teal-400">
+            {[...Array(7).keys()].map((i) => (
+              <span key={i + 1}>{i + 1}</span>
+            ))}
+          </div>
+        </div>
+        <div className="w-full bg-white dark:bg-gray-900 transition duration-300 rounded-xl p-4 shadow-md">
+          <p className="text-base md:text-lg font-semibold text-black dark:text-white mb-2">
+            <span className="font-bold">{completedWorkouts} / {weeklyGoal}</span> workouts done this week
+          </p>
+          <div className="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-3">
+            <div
+              className="bg-teal-600 h-3 rounded-full transition-all duration-500"
+              style={{ width: `${Math.min((completedWorkouts / weeklyGoal) * 100, 100)}%` }}
+            />
+          </div>
+        </div>
         <p className="text-lg md:text-xl italic">
           {completedWorkouts >= weeklyGoal ? (
             " Good job! 💪"

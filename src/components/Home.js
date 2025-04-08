@@ -42,7 +42,7 @@ function Home() {
       { src: "/images/nutritionTrackerDesktop.webp", alt: "Nutrition tracker for tracking macros and goals", description: "Track nutrition to help monitor macros for a balanced diet." },
       { src: "/images/darkMode.webp", alt: "Enable dark mode for better workout tracking experience", description: "Switch to Dark Mode" },
       { src: "/images/rankDesktop.webp", alt: "Ranking based on consistency", description: "See your weekly rank" },
-      { src: "/images/workoutFrequencyDesktop.webp", alt: "Monitor workout frequency and training consistency", description: "Monitor workout consistency" },
+      { src: "/images/workoutFrequency.webp", alt: "Monitor workout frequency and training consistency", description: "Monitor workout consistency" },
       { src: "/images/bodyWeightTracker.webp", alt: "Monitor body weight on a diagramm", description: "Track body weight" },
       { src: "/images/trackGoals.webp", alt: "Set and track fitness goals with progress updates", description: "Set & track goals" },
       { src: "/images/feedback.webp", alt: "Share feedback to improve the workout tracker app", description: "Share your feedback" },
