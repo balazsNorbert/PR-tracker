@@ -7,14 +7,13 @@ const WorkoutCalendar = ({ workoutDays, streakAchievedWeeks }) => {
 
   const tileClassName = ({ date, view }) => {
     const workoutDate = workoutDays.find(d => new Date(d).toDateString() === date.toDateString());
-    let streakWeek = null;
+    const streakWeek =Array.isArray(streakAchievedWeeks) && streakAchievedWeeks.some(week => {
+      const current = date.setHours(0, 0, 0, 0);
+      const start = new Date(week.startDate).setHours(0, 0, 0, 0);
+      const end = new Date(week.endDate).setHours(0, 0, 0, 0);
+      return current >= start && current <= end;
+    });
 
-    if (Array.isArray(streakAchievedWeeks)) {
-      streakWeek = streakAchievedWeeks.find(week =>
-        new Date(week.startDate).toDateString() <= date.toDateString() &&
-        new Date(week.endDate).toDateString() >= date.toDateString()
-      );
-    }
     if(workoutDate && streakWeek) {
       return 'workout-day streak-week';
     }

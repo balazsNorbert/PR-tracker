@@ -62,7 +62,7 @@ const StreakTracker = ({ userId, workouts }) => {
       }
     });
     setWorkoutDays(Array.from(workoutDaysSet));
-    setStreakAchievedWeeks(Array.from(streakWeeksMap.values()));
+    setStreakAchievedWeeks(streakAchievedWeeks);
   }, [weeklyGoal]);
 
   useEffect(() => {
@@ -153,13 +153,13 @@ const StreakTracker = ({ userId, workouts }) => {
         <h3 className="font-bold text-xl">
           Workout frequency
         </h3>
-        <div className="w-full">
+        <div className="max-w-full shadow-xl">
           <WorkoutCalendar workoutDays={workoutDays} streakAchievedWeeks={streakAchievedWeeks}/>
         </div>
         <select
           value={weeklyGoal}
           onChange={(e) => updateWeeklyGoal(userId, e.target.value)}
-          className="font-bold text-base md:text-lg text-black dark:text-white p-3 rounded-lg border dark:border-none shadow-lg
+          className="font-semibold text-base md:text-lg text-black dark:text-white p-4 rounded-2xl border dark:border-none shadow-lg
           focus:outline-none focus:ring-2 focus:ring-teal-400 dark:bg-gray-900
         dark:focus:ring-teal-400 transition duration-300 w-full"
         >
@@ -171,10 +171,17 @@ const StreakTracker = ({ userId, workouts }) => {
           <option value="6">6 workouts / week</option>
           <option value="7">7 workouts / week</option>
         </select>
-        <p className="bg-white dark:bg-gray-900 rounded-lg text-base md:text-lg text-black dark:text-white w-full p-2 font-semibold transition duration-300">
-          <span className="text-lg md:text-xl">{completedWorkouts} / {weeklyGoal} </span>
-          workout done this week
-        </p>
+        <div className="w-full bg-white dark:bg-gray-900 transition duration-300 rounded-xl p-4 shadow-md">
+          <p className="text-base md:text-lg font-semibold text-black dark:text-white mb-2">
+            <span className="font-bold">{completedWorkouts} / {weeklyGoal}</span> workouts done this week
+          </p>
+          <div className="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-3">
+            <div
+              className="bg-teal-600 h-3 rounded-full transition-all duration-500"
+              style={{ width: `${Math.min((completedWorkouts / weeklyGoal) * 100, 100)}%` }}
+            />
+          </div>
+        </div>
         <p className="text-lg md:text-xl italic">
           {completedWorkouts >= weeklyGoal ? (
             " Good job! 💪"
