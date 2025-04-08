@@ -180,6 +180,7 @@ const StreakTracker = ({ userId, workouts }) => {
               <div
                 {...props}
                 className="w-6 h-6 bg-teal-600 dark:bg-teal-400 rounded-full shadow-md"
+                key={index}
               />
             )}
           />
