@@ -40,10 +40,13 @@
   border: 1px solid lightgray !important;
 }
 
-.react-calendar__tile--now {
+.react-calendar__tile--now.workout-day {
   border: 2px solid rgb(255, 0, 0) !important;
 }
 
+.react-calendar__tile--now.streak-week {
+  border: 2px solid rgb(255, 0, 0) !important;
+}
 
 abbr[title] {
   text-decoration: none;
