@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import debounce from 'lodash.debounce';
 import { Range } from 'react-range';
 import axios from 'axios';
 import WorkoutCalendar from './WorkoutCalendar';
@@ -67,21 +68,23 @@ const StreakTracker = ({ userId, workouts }) => {
   }, [weeklyGoal]);
 
   useEffect(() => {
-    const completedWorkoutsThisWeek = calculateCompletedWorkouts(workouts);
-
     const fetchStreak = async () => {
       try {
         const response = await axios.get(`${apiURL}/users/${userId}/streak`);
         setStreak( response.data.streak );
         setWeeklyGoal(response.data.weeklyGoal);
-        setCompletedWorkouts(completedWorkoutsThisWeek);
-        calculateWorkoutDaysAndStreak(workouts);
       } catch (error) {
         console.error("Error fetching streak:", error);
       }
     };
     fetchStreak();
-  }, [userId, apiURL, workouts, calculateWorkoutDaysAndStreak]);
+  }, [userId, apiURL]);
+
+  useEffect(() => {
+    const completedWorkoutsThisWeek = calculateCompletedWorkouts(workouts);
+    setCompletedWorkouts(completedWorkoutsThisWeek);
+    calculateWorkoutDaysAndStreak(workouts);
+  }, [workouts, calculateWorkoutDaysAndStreak]);
 
   const updateWeeklyGoal = async (userId, newGoal) => {
     const completedWorkoutsThisWeek = calculateCompletedWorkouts(workouts);
@@ -98,6 +101,10 @@ const StreakTracker = ({ userId, workouts }) => {
       console.error('Error updating weekly goal: ', error);
     }
   }
+
+  const updateWeeklyGoalDebounced = debounce((userId, newGoal) => {
+    updateWeeklyGoal(userId, newGoal);
+  }, 300);
 
   const getStreakLevel = (streak) => {
     if (streak >= 250) return { label: "Titan", color: "text-cyan-800", icon: "diamond" };
@@ -165,7 +172,7 @@ const StreakTracker = ({ userId, workouts }) => {
             max={7}
             values={[weeklyGoal]}
             onChange={(values) => {
-              updateWeeklyGoal(userId, values[0]);
+              updateWeeklyGoalDebounced(userId, values[0]);
             }}
             renderTrack={({ props, children }) => (
               <div
