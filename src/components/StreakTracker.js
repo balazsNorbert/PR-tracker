@@ -16,6 +16,9 @@ const StreakTracker = ({ userId, workouts }) => {
   const calculateCompletedWorkouts = (workouts) => {
     const today = new Date();
     const startOfWeek = new Date(today);
+    const day = today.getDay();
+    const diffToMonday = day === 0 ? -6 : 1 - day;
+    startOfWeek.setDate(today.getDate() + diffToMonday);
     startOfWeek.setDate(today.getDate() - today.getDay() + 1);
     startOfWeek.setHours(0, 0, 0, 0);
     const endOfWeek = new Date(startOfWeek);
@@ -37,7 +40,9 @@ const StreakTracker = ({ userId, workouts }) => {
     workouts.forEach((workout) => {
       const workoutDate = new Date(workout.date);
       const startOfWeek = new Date(workoutDate);
-      startOfWeek.setDate(workoutDate.getDate() - workoutDate.getDay());
+      const day = workoutDate.getDay();
+      const diffToMonday = day === 0 ? -6 : 1 - day;
+      startOfWeek.setDate(workoutDate.getDate() + diffToMonday);
       startOfWeek.setHours(0, 0, 0, 0);
 
       const endOfWeek = new Date(startOfWeek);
