@@ -27,7 +27,8 @@ const Profile = () => {
       const goalsResponse = await axios.get(`${apiURL}/goals/${userId}`);
       const workoutsResponse = await axios.get(`${apiURL}/workouts`);
       setGoals(goalsResponse.data);
-      setWorkouts(workoutsResponse.data);
+      const filteredWorkouts = workoutsResponse.data.filter(workout => workout.exercise && workout.exercise.length > 0);
+      setWorkouts(filteredWorkouts);
     } catch (error) {
       console.log("Error adding goal:", error);
     }
@@ -40,6 +41,19 @@ const Profile = () => {
       fetchGoals(user.userId);
     }
   }, [fetchGoals, user]);
+
+  useEffect(() => {
+    const fetchWorkouts = async () => {
+      try {
+        const workoutsResponse = await axios.get(`${apiURL}/workouts`);
+        const filteredWorkouts = workoutsResponse.data.filter(workout => workout.exercise && workout.exercise.length > 0);
+        setWorkouts(filteredWorkouts);
+      } catch (error) {
+        console.log("Error fetching workouts:", error);
+      }
+    };
+    fetchWorkouts();
+  }, [apiURL]);
 
   const handleExerciseChange = (e) => {
     const value = e.target.value;
