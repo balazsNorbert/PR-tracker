@@ -165,7 +165,6 @@ const StreakTracker = ({ userId, workouts }) => {
             max={7}
             values={[weeklyGoal]}
             onChange={(values) => {
-              setWeeklyGoal(values[0]);
               updateWeeklyGoal(userId, values[0]);
             }}
             renderTrack={({ props, children }) => (
