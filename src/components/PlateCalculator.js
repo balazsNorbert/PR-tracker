@@ -214,7 +214,7 @@ const PlateCalculator = () => {
           {plateResult.length > 0 && (
             <div className="flex flex-col items-center gap-2">
               <h3 className="font-semibold">Barbell Setup:</h3>
-              <div className={`flex justify-center h-24 ${plateResult.length > 11 ? "-mx-56" : " -mx-14"} bg-gray-100 rounded p-2 scale-[.8] md:scale-100 max-w-full -mx-9`}>
+              <div className={`flex justify-center h-24 ${plateResult.length > 11 ? "-mx-56" : " -mx-14"} bg-gray-100 rounded p-2 scale-[.65] md:scale-100 max-w-full -mx-9`}>
                 {[...plateResult].reverse().map((p, i) => (
                     <div
                       key={i}
