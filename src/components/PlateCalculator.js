@@ -65,7 +65,7 @@ const PlateCalculator = () => {
   const [customPlate, setCustomPlate] = useState("");
   const [plateResult, setPlateResult] = useState([]);
   const [calcStatus, setCalcStatus] = useState(null);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   useEffect(() => {
@@ -124,7 +124,7 @@ const PlateCalculator = () => {
   return (
     <>
       {isVisible ? (
-        <div className="relative top-20 xs:top-0 right-9 md:right-0 flex flex-col gap-4 max-w-xl bg-gray-800 border-2 border-gray-700 rounded-lg mx-5 p-4">
+        <div className="relative top-28 xs:top-0 right-9 md:right-0 flex flex-col gap-4 w-full bg-gray-800 border-2 border-gray-700 rounded-lg mx-5 p-4">
           <button
               onClick={toggleVisibility}
               className="absolute top-2 right-2 bg-gray-900 text-white rounded-lg shadow-lg hover:bg-gray-600 transition"
@@ -214,7 +214,7 @@ const PlateCalculator = () => {
           {plateResult.length > 0 && (
             <div className="flex flex-col items-center gap-2">
               <h3 className="font-semibold">Barbell Setup:</h3>
-              <div className="flex justify-center h-24 scale-75 md:scale-100 bg-gray-100 rounded p-2 max-w-full -mx-9">
+              <div className={`flex justify-center h-24 ${plateResult.length > 11 ? "-mx-56" : " -mx-14"} bg-gray-100 rounded p-2 scale-[.8] md:scale-100 max-w-full -mx-9`}>
                 {[...plateResult].reverse().map((p, i) => (
                     <div
                       key={i}

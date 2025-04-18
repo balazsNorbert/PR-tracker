@@ -16,6 +16,8 @@ function Home() {
     mobile: [
       { src: "/images/addExercise.webp", alt: "Add a new exercise to your workout log", description: "Log new exercises" },
       { src: "/images/PrNotification.webp", alt: "Personal record (PR) notification for workout progress", description: "Get PR alerts" },
+      { src: "/images/plateCalculatorMobile.webp", alt: "Plate calculator showing selected weight plates on a barbell", description: "Calculate your barbell setup easily" },
+      { src: "/images/stopper.webp", alt: "Workout stopwatch tracking rest time", description: "Track your rest and workout time" },
       { src: "/images/workoutExercisesMobile.webp", alt: "Weekly workout planner for tracking exercises", description: "Plan weekly workouts" },
       { src: "/images/workoutMuscleGroupsMobile.webp", alt: "Track weekly workouts by targeted muscle groups", description: "Plan weekly workouts" },
       { src: "/images/addNote.webp", alt: "Add custom workout notes for better tracking", description: "Add workout notes" },
@@ -34,6 +36,8 @@ function Home() {
     desktop: [
       { src: "/images/addExercise.webp", alt: "Add a new exercise to your workout log", description: "Log new exercises" },
       { src: "/images/PrNotificationDesktop.webp", alt: "Personal record (PR) notification for workout progress", description: "Get PR alerts" },
+      { src: "/images/plateCalculatorDesktop.webp", alt: "Plate calculator showing selected weight plates on a barbell", description: "Calculate your barbell setup easily" },
+      { src: "/images/stopper.webp", alt: "Workout stopwatch tracking rest time", description: "Track your rest and workout time" },
       { src: "/images/workoutExercisesDesktop.webp", alt: "Weekly workout planner for tracking exercises", description: "Plan weekly workouts" },
       { src: "/images/workoutMuscleGroupsDesktop.webp", alt: "Track weekly workouts by targeted muscle groups", description: "Target muscle groups weekly" },
       { src: "/images/addNoteDesktop.webp", alt: "Add custom workout notes for better tracking", description: "Add workout notes" },
