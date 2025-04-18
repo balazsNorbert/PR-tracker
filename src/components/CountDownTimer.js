@@ -78,19 +78,19 @@ const CountDownTimer = () => {
 
   return (
     <div className="flex flex-col items-end justify-center gap-4  text-4xl">
-       <button
-        onClick={toggleVisibility}
-        className="bg-gray-800 dark:bg-gray-600 text-white rounded-xl shadow-lg hover:bg-gray-600 dark:hover:bg-gray-700 transition"
+      <button
+       onClick={toggleVisibility}
+       className="relative bg-gray-800 text-white rounded-xl shadow-lg hover:bg-gray-600 transition"
       >
         {isVisible ? (
-          <span className="text-4xl px-3">-</span>
+          <span className="relative bottom-1 text-4xl px-3">-</span>
         ) : (
           <span className="material-icons text-3xl p-2">alarm_on</span>
         )}
       </button>
       {isVisible && (
         <>
-          <div className="flex items-center font-mono font-bold bg-gray-800 dark:bg-gray-600 rounded-xl p-2">
+          <div className="flex items-center font-mono font-bold bg-gray-800 rounded-xl p-2">
             <div className="flex flex-col items-center">
               <button
                 onClick={() => incrementDigit(minutesFirstDigit, setMinutesFirstDigit)}

@@ -1,6 +1,7 @@
 import React from 'react';
 import WorkoutList from './WorkoutList';
 import CountDownTimer from './CountDownTimer';
+import PlateCalculator from './PlateCalculator';
 import { Helmet } from 'react-helmet';
 
 const LogBook = () => {
@@ -17,6 +18,9 @@ const LogBook = () => {
         </div>
         <div className="fixed bottom-32 md:bottom-28 right-5 z-10">
           <CountDownTimer />
+        </div>
+        <div className="fixed bottom-32 md:bottom-28 left-5 z-10">
+          <PlateCalculator />
         </div>
       </div>
     </>
