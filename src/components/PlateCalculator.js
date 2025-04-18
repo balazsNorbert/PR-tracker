@@ -124,7 +124,7 @@ const PlateCalculator = () => {
   return (
     <>
       {isVisible ? (
-        <div className="relative right-9 md:right-0 flex flex-col gap-4 max-w-xl bg-gray-800 rounded-lg mx-5 p-4">
+        <div className="relative top-20 xs:top-0 right-9 md:right-0 flex flex-col gap-4 max-w-xl bg-gray-800 border-2 border-gray-700 rounded-lg mx-5 p-4">
           <button
               onClick={toggleVisibility}
               className="absolute top-2 right-2 bg-gray-900 text-white rounded-lg shadow-lg hover:bg-gray-600 transition"
@@ -132,7 +132,7 @@ const PlateCalculator = () => {
             <span className="relative bottom-1 text-4xl px-3">-</span>
           </button>
           <h2 className="text-xl font-bold">Plate Calculator</h2>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex justify-between flex-wrap gap-4">
             <div className="flex flex-wrap gap-4">
               <div className="flex flex-col gap-2">
                 <label className="text-sm">Target Weight</label>
@@ -185,23 +185,26 @@ const PlateCalculator = () => {
             </div>
             <div className="flex flex-col gap-1">
               <label className="text-sm">Add plates</label>
-              <div className="flex flex-wrap gap-4">
-                <input
-                  type="number"
-                  className="text-black border rounded px-2 py-1 w-20"
-                  value={customPlate}
-                  onChange={(e) => setCustomPlate(e.target.value)}
-                  placeholder="7.5"
-                />
-                <button
-                  onClick={addCustomPlate}
-                  className="bg-green-500 text-white px-3 py-1 rounded"
-                >
-                  Add
-                </button>
+              <div className="flex justify-between flex-wrap gap-4">
+                <div className="flex gap-4">
+                  <input
+                    type="number"
+                    className="text-black bg-white border px-2 py-1 w-20 text-sm md:text-base border-gray-300
+                    rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-300"
+                    value={customPlate}
+                    onChange={(e) => setCustomPlate(e.target.value)}
+                    placeholder="7.5"
+                  />
+                  <button
+                    onClick={addCustomPlate}
+                    className="bg-green-500 text-white px-3 py-1 rounded"
+                  >
+                    Add
+                  </button>
+                </div>
                 <button
                   onClick={calculate}
-                  className="bg-black text-white px-4 py-2 rounded"
+                  className="bg-black text-white px-3 py-1 rounded"
                 >
                   Calculate
                 </button>
@@ -209,9 +212,9 @@ const PlateCalculator = () => {
             </div>
           </div>
           {plateResult.length > 0 && (
-            <div className="relative flex flex-col w-auto gap-2">
+            <div className="flex flex-col items-center gap-2">
               <h3 className="font-semibold">Barbell Setup:</h3>
-              <div className="relative right-9 sm:right-0 flex justify-center h-24 scale-75 md:scale-100 bg-gray-100 rounded p-2 max-w-full">
+              <div className="flex justify-center h-24 scale-75 md:scale-100 bg-gray-100 rounded p-2 max-w-full -mx-9">
                 {[...plateResult].reverse().map((p, i) => (
                     <div
                       key={i}
@@ -231,19 +234,21 @@ const PlateCalculator = () => {
               <p className="text-sm">
                 Total: {calcStatus.totalUsed} {unit} {calcStatus.success ? "✅" : "⚠️ Not exact match"}
               </p>
-              <p className="text-sm">
-                Per side:
-                {groupedPlates
-                  .map(({ weight, count }) => ` ${weight} ${unit} × ${count}`)
-                  .join(", ")}
-              </p>
+              <div className="flex flex-wrap text-sm gap-2">
+                <span>Per side:</span>
+                {groupedPlates.map(({ weight, count }, index) => (
+                  <span key={index}>
+                    {weight} {unit} x {count}
+                  </span>
+                ))}
+              </div>
             </div>
           )}
         </div>
       ) : (
         <button
           onClick={toggleVisibility}
-          className="bg-gray-800 dark:bg-gray-600 text-white rounded-xl p-2 shadow hover:bg-gray-700 transition"
+          className="bg-gray-800 text-white rounded-xl p-2 shadow hover:bg-gray-700 transition"
         >
           <span className="material-icons text-3xl">fitness_center</span>
         </button>
