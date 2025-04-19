@@ -12,6 +12,10 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   const [unit, setUnit] = useState('kg');
   const [suggestions, setSuggestions] = useState([]);
   const [muscleGroup, setMuscleGroup] = useState('');
+  const [isOneRepMaxVisible, setIsOneRepMaxVisible] = useState(false);
+  const [weight, setWeight] = useState('');
+  const [reps, setReps] = useState('');
+  const [oneRepMax, setOneRepMax] = useState(null);
   const user = useSelector((state) => state.auth.user);
 
   const handleExerciseChange = (e) => {
@@ -103,6 +107,17 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
     });
   };
 
+  const toggleOneRepMax = () => {
+    setIsOneRepMaxVisible(!isOneRepMaxVisible);
+  };
+
+  const calculateOneRepMax = () => {
+    if (weight && reps) {
+      const RM = parseFloat(weight) * (1 + 0.0333 * parseInt(reps));
+      setOneRepMax(RM.toFixed(2));
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2 md:gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-xl p-4 md:p-6 mt-5 lg:mt-10">
       <h2 className="text-xl md:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-1 md:mb-4">Add a New Exercise</h2>
@@ -179,7 +194,59 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         <option value="pull">Pull</option>
       </select>
     </div>
-      <label className="text-base md:text-xl font-medium text-gray-600  dark:text-white">Add Set</label>
+    <div className="flex flex-col gap-2 w-full">
+      <div className="flex justify-between items-center gap-2">
+        <label className="text-base md:text-xl font-medium text-gray-600  dark:text-white">Add Set</label>
+        <button
+          type="button"
+          onClick={toggleOneRepMax}
+          className="text-sm md:text-base text-teal-600 dark:text-white  hover:underline"
+        >
+          Calculate 1RM
+        </button>
+      </div>
+      {isOneRepMaxVisible && (
+        <div className="relative flex flex-col gap-4 p-4 border dark:border-gray-600 rounded-md w-full bg-gray-50 dark:bg-gray-800">
+          <div className="flex flex-col gap-2 mt-5">
+            <input
+              type="number"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              placeholder="Weight"
+              className="w-full text-black text-sm md:text-base dark:text-white dark:bg-gray-700 p-3 border border-gray-300 dark:border-gray-600
+              rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+            />
+            <input
+              type="number"
+              value={reps}
+              onChange={(e) => setReps(e.target.value)}
+              placeholder="Reps"
+              className="w-full text-black text-sm md:text-base dark:text-white dark:bg-gray-700 p-3 border border-gray-300 dark:border-gray-600
+              rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={calculateOneRepMax}
+            className="px-4 py-2 bg-teal-700 text-white rounded-lg"
+          >
+            Calculate
+          </button>
+
+          {oneRepMax && (
+            <div className="text-xl font-semibold text-teal-600">
+              Your 1 Rep Max is: {oneRepMax} kg
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={toggleOneRepMax}
+            className="absolute top-2 right-2 text-teal-500 hover:text-teal-400"
+          >
+            <span className="material-icons">close</span>
+          </button>
+        </div>
+      )}
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex gap-2 w-full">
           <input
@@ -230,6 +297,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
       <button type="submit" className="py-3 bg-teal-800 dark:bg-teal-900 font-semibold rounded-lg shadow-md hover:bg-teal-900 dark:hover:bg-teal-600 transition duration-300">
         Save Exercise
       </button>
+    </div>
     </form>
 
   );
