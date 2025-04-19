@@ -59,7 +59,7 @@ const calculatePlates = (target, barWeight, plates) => {
 
 const PlateCalculator = () => {
   const [unit, setUnit] = useState("kg");
-  const [targetWeight, setTargetWeight] = useState(100);
+  const [targetWeight, setTargetWeight] = useState("");
   const [barWeight, setBarWeight] = useState(20);
   const [availablePlates, setAvailablePlates] = useState([]);
   const [customPlate, setCustomPlate] = useState("");
@@ -138,10 +138,12 @@ const PlateCalculator = () => {
                 <label className="text-sm">Target Weight</label>
                 <input
                   type="number"
+                  min="1"
                   className="text-black w-24 border px-2 py-1 text-sm md:text-base  border-gray-300
                   rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-300"
                   value={targetWeight}
                   onChange={(e) => setTargetWeight(e.target.value)}
+                  placeholder="100"
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -161,10 +163,12 @@ const PlateCalculator = () => {
               <label className="text-sm">Bar Weight</label>
               <input
                 type="number"
+                min="1"
                 className="text-black w-20 border px-2 py-1 text-sm md:text-base  border-gray-300
                 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-300"
                 value={barWeight}
                 onChange={(e) => setBarWeight(e.target.value)}
+                placeholder="20"
               />
             </div>
           </div>
@@ -189,6 +193,7 @@ const PlateCalculator = () => {
                 <div className="flex gap-4">
                   <input
                     type="number"
+                    min="0"
                     className="text-black bg-white border px-2 py-1 w-20 text-sm md:text-base border-gray-300
                     rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400 transition duration-300"
                     value={customPlate}

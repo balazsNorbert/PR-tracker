@@ -114,7 +114,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   const calculateOneRepMax = () => {
     if (weight && reps) {
       const RM = parseFloat(weight) * (1 + 0.0333 * parseInt(reps));
-      setOneRepMax(RM.toFixed(2));
+      setOneRepMax(RM.toFixed(0));
     }
   };
 
@@ -218,6 +218,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
             />
             <input
               type="number"
+              min="2"
               value={reps}
               onChange={(e) => setReps(e.target.value)}
               placeholder="Reps"
@@ -234,7 +235,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           </button>
 
           {oneRepMax && (
-            <div className="text-xl font-semibold text-teal-600">
+            <div className="text-xl font-semibold text-teal-600 dark:text-white">
               Your 1 Rep Max is: {oneRepMax} kg
             </div>
           )}
@@ -266,6 +267,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
         </div>
         <input
           type="number"
+          min="1"
           name="reps"
           value={currentSet.reps}
           onChange={(e) => setCurrentSet({ ...currentSet, reps: e.target.value })}
