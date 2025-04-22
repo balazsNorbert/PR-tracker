@@ -215,7 +215,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
           >
           <span className="material-icons">info</span>
           {showInfo && (
-            <div className="absolute top-0 left-0 mt-6 bg-gray-800 dark:bg-gray-900 text-white p-4 rounded-lg shadow-xl w-52 md:w-64  z-10">
+            <div className="absolute top-0 left-0 mt-6 bg-gray-800 dark:bg-gray-900 text-white p-4 rounded-lg shadow-xl w-60 md:w-64 z-10">
               <p className="text-sm md:text-base font-semibold">
                 <span className="font-extrabold text-yellow-300 text-base md:text-lg">Note:</span> This 1 rep max calculator provides calculations for the <span className="text-yellow-400">Epley</span> formula!
               </p>
