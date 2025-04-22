@@ -16,6 +16,7 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
   const [weight, setWeight] = useState('');
   const [reps, setReps] = useState('');
   const [oneRepMax, setOneRepMax] = useState(null);
+  const [showInfo, setShowInfo] = useState(false);
   const user = useSelector((state) => state.auth.user);
 
   const handleExerciseChange = (e) => {
@@ -207,7 +208,21 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
       </div>
       {isOneRepMaxVisible && (
         <div className="relative flex flex-col gap-4 p-4 border dark:border-gray-600 rounded-md w-full bg-gray-50 dark:bg-gray-800">
-          <div className="flex flex-col gap-2 mt-5">
+          <div
+            className="cursor-pointer text-blue-500 relative w-fit"
+            onMouseEnter={() => setShowInfo(true)}
+            onMouseLeave={() => setShowInfo(false)}
+          >
+          <span className="material-icons">info</span>
+          {showInfo && (
+            <div className="absolute top-0 left-0 mt-6 bg-gray-800 dark:bg-gray-900 text-white p-4 rounded-lg shadow-xl w-52 md:w-64  z-10">
+              <p className="text-sm md:text-base font-semibold">
+                <span className="font-extrabold text-yellow-300 text-base md:text-lg">Note:</span> This 1 rep max calculator provides calculations for the <span className="text-yellow-400">Epley</span> formula!
+              </p>
+            </div>
+          )}
+          </div>
+          <div className="flex flex-col gap-2">
             <input
               type="number"
               value={weight}
