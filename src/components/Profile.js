@@ -19,6 +19,7 @@ const Profile = () => {
   const [workouts, setWorkouts] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [subscriptionCanceled, setSubscriptionCanceled] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { darkMode, toggleDarkMode } = useDarkMode();
   const user = useSelector((state) => state.auth.user);
 
@@ -411,9 +412,38 @@ const Profile = () => {
               <Idea />
               <div className="w-full relative">
                 {!subscriptionCanceled ? (
-                  <button onClick={handleCancelSubscription} className="bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 px-4 py-2 rounded-lg w-full">
-                    Cancel Subscription
-                  </button>
+                  <>
+                    <button onClick={() => setShowConfirmModal(true)} className="bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 px-4 py-2 rounded-lg w-full">
+                      Cancel Subscription
+                    </button>
+                    {showConfirmModal && (
+                      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full">
+                          <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Are you sure?</h2>
+                          <p className="text-sm text-gray-700 dark:text-gray-300 mb-6">
+                            Do you really want to cancel your subscription? This action cannot be undone.
+                          </p>
+                          <div className="flex justify-between gap-2">
+                            <button
+                              onClick={() => setShowConfirmModal(false)}
+                              className="px-4 py-2 rounded-md bg-gray-300 hover:bg-gray-400 text-sm"
+                            >
+                              No, go back
+                            </button>
+                            <button
+                              onClick={() => {
+                                handleCancelSubscription();
+                                setShowConfirmModal(false);
+                              }}
+                              className="px-4 py-2 rounded-md bg-red-500 hover:bg-red-600 text-white text-sm"
+                            >
+                              Yes, cancel
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="flex flex-col">
                     <button className="bg-gray-500 px-4 py-2 rounded-lg" disabled>

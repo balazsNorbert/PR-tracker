@@ -3,8 +3,22 @@ import WorkoutList from './WorkoutList';
 import CountDownTimer from './CountDownTimer';
 import PlateCalculator from './PlateCalculator';
 import { Helmet } from 'react-helmet';
+import { useEffect, useState } from 'react';
 
 const LogBook = () => {
+  const [isNearBottom, setIsNearBottom] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.innerHeight + window.scrollY;
+      const nearBottom = scrollPos >= document.body.offsetHeight - 100;
+      setIsNearBottom(nearBottom);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -16,10 +30,10 @@ const LogBook = () => {
           <p className="text-lg lg:text-2xl mx-auto">Track your workouts here.</p>
           <WorkoutList/>
         </div>
-        <div className="fixed bottom-32 md:bottom-28 right-5 z-10">
+        <div className={`fixed right-5 z-10 transition-all duration-300 ${isNearBottom ? "bottom-36" : "bottom-5"}`}>
           <CountDownTimer />
         </div>
-        <div className="fixed bottom-32 md:bottom-28 left-5 z-10">
+        <div className={`fixed left-5 z-10 transition-all duration-300 ${isNearBottom ? "bottom-36" : "bottom-5"}`}>
           <PlateCalculator />
         </div>
       </div>
