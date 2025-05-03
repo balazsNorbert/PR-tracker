@@ -409,7 +409,7 @@ const Profile = () => {
             </div>
           {user && (
             <div className="flex flex-col gap-4 w-full">
-              <Idea />
+              <Idea user={user}/>
               <div className="w-full relative">
                 {!subscriptionCanceled ? (
                   <>

@@ -16,6 +16,7 @@ import TokenChecker from './components/TokenChecker';
 import ScrollToTop from './components/ScrollToTop';
 import Success from './components/Success';
 import Cancel from './components/Cancel';
+import AdminDashboard from './components/AdminDashboard';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="/exercise/:name" element={<ChartByExercise />} />
               <Route path="/success" element={<Success />} />
               <Route path="/cancel" element={<Cancel />} />
+              <Route path="/admin" element={<AdminDashboard />} />
             </Routes>
             <Footer />
         </Router>
