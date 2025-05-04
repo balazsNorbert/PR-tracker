@@ -30,7 +30,7 @@ router.post("/send-idea", protect, async (req, res) => {
 
 router.get("/latest", protect, async (req, res) => {
   try {
-    const latest = await Idea.findOne({ userId: req.user._id })
+    const latest = await Idea.findOne({ userId: req.user.userId })
       .sort({ createdAt: -1 })
       .select("idea reply createdAt");
 
@@ -48,7 +48,7 @@ router.get("/latest", protect, async (req, res) => {
 router.get("/all", protect, adminOnly, async (req, res) => {
   try {
     const ideas = await Idea.find()
-      .sort({ createdAt: -1 })
+      .sort({ reply: 1, createdAt: -1 })
       .populate("userId", "username email");
 
     res.json(ideas);
@@ -74,6 +74,26 @@ router.post("/reply/:id", protect, adminOnly, async (req, res) => {
     res.json({ message: "Reply saved successfully!" });
   } catch (error) {
     console.error("Error saving reply:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.delete("/delete/:id", protect, async (req, res) => {
+  try {
+    const idea = await Idea.findById(req.params.id);
+
+    if (!idea) {
+      return res.status(404).json({ message: "Feedback not found" });
+    }
+
+    if (idea.userId.toString() !== req.user.userId) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    await Idea.findByIdAndDelete(req.params.id);
+    res.json({ message: "Feedback deleted successfully" });
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 });

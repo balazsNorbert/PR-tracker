@@ -38,16 +38,33 @@ const Idea = ( {user} ) => {
     }
   }
 
+  const handleDeleteFeedback = async (id) => {
+    try {
+      await axios.delete(`${apiURL}/idea/delete/${id}`);
+      setLatestFeedback(null);
+    } catch (err) {
+      console.error("Error deleting feedback:", err);
+    }
+  }
+
   return (
     <div className="flex flex-col items-center gap-2 bg-teal-700 dark:bg-gray-700 w-full rounded-lg p-4">
       <h3 className="font-bold text-xl">Feedback</h3>
-      <label className="text-sm md:text-base self-start mt-2">Give us an idea, if you have one!</label>
       {latestFeedback?.reply && (
-        <div className="w-full bg-teal-600 text-white rounded-lg p-3">
+        <div className="relative flex flex-col items-start w-full bg-teal-600 text-white rounded-lg p-3">
           <p className="font-semibold text-sm">Answer for you last feedback:</p>
           <p className="italic">{latestFeedback.reply}</p>
+          <button
+            className="absolute bottom-2 right-2"
+            onClick={() => handleDeleteFeedback(latestFeedback._id)}
+          >
+            <span className="material-icons text-red-600 hover:text-red-700 transition duration-300 text-2xl">
+              delete
+            </span>
+          </button>
         </div>
       )}
+      <label className="text-sm md:text-base self-start mt-2">Give us an idea, if you have one!</label>
       <form onSubmit={handleSubmit} className="w-full">
         <textarea
           value={idea}
