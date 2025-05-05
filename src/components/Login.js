@@ -65,8 +65,8 @@ const Login = () => {
       <Helmet>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-      <div className="flex justify-center mx-5 my-14 items-center h-screen">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6 rounded-3xl bg-white dark:bg-teal-700 shadow-lg w-96 p-4 md:p-6">
+      <div className="flex justify-center mx-5 items-center h-screen">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-lg w-72 md:w-96 p-4 md:p-6">
           <h1 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-2">Login</h1>
           <div className="flex flex-col gap-2">
             <label htmlFor="username" className="text-sm lg:text-lg font-medium text-gray-600 dark:text-white">Username</label>
