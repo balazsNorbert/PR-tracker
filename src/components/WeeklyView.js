@@ -81,7 +81,7 @@ const WeeklyView = ({ workouts, handleDeleteSet, handleSaveNote }) => {
                     {workout.exercise.map((exercise, exerciseIndex) => (
                       <li key={exercise._id} className={`flex gap-1 text-xs md:text-sm 2xl:text-lg pr-3 border-r-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
                         <div className="flex flex-col min-w-max">
-                          <p className={`font-semibold hover:text-teal-600 dark:hover:text-teal-400 text-xs xs:text-base 2xl:text-xl border-b-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
+                          <p className={`font-semibold hover:text-teal-400 dark:hover:text-teal-400 text-xs xs:text-base 2xl:text-xl border-b-2 ${isToday ? 'border-white' : 'border-black dark:border-white'}`}>
                             {`${exerciseIndex + 1}. `}
                             <Link to={`/exercise/${exercise.name}`}>{exercise.name}</Link>
                           </p>

@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   stripeCustomerId: { type: String },
   streak: { type: Number, default: 0 },
   weeklyGoal: { type: Number, default: 3 },
-  lastUpdatedStreakDate: { type: Date, default: null}
+  lastUpdatedStreakDate: { type: Date, default: null},
+  isAdmin: { type: Boolean, default: false }
 });
 
 userSchema.pre("save", async function (next) {
