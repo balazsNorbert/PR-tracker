@@ -2,7 +2,6 @@ import React from 'react';
 import WorkoutList from './WorkoutList';
 import CountDownTimer from './CountDownTimer';
 import PlateCalculator from './PlateCalculator';
-import { Helmet } from 'react-helmet-async';
 import { useEffect, useState } from 'react';
 
 const LogBook = () => {
@@ -21,12 +20,12 @@ const LogBook = () => {
 
   return (
     <>
-      <Helmet>
+      <head>
         <meta name="robots" content="index, follow" />
         <title>Workout Logbook | Track Your Workout Progress</title>
         <meta name="description" content="Keep a detailed record of your workouts, monitor your progress, and stay motivated. Use our Workout Logbook to track exercises and achieve your fitness goals." />
         <link rel="canonical" href="https://workoutracker.com/logbook" />
-      </Helmet>
+      </head>
       <div className="flex justify-center items-start h-full w-full mt-10 relative">
         <div className="flex flex-col gap-4 m-5 md:m-10 w-full">
           <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold mx-auto text-center">Your Training Logbook!</h1>

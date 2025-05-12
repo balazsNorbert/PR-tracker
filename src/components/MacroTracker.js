@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { PieChart, Pie, Cell, Label } from "recharts";
 import axios from "axios";
 import { useSelector } from 'react-redux';
-import { Helmet } from 'react-helmet-async';
 
 const COLORS = ["#FF8042", "#007BFF", "#FFC107", "#28A745"];
 
@@ -80,12 +79,12 @@ const MacroTracker = () => {
 
   return (
     <>
-      <Helmet>
+      <head>
         <meta name="robots" content="index, follow" />
         <title>Nutrition Tracker | Monitor Your Diet and Reach Your Goals</title>
         <meta name="description" content="Track your meals, calories, and nutritional intake with our easy-to-use Nutrition Tracker. Achieve your health and fitness goals by staying on top of your diet!" />
         <link rel="canonical" href="https://workoutracker.com/nutrition-tracker" />
-      </Helmet>
+      </head>
       <div className="flex flex-col items-center gap-8 md:gap-14 min-h-screen w-full my-10 mx-auto p-5 md:px-10">
         <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold">Nutrition Tracker</h1>
         <div className="flex flex-col lg:flex-row items-center gap-10">

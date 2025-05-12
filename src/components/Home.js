@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -73,12 +72,12 @@ function Home() {
 
   return (
     <>
-      <Helmet>
+      <head>
         <meta name="robots" content="index, follow" />
         <title>Workout Tracker | Track your progress and reach your goals!</title>
         <meta name="description" content="Track your workouts, monitor your nutrition, set goals, and stay motivated with our easy-to-use trackers. Start for FREE today and reach your fitness goals!" />
         <link rel="canonical" href="https://workoutracker.com" />
-      </Helmet>
+      </head>
       <section className="flex flex-col gap-8 items-center mint-h-screen justify-center px-5 py-14">
         <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-center">Welcome to your Ultimate Workout Tracker!</h1>
         <div className="bg-white dark:bg-teal-700 text-black dark:text-white p-6 rounded-xl shadow-xl max-w-2xl mx-auto mt-6">

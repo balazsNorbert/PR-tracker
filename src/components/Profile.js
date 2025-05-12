@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import axios from '../axios';
 import { useDarkMode } from '../contexts/DarkModeContext';
@@ -208,12 +207,12 @@ const Profile = () => {
 
   return (
     <>
-      <Helmet>
+      <head>
         <meta name="robots" content="index, follow" />
         <title>Your Profile | Manage Your Workout and Nutrition Goals</title>
         <meta name="description" content="View and update your personal workout and nutrition goals. Track your progress, set new objectives, and achieve your fitness targets with ease." />
         <link rel="canonical" href="https://workoutracker.com/profile" />
-      </Helmet>
+      </head>
       <div className="min-h-screen flex justify-center items-center">
           <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white w-full xs:w-auto xs:rounded-3xl shadow-xl p-4 xs:p-6 xs:mx-5 md:mx-10 md:p-8 mt-10 mb-20">
             {user ? (
