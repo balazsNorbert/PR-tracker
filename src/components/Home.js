@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -16,7 +16,7 @@ function Home() {
     mobile: [
       { src: "/images/addExercise.webp", alt: "Add a new exercise to your workout log", description: "Log new exercises" },
       { src: "/images/PrNotification.webp", alt: "Personal record (PR) notification for workout progress", description: "Get PR alerts" },
-      { src: "/images/plateCalculatorMobile.webp", alt: "Plate calculator showing selected weight plates on a barbell", description: "Calculate your barbell setup easily" },
+      { src: "/images/plateCalculator.webp", alt: "Plate calculator showing selected weight plates on a barbell", description: "Calculate your barbell setup easily" },
       { src: "/images/stopper.webp", alt: "Workout stopwatch tracking rest time", description: "Track your rest and workout time" },
       { src: "/images/1RM.webp", alt: "1 rep max calculator", description: "Calculate your 1 rep max" },
       { src: "/images/workoutExercisesMobile.webp", alt: "Weekly workout planner for tracking exercises", description: "Plan weekly workouts" },
@@ -37,7 +37,7 @@ function Home() {
     desktop: [
       { src: "/images/addExercise.webp", alt: "Add a new exercise to your workout log", description: "Log new exercises" },
       { src: "/images/PrNotificationDesktop.webp", alt: "Personal record (PR) notification for workout progress", description: "Get PR alerts" },
-      { src: "/images/plateCalculatorDesktop.webp", alt: "Plate calculator showing selected weight plates on a barbell", description: "Calculate your barbell setup easily" },
+      { src: "/images/plateCalculator.webp", alt: "Plate calculator showing selected weight plates on a barbell", description: "Calculate your barbell setup easily" },
       { src: "/images/stopper.webp", alt: "Workout stopwatch tracking rest time", description: "Track your rest and workout time" },
       { src: "/images/1RM.webp", alt: "1 rep max calculator", description: "Calculate your 1 rep max" },
       { src: "/images/workoutExercisesDesktop.webp", alt: "Weekly workout planner for tracking exercises", description: "Plan weekly workouts" },
@@ -75,6 +75,9 @@ function Home() {
     <>
       <Helmet>
         <meta name="robots" content="index, follow" />
+        <title>Workout Tracker | Track your progress and reach your goals!</title>
+        <meta name="description" content="Track your workouts, monitor your nutrition, set goals, and stay motivated with our easy-to-use trackers. Start for FREE today and reach your fitness goals!" />
+        <link rel="canonical" href="https://workoutracker.com" />
       </Helmet>
       <section className="flex flex-col gap-8 items-center mint-h-screen justify-center px-5 py-14">
         <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-center">Welcome to your Ultimate Workout Tracker!</h1>

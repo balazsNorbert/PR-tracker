@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import LogBook from './components/LogBook';
@@ -20,29 +21,31 @@ import AdminDashboard from './components/AdminDashboard';
 
 function App() {
   return (
-    <DarkModeProvider>
-      <div className="bg-gradient-to-r from-teal-600 dark:from-teal-800 to-teal-900 dark:to-teal-950 text-white relative">
-        <Router>
-            <ScrollToTop />
-            <TokenChecker />
-            <ToastContainer />
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/logbook" element={<LogBook />} />
-              <Route path="/nutrition-tracker" element={<MacroTracker />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/exercise/:name" element={<ChartByExercise />} />
-              <Route path="/success" element={<Success />} />
-              <Route path="/cancel" element={<Cancel />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Routes>
-            <Footer />
-        </Router>
-      </div>
-    </DarkModeProvider>
+    <HelmetProvider>
+      <DarkModeProvider>
+        <div className="bg-gradient-to-r from-teal-600 dark:from-teal-800 to-teal-900 dark:to-teal-950 text-white relative">
+          <Router>
+              <ScrollToTop />
+              <TokenChecker />
+              <ToastContainer />
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/logbook" element={<LogBook />} />
+                <Route path="/nutrition-tracker" element={<MacroTracker />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/exercise/:name" element={<ChartByExercise />} />
+                <Route path="/success" element={<Success />} />
+                <Route path="/cancel" element={<Cancel />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+              </Routes>
+              <Footer />
+          </Router>
+        </div>
+      </DarkModeProvider>
+    </HelmetProvider>
   );
 }
 
