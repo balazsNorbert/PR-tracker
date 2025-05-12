@@ -36,14 +36,15 @@
     "start": "node server.js",
     "build": "react-scripts build",
     "postbuild": "react-snap",
-    "postinstall": "npm install --legacy-peer-deps",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "react-scripts start"
   },
   "reactSnap": {
     "inlineCss": true,
-    "puppeteerArgs": ["--no-sandbox"],
+    "puppeteerArgs": [
+      "--no-sandbox"
+    ],
     "routes": [
       "/",
       "/logbook",
