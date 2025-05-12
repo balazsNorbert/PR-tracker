@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import axios from '../axios';
 import { useDispatch } from 'react-redux';
 import { login, logout } from '../redux/authSlice';
@@ -64,6 +64,7 @@ const Login = () => {
     <>
       <Helmet>
         <meta name="robots" content="noindex, nofollow" />
+        <title>Workout Tracker | Track your progress and reach your goals!</title>
       </Helmet>
       <div className="flex justify-center mx-5 items-center h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-lg w-72 md:w-96 p-4 md:p-6">

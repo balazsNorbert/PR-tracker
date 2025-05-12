@@ -2,8 +2,24 @@
 		<!--	created with www.mysitemapgenerator.com	-->
 	<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-      <loc>https://workoutracker.com/</loc>
-      <lastmod>2025-03-13</lastmod>
+      <loc>https://workoutracker.com</loc>
+      <lastmod>2025-05-12</lastmod>
       <priority>1.0</priority>
     </url>
+    <url>
+    <loc>https://workoutracker.com/logbook</loc>
+    <lastmod>2025-05-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://workoutracker.com/nutrition-tracker</loc>
+    <lastmod>2025-05-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://workoutracker.com/profile</loc>
+    <lastmod>2025-05-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+
   </urlset>
