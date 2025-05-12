@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from '../axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
   const apiURL = process.env.REACT_APP_API_URL;
@@ -43,10 +42,10 @@ const Register = () => {
 
   return (
     <>
-      <Helmet>
+      <head>
         <meta name="robots" content="noindex, nofollow" />
         <title>Workout Tracker | Track your progress and reach your goals!</title>
-      </Helmet>
+      </head>
       <div className="flex justify-center items-center mx-5 my-14 h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-lg w-72 md:w-96 p-4 md:p-6">
           <h1 className="text-2xl lg:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-2">Register</h1>
