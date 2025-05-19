@@ -42,7 +42,7 @@ function Home() {
       { src: "/images/workoutExercisesDesktop.webp", alt: "Weekly workout planner for tracking exercises", description: "Plan weekly workouts" },
       { src: "/images/workoutMuscleGroupsDesktop.webp", alt: "Track weekly workouts by targeted muscle groups", description: "Target muscle groups weekly" },
       { src: "/images/addNoteDesktop.webp", alt: "Add custom workout notes for better tracking", description: "Add workout notes" },
-      { src: "/images/exerciseProgress.webp", alt: "Exercise progress tracker with performance history", description: "Track exercise progress" },
+      { src: "/images/exerciseProgressDesktop.webp", alt: "Exercise progress tracker with performance history", description: "Track exercise progress" },
       { src: "/images/muscleGroupPrDesktop.webp", alt: "View personal records (PRs) by muscle groups over time", description: "See PRs by muscle group in a time range" },
       { src: "/images/nutritionTrackerDesktop.webp", alt: "Nutrition tracker for tracking macros and goals", description: "Track nutrition to help monitor macros for a balanced diet." },
       { src: "/images/darkMode.webp", alt: "Enable dark mode for better workout tracking experience", description: "Switch to Dark Mode" },

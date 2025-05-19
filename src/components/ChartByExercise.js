@@ -85,8 +85,22 @@ const ChartByExercise = () => {
       <ResponsiveContainer width="100%" className="bg-gray-200 dark:bg-gray-700 py-3 pr-5 md:pr-10 md:py-5 rounded-xl min-h-[300px] md:min-h-[400px] xl:min-h-[500px]">
         <LineChart width={600} height={300} data={exerciseData}>
           <CartesianGrid  strokeDasharray="3 3" stroke={gridStrokeColor}/>
-          <Line type="monotone" dataKey="weight" stroke={darkMode ? '#60a5fa' : '#1d4ed8'} animationDuration={1000}/>
-          <Line domain={[0, maxReps]} type="monotone" dataKey="reps" stroke={darkMode ? '#34d399' : '#15803d'} animationDuration={1000} yAxisId="right"/>
+          <Line
+            type="monotone"
+            dataKey="weight"
+            stroke={darkMode ? '#60a5fa' : '#1d4ed8'}
+            animationDuration={1000}
+          />
+          <Line
+            domain={[0, maxReps]}
+            type="monotone"
+            dataKey="reps"
+            stroke={darkMode ? '#34d399' : '#15803d'}
+            strokeDasharray="4 3"
+            dot= {false}
+            animationDuration={1000}
+            yAxisId="right"
+          />
           <XAxis dataKey="date" tickFormatter={(tick) => new Date(tick).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
           angle={-25} textAnchor="end" tick={{ fill: darkMode ? 'white' : 'black' }}/>
           <YAxis dataKey="weight" tick={{ fill: darkMode ? 'white' : 'black' }}/>
