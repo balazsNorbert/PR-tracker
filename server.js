@@ -27,6 +27,7 @@ app.use("/api/idea", require("./routes/ideaRoutes"));
 app.use("/api/pricing", require("./routes/pricingRoutes"));
 app.use("/api/weights", require("./routes/weightRoutes"));
 app.use("/api/nutrition-tracker", require("./routes/macroRoutes"));
+app.use("/api/nutrition-goals", require("./routes/macroGoalRoutes"));
 
 app.use(express.static(path.join(__dirname, 'build')));
 

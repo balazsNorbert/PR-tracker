@@ -10,7 +10,7 @@ const MacroTracker = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showInfo, setShowInfo] = useState(false);
   const [macros, setMacros] = useState({calories: 0, protein: 0, carbs: 0, fat: 0});
-  const [goals, setGoals] = useState({ calories: 2520, protein: 150, carbs: 300, fat: 80 });
+  const [goals, setGoals] = useState({calories: 2520, protein: 150, carbs: 300, fat: 80});
   const [inputValues, setInputValues] = useState({ calories: '', protein: '', carbs: '', fat: '' });
   const user = useSelector((state) => state.auth.user);
   const userId = user ? user.userId : null;
@@ -67,8 +67,37 @@ const MacroTracker = () => {
   },[selectedDate, apiURL, userId]);
 
   useEffect(() => {
+    if(userId) {
+      (async () => {
+        try {
+          const { data } = await axios.get(`${apiURL}/nutrition-goals/${userId}`);
+          console.log("Belemegy a Get-be");
+          if(data) setGoals(data);
+        } catch (error) {
+          console.error("Error fetching goals:", error);
+        }
+      })();
+    }
+  }, [userId, apiURL]);
+
+  const saveMacroGoals = async () => {
+    try {
+      await axios.put(`${apiURL}/nutrition-goals/${userId}`, goals);
+    } catch (error) {
+      console.error("Error saving goals:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchMacros();
   },[fetchMacros]);
+
+  const handleInputChange = (key, value) => {
+    setGoals((prev) => ({
+      ...prev,
+      [key]: value === '' ? 0 : Number(value),
+    }));
+  };
 
   const macroData = [
     { name: "Protein", value: macros.protein, goal: goals.protein },
@@ -152,13 +181,19 @@ const MacroTracker = () => {
                   <label className="mr-2 font-semibold text-base">{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
                   <input
                     type="number"
-                    value={goals[key]}
-                    onChange={(e) => setGoals({ ...goals, [key]: Number(e.target.value) })}
+                    value={goals[key] === '' ? '' : goals[key]}
+                    onChange={(e) => handleInputChange(key, e.target.value)}
                     className="w-40 text-right text-sm md:text-base text-black dark:text-white dark:bg-gray-900 py-2 px-2 md:px-0 border border-gray-300 dark:border-gray-600
                     rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 transition duration-300"
                   />
                 </div>
               ))}
+              <button
+                onClick={saveMacroGoals}
+                className="mt-4 px-4 py-3 bg-teal-800 dark:bg-teal-900 font-semibold rounded-lg shadow-md hover:bg-teal-900 dark:hover:bg-teal-700 transition duration-300 text-white"
+              >
+                Save Goals
+              </button>
             </div>
           </div>
           <div className="mt-4 grid gird-cols-1 lg:grid-cols-2 gap-6">
