@@ -114,9 +114,10 @@ const MacroTracker = () => {
         <meta name="description" content="Track your meals, calories, and nutritional intake with our easy-to-use Nutrition Tracker. Achieve your health and fitness goals by staying on top of your diet!" />
         <link rel="canonical" href="https://workoutracker.com/nutrition-tracker" />
       </head>
-      <div className="flex flex-col items-center gap-8 md:gap-14 min-h-screen w-full my-10 mx-auto p-5 md:px-10">
+      <div className="flex flex-col items-center gap-4 min-h-screen w-full my-10 mx-auto p-5 md:px-10">
         <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold">Nutrition Tracker</h1>
-        <div className="flex flex-col lg:flex-row items-center gap-10">
+        <h2 className="text-base md:text-lg xl:text-xl text-center">Track your daily nutrition easily by monitoring your macros</h2>
+        <div className="flex flex-col lg:flex-row items-center gap-10 mt-6">
           <div className="flex flex-1 flex-col gap-6 w-full bg-white dark:bg-gray-700 text-gray-600 dark:text-white p-4 md:p-6 rounded-3xl shadow-xl">
           <div className="flex flex-col gap-2">
             <label htmlFor="Date" className="font-bold text-lg">Date</label>
