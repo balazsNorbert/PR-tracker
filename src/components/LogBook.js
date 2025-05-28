@@ -28,8 +28,8 @@ const LogBook = () => {
       </head>
       <div className="flex justify-center items-start h-full w-full mt-10 relative">
         <div className="flex flex-col gap-4 m-5 md:m-10 w-full">
-          <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold mx-auto text-center">Your Training Logbook!</h1>
-          <p className="text-lg lg:text-2xl mx-auto">Track your workouts here.</p>
+          <h1 className="text-xl md:text-2xl xl:text-3xl font-bold mx-auto text-center">Your Training Logbook - Track Workouts & Progress</h1>
+          <h2 className="text-base md:text-lg xl:text-xl mx-auto text-center">Easily log your workouts, monitor your progress, and optimize your training</h2>
           <WorkoutList/>
         </div>
         <div className={`fixed right-5 z-10 transition-all duration-300 ${isNearBottom ? "bottom-36" : "bottom-5"}`}>

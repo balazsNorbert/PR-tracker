@@ -78,13 +78,13 @@ function Home() {
         <meta name="description" content="Track your workouts, monitor your nutrition, set goals, and stay motivated with our easy-to-use trackers. Start for FREE today and reach your fitness goals!" />
         <link rel="canonical" href="https://workoutracker.com" />
       </head>
-      <section className="flex flex-col gap-8 items-center mint-h-screen justify-center px-5 py-14">
-        <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-center">Welcome to your Ultimate Workout Tracker!</h1>
+      <section className="flex flex-col gap-6 items-center mint-h-screen justify-center px-5 py-14">
+        <h1 className="text-xl md:text-2xl xl:text-3xl font-bold text-center">Ultimate Workout & Nutrition Tracker for Strength Training</h1>
         <div className="bg-white dark:bg-teal-700 text-black dark:text-white p-6 rounded-xl shadow-xl max-w-2xl mx-auto mt-6">
-          <h2 className="text-lg lg:text-xl font-bold mb-8 text-center">Why Use a Workout Tracker for Your Workouts?</h2>
+          <h2 className="text-base md:text-lg xl:text-xl font-bold mb-8 text-center">Why a Workout Tracker Is Essential for Reaching Your Fitness Goals ?</h2>
           <ul className="flex flex-col gap-4 text-sm md:text-lg text-gray-600 dark:text-white">
             <li>
-              ✅ <span className="font-bold text-black dark:text-white">Track Your Workout Progress</span>
+              <h3 className="font-bold text-black dark:text-white">✅ Track Your Workout Progress</h3>
               <p className={`${expandedParagraph === 1 ? '' : 'line-clamp-3'}`}>
                 Using a workout tracker allows you to log your weights, reps, and exercises to see how far you've come.
                 It's an essential part of achieving your <strong className="text-teal-800 dark:text-white">fitness goals </strong>
@@ -99,7 +99,7 @@ function Home() {
               </button>
             </li>
             <li>
-              ✅ <span className="font-bold text-black dark:text-white">Stay Motivated Throughout Your Fitness Journey</span>
+              <h3 className="font-bold text-black dark:text-white">✅ Stay Motivated Throughout Your Fitness Journey</h3>
               <p className={`${expandedParagraph === 2 ? '' : 'line-clamp-3'}`}>
                 Consistent tracking of your workouts keeps you motivated and engaged. Monitoring your
                 <strong className="text-teal-800 dark:text-white"> workout progress</strong> ensures you're always moving toward
@@ -115,7 +115,7 @@ function Home() {
               </button>
             </li>
             <li>
-              ✅ <span className="font-bold text-black dark:text-white">Optimize Your Strength Training</span>
+              <h3 className="font-bold text-black dark:text-white">✅ Optimize Your Strength Training</h3>
               <p className={`${expandedParagraph === 3 ? '' : 'line-clamp-3'}`}>
                 By tracking your workout sessions, you can analyze your performance and tailor your routines to maximize strength gains.
                 In addition, our nutrition tracker can provide insights into your diet, ensuring you're fueling your body properly for
@@ -129,7 +129,7 @@ function Home() {
               </button>
             </li>
             <li>
-              ✅ <span className="font-bold text-black dark:text-white">Break Through Fitness Plateaus</span>
+              <h3 className="font-bold text-black dark:text-white">✅ Break Through Fitness Plateaus</h3>
               <p className={`${expandedParagraph === 4 ? '' : 'line-clamp-3'}`}>
                 Tracking your progress helps you identify when you hit a plateau. Whether it's your workout performance or your nutrition,
                 understanding both sides helps you make the necessary adjustments. Combining a workout tracker with a nutrition tracker
@@ -151,15 +151,13 @@ function Home() {
             </li>
           </ul>
         </div>
-        <button className="bg-gray-700 dark:bg-teal-600 hover:bg-teal-500 dark:hover:bg-teal-500 font-semibold text-lg xl:text-2xl
-        py-3 px-6 rounded-lg transition duration-300">
-          <Link to="/logbook" className="flex gap-2 items-center">
-            Go To LogBook
-            <span className="material-icons">
-              arrow_forward
-            </span>
-          </Link>
-        </button>
+        <Link to="/logbook" className="flex gap-2 items-center bg-gray-700 dark:bg-teal-600 hover:bg-teal-500 dark:hover:bg-teal-500 font-semibold text-base md:text-lg xl:text-2xl
+          py-3 px-6 rounded-lg transition duration-300">
+          View Workout Logbook
+          <span className="material-icons">
+            arrow_forward
+          </span>
+        </Link>
       </section>
       <section className="flex flex-col gap-8 items-center mint-h-screen justify-center bg-gradient-to-tr from-gray-700 to-gray-900 py-14">
         <div className="flex items-center gap-2">

@@ -213,15 +213,20 @@ const Profile = () => {
         <meta name="description" content="View and update your personal workout and nutrition goals. Track your progress, set new objectives, and achieve your fitness targets with ease." />
         <link rel="canonical" href="https://workoutracker.com/profile" />
       </head>
-      <div className="min-h-screen flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center max-w-xl mx-auto">
           <div className="flex flex-col text-center gap-6 items-start dark:bg-teal-700 bg-white w-full xs:w-auto xs:rounded-3xl shadow-xl p-4 xs:p-6 xs:mx-5 md:mx-10 md:p-8 mt-10 mb-20">
             {user ? (
-            <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900">
-              Welcome back, <span className="text-teal-700 dark:text-white">{user.username}!</span>
-            </h1>
+              <>
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
+                  Welcome back, <span className="text-teal-700 dark:text-white">{user.username}!</span>
+                </h1>
+                <p className="text-sm xl:text-base text-gray-600 dark:text-white font-semibold">
+                  Set fitness goals, track your body weight, and monitor your workout consistency - all from your personalized profile.
+                </p>
+              </>
             ) : (
               <>
-                <h1 className="text-2xl lg:text-3xl 2xl:text-4xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
                   Welcome!
                 </h1>
                 <p className="text-lg lg:text-xl text-red-600 dark:text-red-500 font-semibold text-center">
@@ -239,25 +244,17 @@ const Profile = () => {
                   light_mode
                 </span>
               </button>
-              <button
-                className="text-sm md:text-lg dark:bg-white dark:text-black bg-gray-600 px-2 md:px-4 py-2 rounded-lg transition duration-300"
-              >
-              <Link to="/logbook" className="flex items-center gap-2">
+              <Link to="/logbook" className="flex items-center gap-2 text-sm md:text-lg dark:bg-white dark:text-black bg-gray-600 px-2 md:px-4 py-2 rounded-lg transition duration-300">
                   Your logbook
                   <span className="material-icons text-white dark:text-gray-600">
                     arrow_forward
                   </span>
               </Link>
-              </button>
             </div>
-            {user && (
-              <>
-                <StreakTracker userId={user.userId} workouts={workouts}/>
-                <WeightTracker userId={user.userId} />
-              </>
-            )}
+            <StreakTracker userId={user?.userId} workouts={workouts}/>
+            <WeightTracker userId={user?.userId} />
             <div className="bg-teal-700 dark:bg-gray-700 w-full rounded-lg p-4">
-              <h3 className="text-xl font-semibold">Add new goal</h3>
+              <h3 className="text-xl font-bold">Add new goal</h3>
               <div className="w-full flex flex-col items-center gap-4 mt-5">
                 <input
                   type="text"
@@ -409,7 +406,6 @@ const Profile = () => {
                 )}
               </ul>
             </div>
-          {user && (
             <div className="flex flex-col gap-4 w-full">
               <Idea user={user}/>
               <div className="w-full relative">
@@ -458,7 +454,6 @@ const Profile = () => {
                 )}
               </div>
             </div>
-          )}
           </div>
       </div>
     </>

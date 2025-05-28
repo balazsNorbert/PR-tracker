@@ -121,11 +121,11 @@ const Workout = ({ onAddWorkout, existingExercises }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-2 md:gap-4 rounded-3xl bg-white dark:bg-teal-700 shadow-xl p-4 md:p-6 mt-5 lg:mt-10">
-      <h2 className="text-xl md:text-3xl font-semibold text-center text-gray-800 dark:text-white mb-1 md:mb-4">Add a New Exercise</h2>
+      <h3 className="text-xl md:text-2xl font-semibold text-center text-gray-800 dark:text-white mb-1 md:mb-4">Add a New Exercise</h3>
       {!user && (
-          <h3 className="text-lg lg:text-xl text-red-600 dark:text-red-500 font-semibold text-center">
+          <h4 className="text-lg lg:text-xl text-red-600 dark:text-red-500 font-semibold text-center">
             ⚠️ You need to log in to save your workouts!
-          </h3>
+          </h4>
         )
       }
       <div className="flex flex-col gap-2">

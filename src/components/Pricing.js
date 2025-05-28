@@ -27,10 +27,10 @@ const Pricing = () => {
             <path d="M0,0 Q250,50 500,0 V50 H0 Z" fill="#374151"></path>
           </svg>
         </div>
-        <button className="absolute -bottom-5 bg-teal-700 hover:bg-teal-800 text-xl lg:text-2xl py-2 px-8 rounded-lg
+        <Link to='/register' className="absolute -bottom-5 bg-teal-700 hover:bg-teal-800 text-xl lg:text-2xl py-2 px-8 rounded-lg
           font-semibold transition-all duration-300 transform hover:scale-105 shadow-md">
-          <Link to='/register'>Start 14-Day Free Trial</Link>
-        </button>
+          Start Free Trial
+        </Link>
         <div className="bg-gradient-to-tr from-gray-600 to-gray-900 p-8 pb-12 rounded-b-xl w-full">
           <ul className="flex flex-col gap-2 md:gap-3 text-white text-base md:text-lg">
             <li>✅ Easily add and track your workouts</li>
