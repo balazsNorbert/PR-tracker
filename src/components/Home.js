@@ -74,22 +74,25 @@ function Home() {
     <>
       <head>
         <meta name="robots" content="index, follow" />
-        <title>Workout Tracker | Track your progress and reach your goals!</title>
-        <meta name="description" content="Track your workouts, monitor your nutrition, set goals, and stay motivated with our easy-to-use trackers. Start for FREE today and reach your fitness goals!" />
+        <title>Best Workout & Nutrition Tracker for Weight Training</title>
+        <meta name="description" content="Track your workouts and nutrition with the best workout tracker, macros and calorie counter tool. Start for free today and reach your fitness goals faster!" />
         <link rel="canonical" href="https://workoutracker.com" />
       </head>
       <section className="flex flex-col gap-6 items-center mint-h-screen justify-center px-5 py-14">
-        <h1 className="text-xl md:text-2xl xl:text-3xl font-bold text-center">Ultimate Workout & Nutrition Tracker for Strength Training</h1>
+        <h1 className="text-xl md:text-2xl xl:text-3xl font-bold text-center">
+          The Best Workout & Nutrition Tracker for Weight Training
+        </h1>
         <div className="bg-white dark:bg-teal-700 text-black dark:text-white p-6 rounded-xl shadow-xl max-w-2xl mx-auto mt-6">
-          <h2 className="text-base md:text-lg xl:text-xl font-bold mb-8 text-center">Why a Workout Tracker Is Essential for Reaching Your Fitness Goals ?</h2>
+          <h2 className="text-base md:text-lg xl:text-xl font-bold mb-8 text-center">
+            Why a Workout Tracker Is Essential for Reaching Your Fitness Goals?
+          </h2>
           <ul className="flex flex-col gap-4 text-sm md:text-lg text-gray-600 dark:text-white">
             <li>
-              <h3 className="font-bold text-black dark:text-white">✅ Track Your Workout Progress</h3>
+              <h3 className="font-bold text-black dark:text-white">
+                ✅ Track Your Workout Progress with the Best Exercise Tracker
+              </h3>
               <p className={`${expandedParagraph === 1 ? '' : 'line-clamp-3'}`}>
-                Using a workout tracker allows you to log your weights, reps, and exercises to see how far you've come.
-                It's an essential part of achieving your <strong className="text-teal-800 dark:text-white">fitness goals </strong>
-                and staying on track. While tracking your <Link to="/logbook" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white">workout performance</Link> is key,
-                incorporating nutrition tracking can further help you optimize your results.
+                Using a <strong className="text-teal-800 dark:text-white">fitness tracker</strong> and <strong className="text-teal-800 dark:text-white">workout exercise app</strong> like ours allows you to log weights, reps, and exercises, so you can clearly see how far you've come. It's an essential part of achieving your <strong className="text-teal-800 dark:text-white">fitness goals</strong> and staying on track. While tracking your <Link to="/logbook" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white">workout performance</Link> is key, incorporating nutrition tracking with our <strong className="text-teal-800 dark:text-white">calorie counter</strong> can further help optimize your results.
               </p>
               <button
                 onClick={() => toggleExpand(1)}
@@ -99,13 +102,11 @@ function Home() {
               </button>
             </li>
             <li>
-              <h3 className="font-bold text-black dark:text-white">✅ Stay Motivated Throughout Your Fitness Journey</h3>
+              <h3 className="font-bold text-black dark:text-white">
+                ✅ Stay Motivated Throughout Your Fitness Journey
+              </h3>
               <p className={`${expandedParagraph === 2 ? '' : 'line-clamp-3'}`}>
-                Consistent tracking of your workouts keeps you motivated and engaged. Monitoring your
-                <strong className="text-teal-800 dark:text-white"> workout progress</strong> ensures you're always moving toward
-                your goals. If you're interested in tracking your nutrition alongside your workouts, our
-                <Link to="/nutrition-tracker" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white"> nutrition tracker </Link>
-                can help you refine your diet and further boost your progress.
+                Consistent tracking with our <strong className="text-teal-800 dark:text-white">fit trackers</strong> keeps you motivated and engaged. Monitoring your <strong className="text-teal-800 dark:text-white">workout progress</strong> ensures you're always moving toward your goals. If you're interested in tracking your nutrition alongside workouts, our <Link to="/nutrition-tracker" className="font-bold text-teal-800 hover:text-black dark:hover:text-teal-500 dark:text-white">nutrition tracker</Link> helps you refine your diet and boost progress by <strong className="text-teal-800 dark:text-white">tracking macros</strong> and <strong className="text-teal-800 dark:text-white">calorie intake</strong>.
               </p>
               <button
                 onClick={() => toggleExpand(2)}
@@ -115,11 +116,11 @@ function Home() {
               </button>
             </li>
             <li>
-              <h3 className="font-bold text-black dark:text-white">✅ Optimize Your Strength Training</h3>
+              <h3 className="font-bold text-black dark:text-white">
+                ✅ Optimize Your Strength Training and Nutrition
+              </h3>
               <p className={`${expandedParagraph === 3 ? '' : 'line-clamp-3'}`}>
-                By tracking your workout sessions, you can analyze your performance and tailor your routines to maximize strength gains.
-                In addition, our nutrition tracker can provide insights into your diet, ensuring you're fueling your body properly for
-                <strong className="text-teal-800 dark:text-white"> maximum performance</strong>.
+                By tracking your workout sessions, you can analyze your performance and tailor routines to maximize strength gains. Plus, our nutrition tracker provides insights into your diet, allowing you to monitor <strong className="text-teal-800 dark:text-white">calorie intake</strong> and track macros to fuel your body for <strong className="text-teal-800 dark:text-white">maximum performance</strong>.
               </p>
               <button
                 onClick={() => toggleExpand(3)}
@@ -129,11 +130,11 @@ function Home() {
               </button>
             </li>
             <li>
-              <h3 className="font-bold text-black dark:text-white">✅ Break Through Fitness Plateaus</h3>
+              <h3 className="font-bold text-black dark:text-white">
+                ✅ Break Through Fitness Plateaus
+              </h3>
               <p className={`${expandedParagraph === 4 ? '' : 'line-clamp-3'}`}>
-                Tracking your progress helps you identify when you hit a plateau. Whether it's your workout performance or your nutrition,
-                understanding both sides helps you make the necessary adjustments. Combining a workout tracker with a nutrition tracker
-                can be the key to overcoming obstacles and continuing to progress.
+                Tracking your progress helps identify plateaus in both your workout and nutrition. Using a combined workout tracker, macro tracker, and calorie counter is key to overcoming obstacles and continuing your fitness journey.
               </p>
               <button
                 onClick={() => toggleExpand(4)}
@@ -143,9 +144,12 @@ function Home() {
               </button>
             </li>
             <li>
-              <a href="https://www.fitnessfirst.co.uk/blog/how-and-why-should-i-track-my-workouts"
-              target="_blank" rel="noopener"
-              className="font-bold text-teal-800 dark:text-white hover:text-black dark:hover:text-teal-500 underline">
+              <a
+                href="https://www.fitnessfirst.co.uk/blog/how-and-why-should-i-track-my-workouts"
+                target="_blank"
+                rel="noopener"
+                className="font-bold text-teal-800 dark:text-white hover:text-black dark:hover:text-teal-500 underline"
+              >
                 Read more about why tracking workouts helps fitness progress.
               </a>
             </li>
