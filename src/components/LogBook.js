@@ -22,8 +22,8 @@ const LogBook = () => {
     <>
       <head>
         <meta name="robots" content="index, follow" />
-        <title>Workout Logbook | Track Your Workout Progress</title>
-        <meta name="description" content="Keep a detailed record of your workouts, monitor your progress, and stay motivated. Use our Workout Logbook to track exercises and achieve your fitness goals." />
+        <title>Workout Logbook | Track & Improve Your Workout Progress</title>
+        <meta name="description" content="Keep a detailed workout journal, monitor your progress, and stay motivated. Use our Workout Logbook to track exercises and achieve your fitness goals." />
         <link rel="canonical" href="https://workoutracker.com/logbook" />
       </head>
       <div className="flex justify-center items-start h-full w-full mt-10 relative">
