@@ -21,11 +21,20 @@ router.post("/register", async (req, res) => {
     name: username,
   });
 
+  const trialSubscription = await stripe.subscriptions.create({
+    customer: customer.id,
+    items: [{ price: process.env.REACT_APP_STRIPE_PRICE_ID }],
+    trial_period_days: 14,
+    payment_behavior: 'default_incomplete',
+    expand: ['latest_invoice.payment_intent'],
+  });
+
   const user = new User({
     username,
     password,
     email,
     stripeCustomerId: customer.id,
+    stripeSubscriptionId: trialSubscription.id,
   });
 
   try {
@@ -55,8 +64,11 @@ router.post("/login", async(req, res) => {
       const subscriptions = await stripe.subscriptions.list({
         customer: user.stripeCustomerId
       });
-      if (subscriptions.data.length > 0 && (subscriptions.data[0].status === 'active' || subscriptions.data[0].status === 'trialing')) {
-        isSubscribed = true;
+      if (subscriptions.data.length > 0) {
+        const sub = subscriptions.data[0];
+        if (sub.status === 'active' || sub.status === 'trialing') {
+          isSubscribed = true;
+        }
       }
     }
 
