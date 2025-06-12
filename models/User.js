@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   stripeCustomerId: { type: String },
+  stripeSubscriptionId: { type: String },
   streak: { type: Number, default: 0 },
   weeklyGoal: { type: Number, default: 3 },
   lastUpdatedStreakDate: { type: Date, default: null},

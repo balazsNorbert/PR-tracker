@@ -13,13 +13,16 @@ const Pricing = () => {
       <div className="flex flex-col gap-4 items-center bg-white rounded-xl shadow-2xl relative">
         <div className="flex flex-col items-center gap-4 px-6 pt-6 w-full relative">
           <div className="relative">
-            <span className="absolute -top-2 -right-3 bg-yellow-400 text-xs px-2 py-1 rounded-full font-bold text-gray-800">Best Value</span>
+            <span className="absolute -top-2 -right-3 bg-yellow-300 text-xs px-2 py-1 rounded-full font-bold text-gray-800">Best Value</span>
             <p className="text-4xl md:text-5xl font-bold text-teal-800">$3.99<span className="font-semibold text-lg">/month</span></p>
           </div>
           <p className="text-center text-gray-600 italic">Enjoy complete workout & nutrition tracking.</p>
           <p className="text-xl text-teal-800 font-semibold w-fit mx-auto"><span className="text-2xl">14</span>-day free trial!</p>
-          <p className="text-xs md:text-sm text-gray-500 text-center">
-            💳 Card required. You won't be charged during the trial.
+          <p className="flex items-center gap-2 text-sm md:text-base text-green-500 font-semibold text-center">
+            <span className="material-icons text-xl md:text-2xl text-teal-700">
+              credit_card_off
+            </span>
+            No Credit Card required!
           </p>
         </div>
         <div className="w-full">
