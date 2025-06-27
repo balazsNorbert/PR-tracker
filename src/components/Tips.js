@@ -1,0 +1,57 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const blogPosts = [
+  {
+    id: 'how-to-avoid-workout-plateaus',
+    title: 'How to Avoid Workout Plateaus and Keep Progressing',
+    excerpt: 'Discover proven techniques to break through plateaus and continually improve your fitness.',
+  },
+  {
+    id: 'why-track-your-nutrition',
+    title: 'Why Track Your Nutrition? The Key to Better Results',
+    excerpt: 'Learn why monitoring your nutrition is essential and how it can transform your fitness journey.',
+  },
+  {
+    id: 'why-track-your-workouts',
+    title: 'Why Track Your Workouts? Maximize Your Training Efficiency',
+    excerpt: 'Understand the benefits of tracking your workouts and how it helps you reach your fitness goals faster.',
+  },
+];
+
+const Tips = () =>{
+  return (
+    <>
+      <head>
+        <meta name="robots" content="index, follow" />
+        <title>Fitness & Nutrition Tips to Boost Your Workout</title>
+        <meta name="description" content="Explore our best workout and nutrition tips to overcome plateaus, stay motivated, and reach your fitness goals faster with proven strategies and expert advice." />
+        <link rel="canonical" href="https://workoutracker.com/tips" />
+      </head>
+      <div className="min-h-screen mx-5">
+        <div className="flex flex-col items-center gap-10 my-10 mx-auto p-5 md:px-10 bg-white rounded-lg shadow-lg max-w-2xl lg:max-w-3xl">
+          <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-teal-700 text-center">Fitness & Nutrition Tips</h1>
+          <div className="flex flex-col gap-6 w-full">
+            {blogPosts.map(({ id, title, excerpt }) => (
+              <div
+                key={id}
+                className="flex flex-col gap-2 border border-gray-200 rounded-md p-4 shadow-sm hover:shadow-md bg-gray-100 hover:bg-gray-50 transition-all duration-300 cursor-pointer"
+              >
+                <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">{title}</h2>
+                <p className="text-sm md:text-base xl:text-lg text-gray-700 mb-1">{excerpt}</p>
+                <Link
+                  to={`/tips/${id}`}
+                  className="text-teal-500 hover:underline font-medium w-fit"
+                >
+                  ➤ Read more
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Tips;

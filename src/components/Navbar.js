@@ -51,6 +51,9 @@ const Navbar = () => {
           <Link to="/nutrition-tracker" onClick={handleLinkClick}>Nutrition tracker</Link>
         </li>
         <li className="hover:text-teal-500">
+          <Link to="/tips" onClick={handleLinkClick}>Tips</Link>
+        </li>
+        <li className="hover:text-teal-500">
           <Link to="/profile" onClick={handleLinkClick}>Profile</Link>
         </li>
         <li className="flex gap-1 items-center ml-auto">
