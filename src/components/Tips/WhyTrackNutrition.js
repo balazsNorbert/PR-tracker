@@ -20,37 +20,30 @@ const WhyTrackNutrition = () => {
             <p>
               No matter how hard you train, your progress depends heavily on what you eat. Tracking nutrition helps ensure you're fueling your body correctly for your fitness goals.
             </p>
-
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">What Does Tracking Nutrition Involve?</h2>
             <p>
               It means recording your food intake—calories, macronutrients (protein, carbs, fats), and sometimes micronutrients. This awareness helps you make informed choices daily.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">1. Understand Your Eating Habits</h3>
             <p>
               Tracking reveals what and when you eat, helping identify unhealthy patterns like skipping meals or overeating late at night.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">2. Adjust Your Intake to Goals</h3>
             <p>
               Whether you want to lose fat, build muscle, or maintain weight, knowing your intake allows you to tweak calories and macros accordingly.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">3. Improve Nutrient Quality</h3>
             <p>
               Beyond numbers, tracking can help you focus on nutrient-dense foods, improving overall health and energy.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">4. Prevent Plateaus</h3>
             <p>
               Just like workouts, your body adapts to your diet. Tracking lets you spot plateaus and adjust to keep progressing.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">5. Stay Accountable</h3>
             <p>
               Logging meals keeps you honest and mindful, which often leads to better food choices and consistency.
             </p>
-
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Final Thoughts</h2>
             <p>
               Tracking your nutrition provides clarity and control. It's a simple yet powerful tool to complement your training, helping you achieve the results you want faster and smarter.

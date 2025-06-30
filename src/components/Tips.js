@@ -17,6 +17,21 @@ const blogPosts = [
     title: 'Why Track Your Workouts? Maximize Your Training Efficiency',
     excerpt: 'Understand the benefits of tracking your workouts and how it helps you reach your fitness goals faster.',
   },
+  {
+    id: 'how-to-stay-consistent-working-out',
+    title: 'How to Stay Consistent with Working Out',
+    excerpt: 'Struggling to stay motivated? Learn practical strategies to build consistency and make fitness a lasting habit.',
+  },
+  {
+    id: 'how-to-warm-up-before-workout',
+    title: 'How to Warm Up Before Your Workout for Better Performance',
+    excerpt: 'Learn effective warm-up routines to prepare your body, prevent injuries, and boost workout results.',
+  },
+  {
+    id: 'how-much-protein-you-need',
+    title: 'How Much Protein Do You Need Per Day? A Complete Guide',
+    excerpt: 'Learn how much protein you need each day based on your goals, body type, and activity level. Find the ideal amount for building muscle, losing fat, and staying healthy.',
+  }
 ];
 
 const Tips = () =>{
