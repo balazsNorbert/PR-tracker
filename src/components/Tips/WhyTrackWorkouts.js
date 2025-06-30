@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const WhyTrackWorkouts = () => {
   return (
@@ -60,8 +60,8 @@ const WhyTrackWorkouts = () => {
             <Link to="/tips/why-track-your-nutrition" className="text-teal-500 hover:underline">
               ← Previous Tip
             </Link>
-            <Link to="/tips" className="text-teal-500 hover:underline">
-              Back to Tips →
+            <Link to="/tips/how-to-stay-consistent-working-out" className="text-teal-500 hover:underline">
+              Next Tip →
             </Link>
           </div>
         </div>

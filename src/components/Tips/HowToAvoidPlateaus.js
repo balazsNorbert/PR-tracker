@@ -20,7 +20,6 @@ const HowToAvoidPlateaus = () => {
             <p>
               Have you been training consistently but suddenly feel like you're not making any progress? You might be facing a workout plateau, a common part of the fitness journey where results seem to stall. The good news? It's completely normal, and there are ways to move past it.
             </p>
-
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">What Is a Workout Plateau?</h2>
             <p>
               A workout plateau happens when your body adapts to your training routine. That means your muscles, strength, or endurance stop improving, even though you're still working out regularly. This is actually a sign that your body has adjusted and it's time to make changes to keep growing.
@@ -36,32 +35,26 @@ const HowToAvoidPlateaus = () => {
             </ul>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">How to Break Through a Plateau</h2>
             <p>Here are proven ways to get back on track:</p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">1. Switch Up Your Routine</h3>
             <p>
               Introduce new exercises, rep ranges, or equipment. For example, swap machines for free weights or try bodyweight variations. Keeping your workouts fresh keeps your muscles guessing.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">2. Add Progressive Overload</h3>
             <p>
               Progress happens when you push your body. Gradually increase the weight, number of reps, or sets you do each week.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">3. Prioritize Recovery</h3>
             <p>
               Rest is just as important as training. Make sure you're getting enough sleep and taking at least one or two rest days per week.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">4. Improve Your Nutrition</h3>
             <p>
               Your body needs the right fuel to build muscle and recover. Focus on getting enough protein, and ensure you're eating enough calories to support your goals.
             </p>
-
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">5. Track Your Progress</h3>
             <p>
               Logging your workouts helps you notice when you're plateauing—and helps you spot patterns that work. Plus, it's motivating to see how far you've come.
             </p>
-
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Final Thoughts</h2>
             <p>
               Plateaus are not failures — they're signs that you've progressed and your body is ready for the next level. Stay consistent, make smart adjustments, and keep moving forward. You've got this!

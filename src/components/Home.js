@@ -92,7 +92,7 @@ function Home() {
                 ✅ Track Your Workout Progress with the Best Exercise Tracker
               </h3>
               <p className={`${expandedParagraph === 1 ? '' : 'line-clamp-3'}`}>
-                Using a fitness tracker and workout exercise app like ours allows you to log weights, reps, and exercises, so you can clearly see how far you've come. It's an essential part of achieving your fitness goals and staying on track. While tracking your <Link to="/logbook" className="font-bold text-teal-800 hover:underline dark:hover:text-teal-500 dark:text-white">workout performance</Link> is key, incorporating nutrition tracking with our calorie counter can further help optimize your results.
+                Using a workout tracker and exercise app like ours allows you to log weights, reps, and exercises, so you can clearly see how far you've come. It's an essential part of achieving your fitness goals and staying on track. While tracking your <Link to="/logbook" className="font-bold text-teal-800 hover:underline dark:hover:text-teal-500 dark:text-white">workout performance</Link> is key, incorporating nutrition tracking with our calorie counter can further help optimize your results.
               </p>
               <button
                 onClick={() => toggleExpand(1)}

@@ -21,7 +21,9 @@ import AdminDashboard from './components/AdminDashboard';
 import HowToAvoidPlateaus from './components/Tips/HowToAvoidPlateaus';
 import WhyTrackNutrition from './components/Tips/WhyTrackNutrition';
 import WhyTrackWorkouts from './components/Tips/WhyTrackWorkouts';
-
+import HowToStayConsistentWorkingOut from './components/Tips/HowToStayConsistentWorkingOut';
+import HowToWarmUpBeforeWorkout from './components/Tips/HowToWarmUpBeforeWorkout';
+import HowMuchProteinYouNeed from './components/Tips/HowMuchProteinYouNeed';
 
 const TipsLayout = () => <Outlet />;
 
@@ -43,6 +45,9 @@ function App() {
                 <Route path="how-to-avoid-workout-plateaus" element={<HowToAvoidPlateaus />} />
                 <Route path="why-track-your-nutrition" element={<WhyTrackNutrition />} />
                 <Route path="why-track-your-workouts" element={<WhyTrackWorkouts />} />
+                <Route path="how-to-stay-consistent-working-out" element={<HowToStayConsistentWorkingOut />} />
+                <Route path="how-to-warm-up-before-workout" element={<HowToWarmUpBeforeWorkout />} />
+                <Route path="how-much-protein-you-need" element={<HowMuchProteinYouNeed />} />
               </Route>
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
