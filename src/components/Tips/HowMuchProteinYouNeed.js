@@ -79,8 +79,8 @@ const HowMuchProteinYouNeed = () => {
             <Link to="/tips/how-to-warm-up-before-workout" className="text-teal-500 hover:underline">
               ← Previous Tip
             </Link>
-            <Link to="/tips" className="text-teal-500 hover:underline">
-              Back to Tips →
+            <Link to="/tips/what-to-eat-before-workout" className="text-teal-500 hover:underline">
+              Next Tip →
             </Link>
           </div>
         </div>

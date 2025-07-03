@@ -31,6 +31,26 @@ const blogPosts = [
     id: 'how-much-protein-you-need',
     title: 'How Much Protein Do You Need Per Day? A Complete Guide',
     excerpt: 'Learn how much protein you need each day based on your goals, body type, and activity level. Find the ideal amount for building muscle, losing fat, and staying healthy.',
+  },
+  {
+    id: 'what-to-eat-before-workout',
+    title: 'What to Eat Before a Workout to Boost Energy and Performance',
+    excerpt: 'Discover what to eat before your workout to fuel your body, boost endurance, and improve performance. Learn the best foods and timing strategies for effective training.'
+  },
+  {
+    id: 'what-to-eat-after-workout',
+    title: 'What to Eat After a Workout to Boost Recovery and Muscle Growth',
+    excerpt: 'Discover the best foods to eat after your workout to speed up recovery, promote muscle growth, and replenish energy. Learn how proper nutrition post-exercise makes a difference.'
+  },
+  {
+    id: 'why-you-are-not-building-muscle',
+    title: "Why You're Not Building Muscle — 6 Mistakes to Fix Now",
+    excerpt: 'Struggling to gain muscle? Learn the six common mistakes that may be holding you back and how to fix them to finally see the results you want.'
+  },
+  {
+    id: 'how-long-should-your-workouts-be',
+    title: 'How Long Should Your Workouts Be for Best Results?',
+    excerpt: 'Find out the ideal workout duration based on your fitness goals. Learn how to optimize your time for muscle gain, fat loss, or overall health.'
   }
 ];
 

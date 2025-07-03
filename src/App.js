@@ -24,6 +24,10 @@ import WhyTrackWorkouts from './components/Tips/WhyTrackWorkouts';
 import HowToStayConsistentWorkingOut from './components/Tips/HowToStayConsistentWorkingOut';
 import HowToWarmUpBeforeWorkout from './components/Tips/HowToWarmUpBeforeWorkout';
 import HowMuchProteinYouNeed from './components/Tips/HowMuchProteinYouNeed';
+import WhatToEatBeforeWorkout from './components/Tips/WhatToEatBeforeWorkout';
+import WhatToEatAfterWorkout from './components/Tips/WhatToEatAfterWorkout';
+import WhyYouAreNotBuildingMuscle from './components/Tips/WhyYouAreNotBuildingMuscle';
+import HowLongShouldYourWorkoutsBe from './components/Tips/HowLongShouldYourWorkoutsBe';
 
 const TipsLayout = () => <Outlet />;
 
@@ -48,6 +52,10 @@ function App() {
                 <Route path="how-to-stay-consistent-working-out" element={<HowToStayConsistentWorkingOut />} />
                 <Route path="how-to-warm-up-before-workout" element={<HowToWarmUpBeforeWorkout />} />
                 <Route path="how-much-protein-you-need" element={<HowMuchProteinYouNeed />} />
+                <Route path="what-to-eat-before-workout" element={<WhatToEatBeforeWorkout />} />
+                <Route path="what-to-eat-after-workout" element={<WhatToEatAfterWorkout />} />
+                <Route path="why-you-are-not-building-muscle" element={<WhyYouAreNotBuildingMuscle />} />
+                <Route path="how-long-should-your-workouts-be" element={<HowLongShouldYourWorkoutsBe />} />
               </Route>
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
