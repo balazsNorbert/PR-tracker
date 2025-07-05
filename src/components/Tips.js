@@ -51,6 +51,31 @@ const blogPosts = [
     id: 'how-long-should-your-workouts-be',
     title: 'How Long Should Your Workouts Be for Best Results?',
     excerpt: 'Find out the ideal workout duration based on your fitness goals. Learn how to optimize your time for muscle gain, fat loss, or overall health.'
+  },
+  {
+    id: 'how-many-days-a-week-should-you-workout',
+    title: 'How Many Days a Week Should You Work Out for Best Results?',
+    excerpt: 'Learn how many days a week you should work out based on your fitness level and goals. Discover optimal training frequencies for muscle growth, fat loss, and general health.'
+  },
+  {
+    id: 'should-you-workout-every-day',
+    title: 'Should You Work Out Every Day? Pros, Cons & Expert Tips',
+    excerpt: 'Is working out every day a good idea? Discover the benefits and downsides of daily training, and how to do it safely without risking injury or burnout.',
+  },
+  {
+    id: 'how-long-should-you-rest-between-sets',
+    title: 'How Long Should You Rest Between Sets for Optimal Results?',
+    excerpt: 'Discover the ideal rest periods between sets to maximize muscle growth, strength, and endurance. Learn how rest time affects your workout performance.'
+  },
+  {
+    id: 'should-you-do-cardio-before-or-after-weights',
+    title: 'Should You Do Cardio Before or After Weights? Expert Advice',
+    excerpt: 'Learn whether you should do cardio before or after weight training for fat loss, muscle gain, and optimal performance. Discover expert tips and timing strategies.',
+  },
+  {
+    id: 'what-is-progressive-overload',
+    title: 'What Is Progressive Overload and Why Is It Important?',
+    excerpt: 'Learn what progressive overload means in strength training, why it’s essential for building muscle and improving performance, and how to apply it safely.'
   }
 ];
 
