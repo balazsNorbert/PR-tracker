@@ -67,8 +67,8 @@ const HowLongShouldYourWorkoutsBe = () => {
             <Link to="/tips/why-you-are-not-building-muscle" className="text-teal-500 hover:underline">
               ← Previous Tip
             </Link>
-            <Link to="/tips" className="text-teal-500 hover:underline">
-              Back to Tips →
+            <Link to="/tips/how-many-days-a-week-should-you-workout" className="text-teal-500 hover:underline">
+              Next Tip →
             </Link>
           </div>
         </div>

@@ -28,6 +28,11 @@ import WhatToEatBeforeWorkout from './components/Tips/WhatToEatBeforeWorkout';
 import WhatToEatAfterWorkout from './components/Tips/WhatToEatAfterWorkout';
 import WhyYouAreNotBuildingMuscle from './components/Tips/WhyYouAreNotBuildingMuscle';
 import HowLongShouldYourWorkoutsBe from './components/Tips/HowLongShouldYourWorkoutsBe';
+import HowManyDaysAWeekShouldYouWorkout from './components/Tips/HowManyDaysAWeekShouldYouWorkout';
+import ShouldYouWorkoutEveryDay from './components/Tips/ShouldYouWorkoutEveryDay';
+import HowLongShouldYouRestBetweenSets from './components/Tips/HowLongShouldYouRestBetweenSets';
+import ShouldYouDoCardioBeforeOrAfterWeights from './components/Tips/ShouldYouDoCardioBeforeOrAfterWeights';
+import WhatIsProgressiveOverload from './components/Tips/WhatIsProgressiveOverload';
 
 const TipsLayout = () => <Outlet />;
 
@@ -56,6 +61,11 @@ function App() {
                 <Route path="what-to-eat-after-workout" element={<WhatToEatAfterWorkout />} />
                 <Route path="why-you-are-not-building-muscle" element={<WhyYouAreNotBuildingMuscle />} />
                 <Route path="how-long-should-your-workouts-be" element={<HowLongShouldYourWorkoutsBe />} />
+                <Route path="how-many-days-a-week-should-you-workout" element={<HowManyDaysAWeekShouldYouWorkout />} />
+                <Route path="should-you-workout-every-day" element={<ShouldYouWorkoutEveryDay />} />
+                <Route path="how-long-should-you-rest-between-sets" element={<HowLongShouldYouRestBetweenSets />} />
+                <Route path="should-you-do-cardio-before-or-after-weights" element={<ShouldYouDoCardioBeforeOrAfterWeights />} />
+                <Route path="what-is-progressive-overload" element={<WhatIsProgressiveOverload />} />
               </Route>
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
