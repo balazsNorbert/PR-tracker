@@ -76,6 +76,21 @@ const blogPosts = [
     id: 'what-is-progressive-overload',
     title: 'What Is Progressive Overload and Why Is It Important?',
     excerpt: 'Learn what progressive overload means in strength training, why it’s essential for building muscle and improving performance, and how to apply it safely.'
+  },
+  {
+    id: 'best-time-to-workout',
+    title: 'Best Time to Workout for Maximum Results',
+    excerpt: 'Find out when is the best time to work out for better performance, faster recovery, and maximum muscle growth based on science and your lifestyle.'
+  },
+  {
+    id: 'should-you-train-to-failure-every-set',
+    title: 'Should You Train to Failure Every Set?',
+    excerpt: 'Discover when training to failure is effective, its benefits and drawbacks, and how often you should push sets to failure for optimal muscle growth and recovery.'
+  },
+  {
+    id: 'can-you-lose-fat-and-gain-muscle',
+    title: 'Can You Lose Fat and Build Muscle at the Same Time?',
+    excerpt: 'Find out if it’s really possible to lose fat and gain muscle at once. Learn how body recomposition works, plus tips for training, diet, and recovery.'
   }
 ];
 

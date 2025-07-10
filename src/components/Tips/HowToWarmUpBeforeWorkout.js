@@ -91,6 +91,14 @@ const HowToWarmUpBeforeWorkout = () => {
             Next Tip →
           </Link>
         </div>
+        <div className="relative bottom-2 flex items-center justify-center text-sm md:text-base gap-2">
+          <p className="text-gray-700 font-medium">
+            Want better results?
+          </p>
+          <Link to="/" className="bg-teal-600 text-white font-semibold px-4 py-1 rounded-full hover:bg-teal-700 transition-colors text-center">
+            Go to Homepage
+          </Link>
+        </div>
       </div>
     </div>
     </>

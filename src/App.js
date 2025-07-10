@@ -33,6 +33,9 @@ import ShouldYouWorkoutEveryDay from './components/Tips/ShouldYouWorkoutEveryDay
 import HowLongShouldYouRestBetweenSets from './components/Tips/HowLongShouldYouRestBetweenSets';
 import ShouldYouDoCardioBeforeOrAfterWeights from './components/Tips/ShouldYouDoCardioBeforeOrAfterWeights';
 import WhatIsProgressiveOverload from './components/Tips/WhatIsProgressiveOverload';
+import BestTimeToWorkout from './components/Tips/BestTimeToWorkout';
+import ShouldYouTrainToFailureEverySet from './components/Tips/ShouldYouTrainToFailureEverySet';
+import LoseFatAndGainMuscle from './components/Tips/LoseFatAndGainMuscle';
 
 const TipsLayout = () => <Outlet />;
 
@@ -66,6 +69,9 @@ function App() {
                 <Route path="how-long-should-you-rest-between-sets" element={<HowLongShouldYouRestBetweenSets />} />
                 <Route path="should-you-do-cardio-before-or-after-weights" element={<ShouldYouDoCardioBeforeOrAfterWeights />} />
                 <Route path="what-is-progressive-overload" element={<WhatIsProgressiveOverload />} />
+                <Route path="best-time-to-workout" element={<BestTimeToWorkout />} />
+                <Route path="should-you-train-to-failure-every-set" element={<ShouldYouTrainToFailureEverySet />} />
+                <Route path="can-you-lose-fat-and-gain-muscle" element={<LoseFatAndGainMuscle />} />
               </Route>
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
