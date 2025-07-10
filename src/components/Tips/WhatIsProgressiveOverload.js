@@ -77,8 +77,16 @@ const WhatIsProgressiveOverload = () => {
             <Link to="/tips/should-you-do-cardio-before-or-after-weights" className="text-teal-500 hover:underline">
               ← Previous Tip
             </Link>
-            <Link to="/tips" className="text-teal-500 hover:underline">
-              Back to Tips →
+            <Link to="/tips/best-time-to-workout" className="text-teal-500 hover:underline">
+              Next Tip →
+            </Link>
+          </div>
+          <div className="relative bottom-2 flex items-center justify-center text-sm md:text-base gap-2">
+            <p className="text-gray-700 font-medium">
+              Want better results?
+            </p>
+            <Link to="/" className="bg-teal-600 text-white font-semibold px-4 py-1 rounded-full hover:bg-teal-700 transition-colors text-center">
+              Go to Homepage
             </Link>
           </div>
         </div>

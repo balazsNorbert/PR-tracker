@@ -74,86 +74,91 @@ function Home() {
     <>
       <head>
         <meta name="robots" content="index, follow" />
-        <title>Best Workout & Nutrition Tracker for Weight Training</title>
-        <meta name="description" content="Track your workouts and nutrition with the best workout tracker, macros and calorie counter tool. Start for free today and reach your fitness goals faster!" />
+        <title>Best Workout, Progressive Overload & Nutrition Tracker</title>
+        <meta name="description" content="Track your workouts, progressive overload, and nutrition with the best workout tracker to avoid plateaus and reach your goals faster. Start for free today!" />
         <link rel="canonical" href="https://workoutracker.com" />
       </head>
       <section className="flex flex-col gap-6 items-center mint-h-screen justify-center px-5 py-14">
         <h1 className="text-xl md:text-2xl xl:text-3xl font-bold text-center">
-          The Best Workout & Nutrition Tracker for Weight Training
+           Best Workout & Nutrition Tracker for Progressive Overload
         </h1>
         <div className="bg-white p-6 rounded-xl shadow-xl max-w-2xl mx-auto mt-6">
           <h2 className="text-base md:text-lg xl:text-xl font-bold mb-8 text-center text-teal-700">
             Why a Workout Tracker Is Essential for Reaching Your Fitness Goals?
           </h2>
           <ul className="flex flex-col gap-4 text-sm md:text-lg text-gray-700">
-            <li>
-              <h3 className="font-bold text-black">
-                ✅ Track Your Workout Progress with the Best Exercise Tracker
-              </h3>
-              <p className={`${expandedParagraph === 1 ? '' : 'line-clamp-3'}`}>
-                Using a workout tracker and exercise app like ours allows you to log weights, reps, and exercises, so you can clearly see how far you've come. It's an essential part of achieving your fitness goals and staying on track. While tracking your <Link to="/logbook" className="font-bold text-teal-800 hover:underline dark:hover:text-teal-500 dark:text-white">workout performance</Link> is key, incorporating nutrition tracking with our calorie counter can further help optimize your results.
-              </p>
-              <button
-                onClick={() => toggleExpand(1)}
-                className="text-teal-700 hover:underline"
-              >
-                {expandedParagraph === 1 ? 'Show Less' : 'Show More'}
-              </button>
-            </li>
-            <li>
-              <h3 className="font-bold text-black">
-                ✅ Stay Motivated Throughout Your Fitness Journey
-              </h3>
-              <p className={`${expandedParagraph === 2 ? '' : 'line-clamp-3'}`}>
-                Consistent tracking with our fit trackers keeps you motivated and engaged. Monitoring your workout progress ensures you're always moving toward your goals. If you're interested in tracking your nutrition alongside workouts, our <Link to="/nutrition-tracker" className="font-bold text-teal-800 hover:underline">nutrition tracker</Link> helps you refine your diet and boost progress by tracking macros and calorie intake.
-              </p>
-              <button
-                onClick={() => toggleExpand(2)}
-                className="text-teal-800 hover:underline"
-              >
-                {expandedParagraph === 2 ? 'Show Less' : 'Show More'}
-              </button>
-            </li>
-            <li>
-              <h3 className="font-bold text-black">
-                ✅ Optimize Your Strength Training and Nutrition
-              </h3>
-              <p className={`${expandedParagraph === 3 ? '' : 'line-clamp-3'}`}>
-                By tracking your workout sessions, you can analyze your performance and tailor routines to maximize strength gains. Plus, our nutrition tracker provides insights into your diet, allowing you to monitor calorie intake and track macros to fuel your body for maximum performance.
-              </p>
-              <button
-                onClick={() => toggleExpand(3)}
-                className="text-teal-800 hover:underline"
-              >
-                {expandedParagraph === 3 ? 'Show Less' : 'Show More'}
-              </button>
-            </li>
-            <li>
-              <h3 className="font-bold text-black">
-                ✅ Break Through Fitness Plateaus
-              </h3>
-              <p className={`${expandedParagraph === 4 ? '' : 'line-clamp-3'}`}>
-                Tracking your progress helps identify plateaus in both your workout and nutrition. Using a combined workout tracker, macro tracker, and calorie counter is key to overcoming obstacles and continuing your fitness journey.
-              </p>
-              <button
-                onClick={() => toggleExpand(4)}
-                className="text-teal-700 hover:underline"
-              >
-                {expandedParagraph === 4 ? 'Show Less' : 'Show More'}
-              </button>
-            </li>
-            <li>
-              <a
-                href="https://www.fitnessfirst.co.uk/blog/how-and-why-should-i-track-my-workouts"
-                target="_blank"
-                rel="noopener"
-                className="font-bold text-teal-800 hover:underline"
-              >
-                Read more about why tracking workouts helps fitness progress.
-              </a>
-            </li>
-          </ul>
+          <li>
+            <h3 className="font-bold text-black">
+              ✅ Track Your Workout Progress with the Best Exercise Tracker
+            </h3>
+            <p className={`${expandedParagraph === 1 ? '' : 'line-clamp-3'}`}>
+              Using a workout tracker and progressive overload app alternative like ours lets you log weights, reps, and exercises in a clear logbook. This makes it easy to follow a progressive overload plan and avoid a workout plateau. Tracking your <Link to="/logbook" className="font-bold text-teal-800 hover:underline dark:hover:text-teal-500 dark:text-white">workout performance</Link> and progress is the best way to keep improving. Pair it with our calorie counter to get even better results.
+            </p>
+            <button
+              onClick={() => toggleExpand(1)}
+              className="text-teal-700 hover:underline"
+            >
+              {expandedParagraph === 1 ? 'Show Less' : 'Show More'}
+            </button>
+          </li>
+          <li>
+            <h3 className="font-bold text-black">
+              ✅ Stay Motivated Throughout Your Fitness Journey
+            </h3>
+            <p className={`${expandedParagraph === 2 ? '' : 'line-clamp-3'}`}>
+              Consistent tracking with our fitness tracker works like a simple progressive overload tracker, so you always know when to add weight or reps. This helps you stick to your plan, stay motivated, and avoid workout plateaus that slow you down. Plus, our <Link to="/nutrition-tracker" className="font-bold text-teal-800 hover:underline">nutrition tracker</Link> makes sure your diet supports your goals.
+            </p>
+            <button
+              onClick={() => toggleExpand(2)}
+              className="text-teal-800 hover:underline"
+            >
+              {expandedParagraph === 2 ? 'Show Less' : 'Show More'}
+            </button>
+          </li>
+          <li>
+            <h3 className="font-bold text-black">
+              ✅ Optimize Your Strength Training and Nutrition
+            </h3>
+            <p className={`${expandedParagraph === 3 ? '' : 'line-clamp-3'}`}>
+              By using our workout logbook, you can analyze each training session and build a progressive overload plan that actually works. Combined with nutrition tracking and macro logging, you’ll avoid plateaus and keep pushing forward toward new personal bests.
+            </p>
+            <button
+              onClick={() => toggleExpand(3)}
+              className="text-teal-800 hover:underline"
+            >
+              {expandedParagraph === 3 ? 'Show Less' : 'Show More'}
+            </button>
+          </li>
+          <li>
+            <h3 className="font-bold text-black">
+              ✅ Break Through Fitness Plateaus
+            </h3>
+            <p className={`${expandedParagraph === 4 ? '' : 'line-clamp-3'}`}>
+              Many people hit a workout plateau because they stop tracking progress. With our progressive overload app alternative, you can keep improving by adjusting your plan when needed. Combine your workout tracker with our macro and calorie counter for the best results.
+            </p>
+            <button
+              onClick={() => toggleExpand(4)}
+              className="text-teal-700 hover:underline"
+            >
+              {expandedParagraph === 4 ? 'Show Less' : 'Show More'}
+            </button>
+          </li>
+          <li>
+            <Link to="/tips" className="font-bold text-teal-800 hover:underline">
+              Want more fitness tips? Check out our Tips & Guides page!
+            </Link>
+          </li>
+          <li>
+            <a
+              href="https://www.fitnessfirst.co.uk/blog/how-and-why-should-i-track-my-workouts"
+              target="_blank"
+              rel="noopener"
+              className="font-bold text-teal-800 hover:underline"
+            >
+              Read more about why tracking workouts & progressive overload matter.
+            </a>
+          </li>
+        </ul>
         </div>
         <Link to="/logbook" className="flex gap-2 items-center bg-gray-700 dark:bg-teal-600 hover:bg-teal-500 dark:hover:bg-teal-500 font-semibold text-base md:text-lg xl:text-2xl
           py-3 px-6 rounded-lg transition duration-300">
