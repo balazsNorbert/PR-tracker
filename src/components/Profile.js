@@ -220,9 +220,6 @@ const Profile = () => {
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-900 mx-auto">
                   Welcome back, <span className="text-teal-700 dark:text-white">{user.username}!</span>
                 </h1>
-                <p className="text-sm xl:text-base text-gray-600 dark:text-white font-semibold">
-                  Set fitness goals, track your body weight, and monitor your workout consistency - all from your personalized profile.
-                </p>
               </>
             ) : (
               <>
