@@ -106,7 +106,7 @@ function Home() {
               ✅ Stay Motivated Throughout Your Fitness Journey
             </h3>
             <p className={`${expandedParagraph === 2 ? '' : 'line-clamp-3'}`}>
-              Consistent tracking with our fitness tracker works like a simple progressive overload tracker, so you always know when to add weight or reps. This helps you stick to your plan, stay motivated, and avoid workout plateaus that slow you down. Plus, our <Link to="/nutrition-tracker" className="font-bold text-teal-800 hover:underline">nutrition tracker</Link> makes sure your diet supports your goals.
+              Consistent tracking with our fitness tracker works like a simple progressive overload tracker, so you always know when to add weight or reps. Many people think they should workout every day, but with proper tracking you can balance training and rest for the best results — helping you stick to your plan, stay motivated, and avoid workout plateaus. Plus, our <Link to="/nutrition-tracker" className="font-bold text-teal-800 hover:underline">nutrition tracker</Link> makes sure your diet supports your goals.
             </p>
             <button
               onClick={() => toggleExpand(2)}
