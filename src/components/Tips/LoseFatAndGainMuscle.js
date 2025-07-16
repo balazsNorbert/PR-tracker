@@ -77,8 +77,8 @@ const LoseFatAndGainMuscle = () => {
             <Link to="/tips/should-you-train-to-failure-every-set" className="text-teal-500 hover:underline">
               ← Previous Tip
             </Link>
-            <Link to="/tips" className="text-teal-500 hover:underline">
-              Back to Tips →
+            <Link to="/tips/best-workout-split-for-beginners" className="text-teal-500 hover:underline">
+              Next Tip →
             </Link>
           </div>
           <div className="relative bottom-2 flex items-center justify-center text-sm md:text-base gap-2">

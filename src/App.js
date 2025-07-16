@@ -36,6 +36,13 @@ import WhatIsProgressiveOverload from './components/Tips/WhatIsProgressiveOverlo
 import BestTimeToWorkout from './components/Tips/BestTimeToWorkout';
 import ShouldYouTrainToFailureEverySet from './components/Tips/ShouldYouTrainToFailureEverySet';
 import LoseFatAndGainMuscle from './components/Tips/LoseFatAndGainMuscle';
+import BestWorkoutSplitForBeginners from './components/Tips/BestWorkoutSplitForBeginners';
+import BestWorkoutSplit from './components/Tips/BestWorkoutSplit';
+import HowHeavyShouldYouLift from './components/Tips/HowHeavyShouldYouLift';
+import TrainMuscleTwiceAWeek from './components/Tips/TrainMuscleTwiceAWeek';
+import MuscleSorenessAndGrowth from './components/Tips/MuscleSorenessAndGrowth';
+import HowManyExercisesPerMuscle from './components/Tips/HowManyExercisesPerMuscle';
+import StrengthVsHypertrophy from './components/Tips/StrengthVsHypertrophy';
 
 const TipsLayout = () => <Outlet />;
 
@@ -72,6 +79,13 @@ function App() {
                 <Route path="best-time-to-workout" element={<BestTimeToWorkout />} />
                 <Route path="should-you-train-to-failure-every-set" element={<ShouldYouTrainToFailureEverySet />} />
                 <Route path="can-you-lose-fat-and-gain-muscle" element={<LoseFatAndGainMuscle />} />
+                <Route path="best-workout-split-for-beginners" element={<BestWorkoutSplitForBeginners />} />
+                <Route path="best-workout-split" element={<BestWorkoutSplit />} />
+                <Route path="how-heavy-should-you-lift" element={<HowHeavyShouldYouLift />} />
+                <Route path="train-muscle-twice-a-week" element={<TrainMuscleTwiceAWeek />} />
+                <Route path="muscle-soreness-and-growth" element={<MuscleSorenessAndGrowth />} />
+                <Route path="how-many-exercises-per-muscle" element={<HowManyExercisesPerMuscle />} />
+                <Route path="strength-vs-hypertrophy" element={<StrengthVsHypertrophy />} />
               </Route>
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
