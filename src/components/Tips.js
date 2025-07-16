@@ -91,6 +91,41 @@ const blogPosts = [
     id: 'can-you-lose-fat-and-gain-muscle',
     title: 'Can You Lose Fat and Build Muscle at the Same Time?',
     excerpt: 'Find out if it’s really possible to lose fat and gain muscle at once. Learn how body recomposition works, plus tips for training, diet, and recovery.'
+  },
+    {
+    id: 'best-workout-split-for-beginners',
+    title: 'What’s the Best Workout Split for Beginners?',
+    excerpt: 'Discover the best workout split for beginners to build muscle, stay consistent, and avoid burnout. Learn which training split fits your goals and schedule.'
+  },
+  {
+    id: 'best-workout-split',
+    title: 'What is the Best Workout Split?',
+    excerpt: 'Find out what the best workout split is for building muscle, balancing recovery, and fitting your schedule. Learn which split suits your training level and goals.'
+  },
+  {
+    id: 'how-heavy-should-you-lift',
+    title: 'How Do I Know If I’m Lifting Too Heavy?',
+    excerpt: 'Learn how to tell if your weights are too heavy for safe and effective training. Avoid bad form, reduce injury risk, and lift smarter for better muscle growth.'
+  },
+  {
+    id: 'train-muscle-twice-a-week',
+    title: 'Is It Okay to Train a Muscle Twice a Week?',
+    excerpt: 'Many lifters ask if training a muscle twice weekly is good for growth. Discover the benefits of higher frequency training and how to recover properly.'
+  },
+  {
+    id: 'muscle-soreness-and-growth',
+    title: 'Is Muscle Soreness Necessary for Muscle Growth?',
+    excerpt: 'Does being sore mean your muscles are growing? Understand the link between muscle soreness and real muscle gains.'
+  },
+  {
+    id: 'how-many-exercises-per-muscle',
+    title: 'How Many Exercises Per Muscle Group Should You Do?',
+    excerpt: 'Learn how many exercises per muscle group you should do in a workout. Find the right balance of volume and intensity for muscle growth and recovery.'
+  },
+  {
+    id: 'strength-vs-hypertrophy',
+    title: 'What’s the Difference Between Strength and Hypertrophy Training?',
+    excerpt: 'Understand the key differences between strength training and hypertrophy training. Learn which approach fits your goals best.'
   }
 ];
 
