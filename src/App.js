@@ -43,6 +43,8 @@ import TrainMuscleTwiceAWeek from './components/Tips/TrainMuscleTwiceAWeek';
 import MuscleSorenessAndGrowth from './components/Tips/MuscleSorenessAndGrowth';
 import HowManyExercisesPerMuscle from './components/Tips/HowManyExercisesPerMuscle';
 import StrengthVsHypertrophy from './components/Tips/StrengthVsHypertrophy';
+import CompoundVsIsolation from './components/Tips/CompoundVsIsolation';
+import FreeWeightsVsMachines from './components/Tips/FreeWeightsVsMachines';
 
 const TipsLayout = () => <Outlet />;
 
@@ -86,6 +88,8 @@ function App() {
                 <Route path="muscle-soreness-and-growth" element={<MuscleSorenessAndGrowth />} />
                 <Route path="how-many-exercises-per-muscle" element={<HowManyExercisesPerMuscle />} />
                 <Route path="strength-vs-hypertrophy" element={<StrengthVsHypertrophy />} />
+                <Route path="compound-vs-isolation-exercises" element={<CompoundVsIsolation />} />
+                <Route path="free-weights-vs-machines" element={<FreeWeightsVsMachines />} />
               </Route>
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />

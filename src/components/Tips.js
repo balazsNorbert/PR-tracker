@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const blogPosts = [
   {
@@ -126,10 +127,26 @@ const blogPosts = [
     id: 'strength-vs-hypertrophy',
     title: 'What’s the Difference Between Strength and Hypertrophy Training?',
     excerpt: 'Understand the key differences between strength training and hypertrophy training. Learn which approach fits your goals best.'
+  },
+  {
+    id: 'compound-vs-isolation-exercises',
+    title: 'Compound vs Isolation Exercises: What’s the Difference?',
+    excerpt: 'Learn the key differences between compound and isolation exercises, when to use each, and how to structure your workouts for maximum muscle growth and strength.'
+  },
+  {
+    id: 'free-weights-vs-machines',
+    title: 'Free Weights vs Machines: Which is Better?',
+    excerpt: 'Discover the pros and cons of free weights and machines. Find out which one is best for your goals, experience level, and training style.'
   }
 ];
 
 const Tips = () =>{
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredPosts = blogPosts.filter(post =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <head>
@@ -141,8 +158,16 @@ const Tips = () =>{
       <div className="min-h-screen mx-5">
         <div className="flex flex-col items-center gap-10 my-10 mx-auto p-5 md:px-10 bg-white rounded-lg shadow-lg max-w-2xl lg:max-w-3xl">
           <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold text-teal-700 text-center">Fitness & Nutrition Tips</h1>
+          <input
+            type="text"
+            placeholder="Search tips..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full p-3 text-gray-700 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
           <div className="flex flex-col gap-6 w-full">
-            {blogPosts.map(({ id, title, excerpt }) => (
+            {filteredPosts.length > 0 ? (
+              filteredPosts.map(({ id, title, excerpt }) => (
               <div
                 key={id}
                 className="flex flex-col gap-2 border border-gray-200 rounded-md p-4 shadow-sm hover:shadow-md bg-gray-100 hover:bg-gray-50 transition-all duration-300 cursor-pointer"
@@ -156,7 +181,9 @@ const Tips = () =>{
                   ➤ Read more
                 </Link>
               </div>
-            ))}
+            ))) : (
+              <p className="text-gray-500 text-center">No tips found for your search.</p>
+            )}
           </div>
         </div>
       </div>
