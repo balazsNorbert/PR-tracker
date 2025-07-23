@@ -30,7 +30,7 @@ const BestWorkoutSplit = () => {
             </h2>
             <ul className="list-disc list-inside">
               <li>
-                <strong>Full-Body Split:</strong> Great for busy people or beginners. Hit all major muscle groups 2-3 times per week.
+                <strong>Full-Body Split:</strong> Great for busy people or beginners. Hit all major muscle groups 2-3 times per week. Many beginners love full-body training because it teaches good form and builds a strong base. It's also forgiving if you miss a workout — you won't skip an entire muscle group.
               </li>
               <li>
                 <strong>Upper/Lower Split:</strong> Train upper body and lower body on separate days. Good balance of frequency and recovery, 3-4 days per week.
@@ -46,7 +46,8 @@ const BestWorkoutSplit = () => {
               How to Pick the Best Workout Split for You
             </h2>
             <p>
-              The best workout split is the one you can stick to. If you can only train three times a week, a full-body or upper/lower split is often better than trying to squeeze in a six-day PPL. More frequency usually means more progress, but only if you recover properly.
+              The best workout split is the one you can stick to. If you can only train three times a week, a full-body or upper/lower split is often better than trying to squeeze in a six-day PPL. <Link to="/tips/train-muscle-twice-a-week" className="font-bold text-teal-800 hover:underline">More frequency</Link> usually means more progress, but only if you recover properly.
+              If you feel tired or stuck, try lowering your volume or switching to a simpler split for a few weeks. Sometimes, less is more.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Tips for Making Any Split Work
@@ -56,12 +57,14 @@ const BestWorkoutSplit = () => {
               <li>Listen to your body — rest when needed to avoid overtraining.</li>
               <li>Track your workouts to spot plateaus and make changes.</li>
               <li>Adjust your split if your schedule or recovery needs change.</li>
+              <li>Eat and sleep well — recovery is just as important as your training plan.</li>
             </ul>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Final Thoughts
             </h2>
             <p>
               So, what is the best workout split? The truth is, it's different for everyone. The best workout split is the one that challenges you, helps you recover, and fits your life. Start simple, build consistency, and adjust your split as your training evolves.
+              Remember, the best split is the one you actually enjoy doing. If you like your workouts, you'll stick with them longer and see better results.
             </p>
           </div>
           <div className="flex justify-between items-center w-full text-sm md:text-base">

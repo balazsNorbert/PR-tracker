@@ -7,13 +7,13 @@ const ShouldYouWorkoutEveryDay = () => {
       <head>
         <meta name="robots" content="index, follow" />
         <title>Should You Work Out Every Day? Pros, Cons & Expert Tips</title>
-        <meta name="description" content="Should you work out every day? Discover the benefits and risks of daily exercise, when it’s safe to train daily, and tips for balancing workouts with recovery." />
+        <meta name="description" content="Should you really work out every day? Find out if daily training helps or hurts your progress, when it makes sense to train daily, and how to recover smart." />
         <link rel="canonical" href="https://workoutracker.com/tips/should-you-workout-every-day" />
       </head>
       <div className="min-h-screen mx-5">
         <div className="flex flex-col items-center gap-10 w-full my-10 mx-auto p-5 md:px-10 bg-white rounded-xl shadow-lg max-w-2xl lg:max-w-3xl">
           <h1 className="text-xl md:text-2xl xl:text-3xl font-bold text-teal-700 text-center">
-            Should You Work Out Every Day? Pros, Cons & Expert Tips
+            Should You Work Out Every Day? Pros & Cons
           </h1>
           <div className="flex flex-col gap-4 text-gray-700 max-w-none">
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
@@ -55,6 +55,24 @@ const ShouldYouWorkoutEveryDay = () => {
               <li>Monitor fatigue, sleep quality, and performance trends</li>
               <li>Fuel your body with proper nutrition and hydration</li>
             </ul>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
+              Signs You Need More Rest
+            </h2>
+            <p>
+              Even if you love training daily, it's crucial to watch for signs that your body needs a break. Persistent <Link to="/tips/muscle-soreness-and-growth" className="font-bold text-teal-800 hover:underline">muscle soreness</Link>, trouble sleeping, low motivation, or declining performance are all red flags for overtraining. Taking a rest day or switching to gentle activity can help you bounce back stronger.
+            </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
+              Alternative Ways to Stay Active
+            </h2>
+            <p>
+              Not every workout has to be intense. If you want to move every day, mix in light activities like leisurely walks, mobility drills, or restorative yoga. This keeps you active without putting extra stress on your body, helping with recovery while maintaining your routine.
+            </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
+              Listen to Your Body
+            </h2>
+            <p>
+              At the end of the day, no training plan should ignore how you feel. Tuning into your body's signals is just as important as any program or schedule. Balance hard training with rest, fuel your body well, and remember: <Link to="/tips/what-is-progressive-overload" className="font-bold text-teal-800 hover:underline">progress</Link> comes from <Link to="/tips/how-to-stay-consistent-working-out" className="font-bold text-teal-800 hover:underline">consistency</Link> — not from burning out.
+            </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Final Thoughts
             </h2>

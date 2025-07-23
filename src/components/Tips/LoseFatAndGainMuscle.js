@@ -7,7 +7,7 @@ const LoseFatAndGainMuscle = () => {
       <head>
         <meta name="robots" content="index, follow" />
         <title>Can You Lose Fat and Gain Muscle at the Same Time?</title>
-        <meta name="description" content="Wondering if you can lose fat and gain muscle simultaneously? Discover how body recomposition works and what it takes to burn fat and gain muscle together." />
+        <meta name="description" content="Can you really lose fat and build muscle at the same time? Learn how to train smart, eat right, and recover well for successful body recomposition." />
         <link rel="canonical" href="https://workoutracker.com/tips/can-you-lose-fat-and-gain-muscle" />
       </head>
       <div className="min-h-screen mx-5">
@@ -20,7 +20,8 @@ const LoseFatAndGainMuscle = () => {
               The Truth About Body Recomposition
             </h2>
             <p>
-              One of the most common fitness questions is whether you can lose fat while gaining muscle at the same time—a process known as body recomposition. The good news is, yes, it's possible, but it requires a smart approach to nutrition, training, and recovery.
+              One of the most common fitness questions is whether you can lose fat while gaining muscle at the same time. A process known as body recomposition.
+              The good news is, yes, it's possible, but it requires a smart approach to <Link to="/tips/why-track-your-nutrition" className="font-bold text-teal-800 hover:underline"> Nutrition</Link>, training, and recovery.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               How Body Recomposition Works
@@ -65,6 +66,12 @@ const LoseFatAndGainMuscle = () => {
             </h2>
             <p>
               Body recomposition takes time and consistency. You may not see the scale move much because you're trading fat for muscle, but your body will look leaner and stronger. Measure progress through photos, strength gains, and how your clothes fit.
+            </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
+              Stay Consistent and Track Progress
+            </h2>
+            <p>
+              Body recomposition doesn't happen overnight. Track your workouts, nutrition, and recovery to stay on course. Small, steady changes add up over weeks and months, so be patient and celebrate non-scale victories like better performance and visible muscle definition.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Final Thoughts
