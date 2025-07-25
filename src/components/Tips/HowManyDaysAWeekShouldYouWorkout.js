@@ -13,42 +13,52 @@ const HowManyDaysAWeekShouldYouWorkout = () => {
       <div className="min-h-screen mx-5">
         <div className="flex flex-col items-center gap-10 w-full my-10 mx-auto p-5 md:px-10 bg-white rounded-xl shadow-lg max-w-2xl lg:max-w-3xl">
           <h1 className="text-xl md:text-2xl xl:text-3xl font-bold text-teal-700 text-center">
-            How Many Days a Week Should You Work Out for Best Results?
+            How Many Times a Week Should You Work Out for Best Results?
           </h1>
           <div className="flex flex-col gap-4 text-gray-700 max-w-none">
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Why Workout Frequency Matters
             </h2>
             <p>
-              How many days a week you work out can significantly impact your results. Your body needs the right balance of training and recovery to progress. Whether your goal is building strength, burning fat, or staying fit, your weekly workout schedule should be aligned with your goals and your lifestyle.
+              Wondering how often should you work out to reach your goals faster? Your workout frequency is one of the key factors that decide whether you build muscle, burn fat, or just spin your wheels.
+              Training too little can slow progress, but training too much without rest can lead to <Link to="/tips/how-to-avoid-workout-plateaus" className="font-bold text-teal-800 hover:underline">plateaus</Link>.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Recommended Training Frequency by Goal
             </h2>
             <ul className="list-disc list-inside">
-              <li><strong>Beginners:</strong> 2-3 days per week focusing on full-body workouts</li>
-              <li><strong>Muscle Gain:</strong> 4-6 days per week using split routines like push/pull/legs</li>
-              <li><strong>Fat Loss:</strong> 3-5 days per week with a mix of strength training and cardio</li>
-              <li><strong>General Health:</strong> At least 3 days per week of moderate-intensity activity</li>
-              <li><strong>Athletes:</strong> 5-6 days per week with tailored programming and recovery</li>
+              <li><strong>Beginners:</strong> 2-3 days per week with full-body workouts to learn the basics.</li>
+              <li><strong>Muscle Gain:</strong> 4-6 days per week using split routines like push/pull/legs or upper/lower splits.</li>
+              <li><strong>Fat Loss:</strong> 3-5 days per week mixing resistance training with cardio or HIIT.</li>
+              <li><strong>General Health:</strong> At least 3 days per week of moderate-intensity training for heart health and mobility.</li>
+              <li><strong>Athletes:</strong> 5-6 days per week with planned deloads and recovery sessions.</li>
             </ul>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Don't Forget Recovery Days
             </h2>
             <p>
-              Recovery is when your muscles rebuild and get stronger. Overtraining without rest can lead to burnout, fatigue, or even injury. Make sure to include 1-2 rest days per week, and listen to your body if you feel unusually sore, tired, or unmotivated.
+              Your body gets stronger while you rest — not while you train. Include 1-2 rest days or active recovery days per week to avoid fatigue, <Link to="/tips/muscle-soreness-and-growth" className="font-bold text-teal-800 hover:underline">soreness</Link>, and injuries. If you ever feel rundown or unmotivated, that's a sign to check your workout frequency and make sure you're not overdoing it.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Finding the Right Balance
             </h2>
             <p>
-              The ideal number of workout days will depend on your time availability, fitness level, recovery rate, and personal preference. Quality beats quantity. It's better to train consistently 3 times a week with intensity and focus than half-heartedly every day.
+              The best answer to how often should you work out depends on your experience, schedule, recovery ability, and what you actually enjoy doing. More isn't always better — better is better. Focus on consistency and quality instead of chasing daily sessions you can't stick to long-term.
             </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
+              Extra Tips for Staying Consistent
+            </h2>
+            <ul className="list-disc list-inside">
+              <li>Plan workouts like appointments — block time in your calendar.</li>
+              <li>Mix up your training styles to stay motivated and avoid boredom.</li>
+              <li>Track your progress to see wins even on busy weeks.</li>
+              <li>Be flexible — it's better to adapt than to skip altogether.</li>
+            </ul>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Final Thoughts
             </h2>
             <p>
-              Working out the right number of days per week helps you stay motivated, avoid burnout, and see long-term results. Start with what feels sustainable, then build from there. The key is consistency—results come from showing up regularly, not from perfection.
+              Finding your ideal workout frequency is about balancing challenge and recovery so you feel strong, not burned out. Pick a schedule you can stick to, adjust when needed, and remember: consistency beats perfection. When you train smart and recover well, results will follow!
             </p>
           </div>
           <div className="flex justify-between items-center w-full text-sm md:text-base">
