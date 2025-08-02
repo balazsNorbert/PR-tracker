@@ -6,7 +6,7 @@ const HowMuchProteinYouNeed = () => {
     <>
       <head>
         <meta name="robots" content="index, follow" />
-        <title>How Much Protein Do You Really Need for Best Results</title>
+        <title>How Much Protein Does Your Body Really Need?</title>
         <meta name="description" content="Learn how much protein you need a day to build muscle, lose fat, or stay healthy. Find the right daily intake based on your fitness goals and lifestyle." />
         <link rel="canonical" href="https://workoutracker.com/tips/how-much-protein-you-need" />
       </head>
@@ -16,63 +16,66 @@ const HowMuchProteinYouNeed = () => {
             How Much Protein Do You Need Per Day?
           </h1>
           <div className="flex flex-col gap-4 text-gray-700 max-w-none">
-            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Why Protein Matters ?</h2>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Why Protein Matters</h2>
             <p>
-              Knowing how much protein you need each day is essential for building muscle, supporting recovery, and maintaining a healthy body. Whether you're training to gain mass, lose fat, or just stay in shape, getting enough protein daily is key to success.
+              Getting enough protein is essential for building and maintaining muscle, boosting recovery, and staying healthy overall. Protein supports tissue repair, hormone production, and your immune system. Unlike carbs or fat, your body can't store extra protein, so your daily intake really counts.
             </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">How Much Protein Do You Really Need?</h2>
             <p>
-              It also plays a critical role in hormone production, immune function, and maintaining skin, hair, and nails. Unlike carbs and fat, your body doesn't store protein in the same way — so daily intake matters more than you think.
+              Your ideal daily protein intake depends on your weight, goals, and activity level. Use the general guidelines below as a starting point:
             </p>
-            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">General Protein Guidelines</h2>
             <ul className="list-disc list-inside">
-              <li>Sedentary adults: ~0.8g per kg of body weight</li>
-              <li>Active individuals: 1.2-2.0g/kg depending on intensity</li>
-              <li>Muscle building: 1.6-2.2g/kg (or ~0.7-1g/lb)</li>
-              <li>Fat loss (with training): ~2.0-2.4g/kg to preserve muscle</li>
-              <li>Athletes and bodybuilders: Often closer to 2.0-2.5g/kg</li>
+              <li><span className="font-semibold">Sedentary adults:</span> ~0.8g per kg of body weight</li>
+              <li><span className="font-semibold">Active lifestyle:</span> 1.2-2.0g/kg</li>
+              <li><span className="font-semibold">Building muscle:</span> 1.6-2.2g/kg (~0.7-1g per lb)</li>
+              <li><span className="font-semibold">Fat loss (while training):</span> 2.0-2.4g/kg to maintain muscle</li>
+              <li><span className="font-semibold">Athletes:</span> 2.0-2.5g/kg depending on sport intensity</li>
             </ul>
+            <h3 className="text-base md:text-lg xl:text-xl text-teal-600">Quick Example</h3>
             <p>
-              These are general recommendations. For personalized advice, especially if you have medical conditions, consult a dietitian or health professional.
-            </p>
-            <h3 className="text-base md:text-lg xl:text-xl text-teal-600">Example Calculation</h3>
-            <p>
-              If you weigh 70kg (154 lbs) and want to build muscle, aim for:
+              If you weigh 80kg (176 lbs) and your goal is muscle growth:
               <br />
-              <span className="font-semibold">70kg x 2g = 140g protein per day</span>
+              <span className="font-semibold">80kg x 2g = 160g protein daily</span>.
+              Divide that into 4 meals: 40g per meal.
             </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Simple Protein Sources</h2>
             <p>
-              Spread that across 4 meals a day, and that's about 35g of protein per meal — completely doable with a balanced diet.
+              Focus on whole foods first. Here are some great options:
             </p>
-            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Best Protein Sources</h2>
             <ul className="list-disc list-inside">
-              <li>Lean meats (chicken, turkey, beef)</li>
-              <li>Fish (salmon, tuna, cod)</li>
-              <li>Eggs and dairy (Greek yogurt, cottage cheese, milk)</li>
-              <li>Protein powders (whey, casein, pea, rice, soy)</li>
-              <li>Plant-based: lentils, tofu, tempeh, chickpeas, edamame, quinoa</li>
+              <li>Lean meats: chicken, turkey, beef</li>
+              <li>Fish & seafood: salmon, tuna, shrimp</li>
+              <li>Eggs and dairy: eggs, Greek yogurt, cottage cheese</li>
+              <li>Protein powders: whey, casein, plant-based</li>
+              <li>Plant-based: lentils, beans, tofu, tempeh, quinoa, chickpeas</li>
             </ul>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">When Should You Eat Protein?</h2>
             <p>
-              If you're vegan or vegetarian, it's important to combine different plant sources to get all essential amino acids — like rice and beans or lentils and quinoa.
-            </p>
-            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">How to Distribute Protein</h2>
-            <p>
-              For optimal muscle protein synthesis (MPS), aim to include at least 20-40g of protein every 3-5 hours throughout the day. Skipping long gaps between meals helps avoid muscle breakdown.
+              Aim to spread protein evenly throughout the day — around 20-40g every 3-4 hours. This supports muscle repair and prevents long gaps that can lead to muscle breakdown.
             </p>
             <p>
-              Consider pairing protein with fiber or healthy fats (like olive oil or avocado) to stay full longer and support overall nutrition.
+              Not sure what to eat? Check out our tips on <Link to="/tips/what-to-eat-before-workout" className="font-bold text-teal-800 hover:underline"> what to eat before a workout</Link> and
+              <Link to="/tips/what-to-eat-after-workout" className="font-bold text-teal-800 hover:underline"> what to eat after a workout</Link> to fuel your training and recovery.
             </p>
-            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Common Myths About Protein</h2>
+            <p>
+              Include protein in breakfast, lunch, dinner, and snacks. A high-protein meal after training is especially effective.
+            </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Protein and Hydration</h2>
+            <p>
+              Higher protein intakes slightly increase your body's water needs. Stay hydrated to support digestion, kidney health, and muscle function. A good rule of thumb: drink at least 2-3 liters of water daily.
+            </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Protein Myths — Busted</h2>
             <ul className="list-disc list-inside">
-              <li><span className="font-semibold">"Too much protein harms your kidneys"</span> — In healthy individuals, there is no strong evidence supporting this.</li>
-              <li><span className="font-semibold">"You can only absorb 30g at a time"</span> — Your body continues to digest and utilize larger amounts, just more slowly.</li>
-              <li><span className="font-semibold">"Protein is only for bodybuilders"</span> — Everyone needs adequate protein, regardless of physique goals.</li>
+              <li><span className="font-semibold">Myth:</span> “You can't absorb more than 30g at once.” → False! You absorb it all — larger amounts just digest more slowly.</li>
+              <li><span className="font-semibold">Myth:</span> “High protein damages your kidneys.” → False! There's no evidence of harm in healthy people.</li>
+              <li><span className="font-semibold">Myth:</span> “Protein is only for bodybuilders.” → Nope! Everyone benefits — for better recovery, strength, and staying lean.</li>
             </ul>
-            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Final Thoughts</h2>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Key Takeaway</h2>
             <p>
-              Your protein needs depend on your goals, weight, activity level, and diet. Use the guidelines above as a flexible framework, and adjust based on your results and how you feel.
+              Dial in your daily protein based on your goal — more if you're lifting heavy or cutting fat, less if you're just staying active. Track your intake for a few days to see where you stand, then adjust. And remember: real food first, supplements second.
             </p>
             <p>
-              Stay consistent, aim for quality sources, and don't stress perfection — progress is what counts. Over time, a well-balanced diet with adequate protein can improve strength, recovery, and body composition.
+              Consistency beats perfection — keep your diet balanced, stay hydrated, and enjoy the results.
             </p>
           </div>
           <div className="flex justify-between items-center w-full text-sm md:text-base">
@@ -83,9 +86,9 @@ const HowMuchProteinYouNeed = () => {
               Next Tip →
             </Link>
           </div>
-          <div className="relative bottom-2 flex items-center justify-center text-sm md:text-base gap-2">
+          <div className="relative bottom-2 flex flex-col items-center justify-center text-center text-sm md:text-base gap-2">
             <p className="text-gray-700 font-medium">
-              Want better results?
+              Want to optimize your nutrition and training?
             </p>
             <Link to="/" className="bg-teal-600 text-white font-semibold px-4 py-1 rounded-full hover:bg-teal-700 transition-colors text-center">
               Go to Homepage

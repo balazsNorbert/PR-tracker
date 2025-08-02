@@ -73,8 +73,8 @@ const FreeWeightsVsMachines = () => {
             <Link to="/tips/compound-vs-isolation-exercises" className="text-teal-500 hover:underline">
               ← Previous Tip
             </Link>
-            <Link to="/tips" className="text-teal-500 hover:underline">
-              Back to Tips →
+            <Link to="/tips/do-you-need-supplements-to-build-muscle" className="text-teal-500 hover:underline">
+              Next tip →
             </Link>
           </div>
           <div className="relative bottom-2 flex items-center justify-center text-sm md:text-base gap-2">

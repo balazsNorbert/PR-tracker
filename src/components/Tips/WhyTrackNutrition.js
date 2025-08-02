@@ -18,35 +18,46 @@ const WhyTrackNutrition = () => {
           <div className="flex flex-col gap-3 text-gray-700 max-w-none">
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Nutrition is the Foundation</h2>
             <p>
-              No matter how hard you train, your progress depends heavily on what you eat. Tracking nutrition helps ensure you're fueling your body correctly for your fitness goals.
+              No matter how hard you train, your progress depends heavily on what you eat. Tracking nutrition helps ensure you're fueling your body correctly for your fitness goals. Without awareness, it's easy to under-eat protein, go overboard on hidden calories, or miss out on essential nutrients.
+            </p>
+            <p>
+              Many people train hard but struggle to see results simply because they're not eating in line with their goals. Tracking gives you the power to see exactly where you stand and take control of your progress.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">What Does Tracking Nutrition Involve?</h2>
             <p>
-              It means recording your food intake—calories, macronutrients (protein, carbs, fats), and sometimes micronutrients. This awareness helps you make informed choices daily.
+              It means recording your food intake — calories, macronutrients (protein, carbs, fats), and sometimes micronutrients like vitamins and minerals. This awareness helps you make informed choices daily and build better long-term habits.
             </p>
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">1. Understand Your Eating Habits</h3>
             <p>
-              Tracking reveals what and when you eat, helping identify unhealthy patterns like skipping meals or overeating late at night.
+              Tracking reveals what, when, and how much you eat. It helps you spot patterns like stress eating, skipping meals, or mindlessly snacking. Once you see these trends, you can fix them.
             </p>
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">2. Adjust Your Intake to Goals</h3>
             <p>
-              Whether you want to lose fat, build muscle, or maintain weight, knowing your intake allows you to tweak calories and macros accordingly.
+              Whether you want to lose fat, build muscle, or maintain weight, knowing your daily intake allows you to tweak calories and macros as needed. It turns vague guesses into measurable data you can act on. If you're aiming to lose fat and gain muscle at the same time,
+              read our guide on whether <Link to="/tips/can-you-lose-fat-and-gain-muscle" className="font-bold text-teal-800 hover:underline">you can lose fat and gain muscle</Link> simultaneously.
             </p>
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">3. Improve Nutrient Quality</h3>
             <p>
-              Beyond numbers, tracking can help you focus on nutrient-dense foods, improving overall health and energy.
+              Beyond just hitting numbers, tracking makes you more mindful about the quality of your food. It encourages you to choose whole, nutrient-dense foods instead of empty calories. Over time, these choices boost your energy, sleep, and recovery.
             </p>
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">4. Prevent Plateaus</h3>
             <p>
-              Just like workouts, your body adapts to your diet. Tracking lets you spot plateaus and adjust to keep progressing.
+              Just like your body adapts to training, it adapts to your diet. When weight loss stalls or muscle gain slows down, a log helps you see what's working and what needs to change. Small tweaks make a big difference.
             </p>
             <h3 className="text-base md:text-lg xl:text-xl text-teal-600">5. Stay Accountable</h3>
             <p>
-              Logging meals keeps you honest and mindful, which often leads to better food choices and consistency.
+              Logging meals keeps you honest. You'll be less likely to snack mindlessly or skip meals when you see the bigger picture. It builds discipline and consistency, which are essential for lasting results.
+            </p>
+            <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Practical Tips for Success</h2>
+            <p>
+              Start simple — you don't need to track forever. Even a week of honest tracking can reveal eye-opening patterns. Use an app or a notebook, whichever is easiest for you. Aim for accuracy, but don't obsess over perfection.
+            </p>
+            <p>
+              If you're not sure what to eat to fuel your workouts properly, check out our tips on <Link to="/tips/what-to-eat-before-workout" className="font-bold text-teal-800 hover:underline">what to eat before a workout</Link> and <Link to="/tips/what-to-eat-after-workout" className="font-bold text-teal-800 hover:underline">what to eat after a workout</Link>. These simple changes can maximize your energy and recovery.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">Final Thoughts</h2>
             <p>
-              Tracking your nutrition provides clarity and control. It's a simple yet powerful tool to complement your training, helping you achieve the results you want faster and smarter.
+              Tracking your nutrition gives you control over your results. It's not about perfection — it's about awareness and making better choices daily. Combine smart tracking with solid training, good sleep, and consistency, and you'll see real progress that lasts.
             </p>
           </div>
           <div className="flex justify-between items-center w-full text-sm md:text-base">
