@@ -137,6 +137,11 @@ const blogPosts = [
     id: 'free-weights-vs-machines',
     title: 'Free Weights vs Machines: Which is Better?',
     excerpt: 'Discover the pros and cons of free weights and machines. Find out which one is best for your goals, experience level, and training style.'
+  },
+  {
+    id: 'do-you-need-supplements-to-build-muscle',
+    title: 'Do You Need Supplements to Build Muscle?',
+    excerpt: 'Are supplements really necessary for muscle growth? Learn which ones work, which ones don’t, and how to get results without wasting money.'
   }
 ];
 

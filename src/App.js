@@ -45,6 +45,7 @@ import HowManyExercisesPerMuscle from './components/Tips/HowManyExercisesPerMusc
 import StrengthVsHypertrophy from './components/Tips/StrengthVsHypertrophy';
 import CompoundVsIsolation from './components/Tips/CompoundVsIsolation';
 import FreeWeightsVsMachines from './components/Tips/FreeWeightsVsMachines';
+import SupplementsForMuscleGrowth from './components/Tips/SupplementsForMuscleGrowth';
 
 const TipsLayout = () => <Outlet />;
 
@@ -90,6 +91,7 @@ function App() {
                 <Route path="strength-vs-hypertrophy" element={<StrengthVsHypertrophy />} />
                 <Route path="compound-vs-isolation-exercises" element={<CompoundVsIsolation />} />
                 <Route path="free-weights-vs-machines" element={<FreeWeightsVsMachines />} />
+                <Route path="do-you-need-supplements-to-build-muscle" element={<SupplementsForMuscleGrowth />} />
               </Route>
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
