@@ -20,56 +20,83 @@ const HowLongShouldYouRestBetweenSets = () => {
               Why Rest Time Between Sets Matters
             </h2>
             <p>
-              Rest periods between sets play a vital role in your training routine. They allow your muscles and nervous system to recover, which directly impacts your performance in subsequent sets. The right rest duration helps optimize muscle growth, strength gains, and endurance development.
+              Rest periods are not just pauses in your workout — they are a vital tool for improving performance and recovery.
+              The time you take between sets allows your muscles to replenish energy stores, repair micro-tears, and prepare for the next bout of effort.
+              Without adequate rest, you risk reduced strength output, impaired form, and slower progress.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               How Rest Affects Your Workout
             </h2>
             <p>
-              When you rest, your body replenishes ATP (adenosine triphosphate), the primary energy source for muscle contractions. Insufficient rest can lead to premature fatigue, reduced strength output, and decreased exercise quality. On the other hand, resting too long may lower your workout intensity and reduce the metabolic stress needed for muscle growth.
+              When you lift weights, your muscles rely heavily on ATP (adenosine triphosphate) as their main energy source.
+              ATP gets depleted during each set, and your body needs rest to restore it.
+              Shorter rest keeps your heart rate elevated and promotes metabolic stress, which is beneficial for muscle growth and endurance.
+              Longer rest allows for full nervous system recovery, which is essential for heavy strength and power training.
+            </p>
+            <p>
+              The nervous system also needs recovery time, especially for compound lifts like squats, deadlifts, and bench presses.
+              These movements recruit multiple muscle groups and demand high neural activation, meaning more rest is required to perform at your best in each set.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Recommended Rest Times Based on Your Goals
             </h2>
-            <ul className="list-disc list-inside space-y-2">
-              <li>
-                <strong>Muscle Growth (Hypertrophy):</strong> 30 to 90 seconds of rest helps maintain muscle tension and metabolic stress, which are crucial for hypertrophy.
-              </li>
-              <li>
-                <strong>Strength Training:</strong> 2 to 5 minutes rest to allow for full recovery of the nervous system and maximal force production.
-              </li>
-              <li>
-                <strong>Muscular Endurance:</strong> Less than 30 seconds rest to keep the heart rate elevated and improve stamina.
-              </li>
-              <li>
-                <strong>Power Training (e.g., Olympic lifts):</strong> 3 to 5 minutes to ensure maximum effort and safe performance.
-              </li>
-            </ul>
+            <p>
+              The optimal rest time between sets depends heavily on your specific goal:
+            </p>
+            <p>
+              For muscle growth (hypertrophy), aim for 30 to 90 seconds of rest.
+              This keeps your muscles under tension and maximizes the metabolic stress that stimulates growth.
+            </p>
+            <p>
+              For strength training, especially with heavy compound lifts, rest for 2 to 5 minutes to allow for complete nervous system recovery and peak force output.
+            </p>
+            <p>
+              For muscular endurance, keep rests under 30 seconds.
+              This maintains a high heart rate and builds your ability to sustain effort over time.
+            </p>
+            <p>
+              For explosive power training, such as Olympic lifts or sprints, rest for 3 to 5 minutes to ensure your body is ready for maximum effort and safe performance.
+            </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               How to Customize Rest Periods
             </h2>
             <p>
-              Your ideal rest time depends not only on your goals but also on your fitness level, workout intensity, and type of exercise. Compound movements (like squats or deadlifts) may require longer rests compared to isolation exercises (like bicep curls). Listen to your body and adjust rest intervals to ensure you're fully recovered but still maintaining workout intensity.
+              While these guidelines work for most people, your ideal rest time also depends on your fitness level,
+              workout intensity, and the type of exercises you're doing.
+              Heavier, <Link to="/tips/compound-vs-isolation-exercises" className="font-bold text-teal-800 hover:underline">compound lifts</Link> require longer breaks compared to isolation movements.
+              Beginners may benefit from slightly longer rests to maintain proper form, while advanced lifters may shorten rests intentionally to increase training density.
             </p>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Practical Tips for Managing Rest Time
             </h2>
             <p>
-              Using a timer or stopwatch can help you keep rest consistent, preventing unintentional long breaks or rushing into the next set too soon. Keep a notebook or app to track your rest times and how they affect your performance over time.
+              Tracking your rest is just as important as tracking your sets and reps.
+              Use a stopwatch or timer to stay consistent, and resist the temptation to scroll on your phone between sets — it's easy to lose track of time and take longer rests than intended.
+              In supersets or circuit training, wait until the full sequence is completed before taking your main rest period.
             </p>
+            <ul className="list-disc list-inside space-y-2">
+              <li>Start your next set when breathing is steady and muscles feel ready.</li>
+              <li>Adjust rest time based on exercise type and overall workout intensity.</li>
+              <li>Log how different rest intervals impact your performance over time.</li>
+            </ul>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Common Mistakes to Avoid
             </h2>
             <ul className="list-disc list-inside space-y-2">
-              <li>Resting too little and not fully recovering, leading to poor form and higher injury risk.</li>
-              <li>Resting too long and losing workout intensity and metabolic benefits.</li>
-              <li>Ignoring how different exercises may require different rest periods.</li>
+              <li>Resting too little, leading to fatigue and compromised form.</li>
+              <li>Resting too long, which can reduce workout intensity and slow progress.</li>
+              <li>Applying the same rest period to all exercises regardless of complexity.</li>
             </ul>
             <h2 className="text-base md:text-lg xl:text-xl font-semibold text-teal-600">
               Final Thoughts
             </h2>
             <p>
-              Rest periods are a critical but often overlooked part of effective training. Adjust your rest time based on your specific goals, workout type, and personal response to optimize recovery, performance, and results. Consistency and mindful rest management can help you achieve your fitness goals faster and safer.
+              The right rest period can be the difference between an average workout and a highly effective one.
+              Whether your goal is building muscle, gaining strength, boosting endurance, or improving explosive power,
+              tailoring your rest time will help you recover better, perform stronger, and progress faster.
+            </p>
+            <p>
+              Listen to your body, track your results, and treat rest as an active part of your training, not just downtime.
             </p>
           </div>
           <div className="flex justify-between items-center w-full text-sm md:text-base">
@@ -80,10 +107,9 @@ const HowLongShouldYouRestBetweenSets = () => {
               Next Tip →
             </Link>
           </div>
+
           <div className="relative bottom-2 flex items-center justify-center text-sm md:text-base gap-2">
-            <p className="text-gray-700 font-medium">
-              Want better results?
-            </p>
+            <p className="text-gray-700 font-medium">Want better results?</p>
             <Link to="/" className="bg-teal-600 text-white font-semibold px-4 py-1 rounded-full hover:bg-teal-700 transition-colors text-center">
               Go to Homepage
             </Link>
